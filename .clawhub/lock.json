@@ -28,6 +28,14 @@
     "book-fetch": {
       "version": "1.0.0",
       "installedAt": 1776200527081
+    },
+    "openclaw-aisa-youtube": {
+      "version": "1.0.0",
+      "installedAt": 1776200703824
+    },
+    "bilibili-search": {
+      "version": "0.1.0",
+      "installedAt": 1776200762130
     }
   }
 }
