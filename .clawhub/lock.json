@@ -16,6 +16,18 @@
     "thinking-model-enhancer": {
       "version": "1.0.0",
       "installedAt": 1776199683339
+    },
+    "zlibrary": {
+      "version": "2.1.0",
+      "installedAt": 1776200463730
+    },
+    "literature-search": {
+      "version": "1.0.3",
+      "installedAt": 1776200521976
+    },
+    "book-fetch": {
+      "version": "1.0.0",
+      "installedAt": 1776200527081
     }
   }
 }
