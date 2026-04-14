@@ -36,6 +36,10 @@
     "bilibili-search": {
       "version": "0.1.0",
       "installedAt": 1776200762130
+    },
+    "multi-search-engine": {
+      "version": "2.1.3",
+      "installedAt": 1776201004463
     }
   }
 }
