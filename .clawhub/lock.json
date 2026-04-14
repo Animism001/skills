@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "youtube-transcript": {
+      "version": "1.0.1",
+      "installedAt": 1776199564101
+    },
+    "bilibili-transcript": {
+      "version": "2.2.0",
+      "installedAt": 1776199622195
+    },
+    "web-researcher": {
+      "version": "1.0.0",
+      "installedAt": 1776199625251
+    },
+    "thinking-model-enhancer": {
+      "version": "1.0.0",
+      "installedAt": 1776199683339
+    }
+  }
+}
