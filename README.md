@@ -8,7 +8,7 @@
 
 - **~/.claude/skills/**: 蒸馏生成的技能
 - **~/skills/**: 优化后的技能
-- **~/evals/skills/**: 测试用例和输出结果
+- **~/.evals/skills/**: 测试用例和输出结果
 
 ## 技术栈
 
@@ -23,7 +23,7 @@
 
 **技能位置**：[skills/robert-mckee-perspective/](file:///workspace/skills/robert-mckee-perspective/)
 
-**测试用例**：[evals/skills/robert-mckee-perspective/](file:///workspace/evals/skills/robert-mckee-perspective/)
+**测试用例**：[.evals/skills/robert-mckee-perspective/](file:///workspace/.evals/skills/robert-mckee-perspective/)
 
 **核心功能**：
 - 故事结构分析
