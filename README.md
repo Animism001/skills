@@ -6,11 +6,10 @@
 
 ## 目录结构
 
-- **~/.claude/skills/**: 蒸馏生成的技能
-- **~/skills/**: 优化后的技能
-- **~/.evals/skills/**: 测试用例和输出结果
-- **~/.agents/skills/**: 工具技能（全局安装）
-- **./.agents/**: 工具技能（工作区副本）
+- **./.origin/skills/**: 蒸馏生成的初始技能
+- **./skills/**: 优化后的技能
+- **./.evals/skills/**: 测试用例和输出结果
+- **./tools/**: 工具技能
   - **huashu-nuwa**: 女娲造人 - 人物蒸馏技能
   - **skill-creator**: 技能创建器 - 技能创建、优化和测试工具
 
@@ -25,7 +24,7 @@
 
 **技能描述**：输入人名/主题/甚至只是模糊需求，自动深度调研→思维框架提炼→生成可运行的人物Skill。两种入口：(1)明确人名→直接蒸馏 (2)模糊需求→诊断推荐→再蒸馏。触发词：「造skill」「蒸馏XX」「女娲」「造人」「XX的思维方式」「做个XX视角」「更新XX的skill」。
 
-**技能位置**：[.agents/huashu-nuwa/](file:///workspace/.agents/huashu-nuwa/)
+**技能位置**：[tools/huashu-nuwa/](file:///workspace/tools/huashu-nuwa/)
 
 **核心功能**：
 - 多源信息采集（6个并行Agent）
@@ -45,7 +44,7 @@
 
 **技能描述**：创建新技能，修改和优化现有技能，测量技能性能。用于当用户想要从头创建技能、编辑或优化现有技能、运行评估来测试技能、用方差分析来基准测试技能性能或优化技能的描述以提高触发准确性时。
 
-**技能位置**：[.agents/skill-creator/](file:///workspace/.agents/skill-creator/)
+**技能位置**：[tools/skill-creator/](file:///workspace/tools/skill-creator/)
 
 **核心功能**：
 - 技能创建（从零开始创建新技能）
