@@ -13,24 +13,26 @@
   - **huashu-nuwa**: 女娲造人 - 人物蒸馏技能
   - **skill-creator**: 技能创建器 - 技能创建、优化和测试工具
   - **multi-search-engine**: 多搜索引擎集成 - 16个引擎（7个国内，9个国际）
+  - **zlibrary**: Z-Library书籍获取 - 电子书搜索和下载
+  - **literature-search**: 文学搜索 - 书籍和文献检索
+  - **book-fetch**: 书籍获取 - 电子书获取（Anna's Archive）
   - **bilibili-search**: B站视频搜索 - 视频搜索、UP主信息查询
-  - **youtube-transcript**: YouTube字幕获取 - 支持住宅IP代理
   - **bilibili-transcript**: B站字幕获取 - 支持CC/AI/Whisper三层回退
+  - **youtube-transcript**: YouTube字幕获取 - 支持住宅IP代理
   - **web-researcher**: 网络研究工具 - 深度网页内容研究
   - **thinking-model-enhancer**: 思维模型增强器 - 思维框架优化
-  - **literature-search**: 文学搜索 - 书籍和文献检索
-  - **book-fetch**: 书籍获取 - 书籍内容检索
 
 ## 技术栈
 
 - 使用 **huashu-nuwa** 技能进行人物蒸馏
 - 使用 **skill-creator** 技能进行技能创建、优化和测试
 - 使用 **multi-search-engine** 进行多源信息检索
+- 使用 **zlibrary** / **book-fetch** 获取电子书
+- 使用 **literature-search** 搜索学术文献
 - 使用 **youtube-transcript** / **bilibili-transcript** 获取视频字幕
 - 使用 **bilibili-search** 搜索视频资源
 - 使用 **web-researcher** 进行深度网络研究
 - 使用 **thinking-model-enhancer** 优化思维框架
-- 使用 **literature-search** / **book-fetch** 进行书籍文献检索
 
 ## 工具技能
 
@@ -79,7 +81,40 @@
 - 时间过滤和站点搜索
 - 隐私引擎和知识查询
 
-### 4. bilibili-search（B站视频搜索）
+### 4. zlibrary（Z-Library书籍获取）
+
+**技能描述**：搜索和下载电子书，支持多种格式，是人物蒸馏中获取著作资料的首选工具。
+
+**技能位置**：[tools/zlibrary/](file:///workspace/tools/zlibrary/)
+
+**核心功能**：
+- 电子书搜索和下载
+- 多种格式支持
+- 海量图书资源库
+
+### 5. literature-search（文学搜索）
+
+**技能描述**：搜索书籍和文献资源，支持多种数据库和检索方式，包括Google Scholar、PubMed、arXiv等学术数据库。
+
+**技能位置**：[tools/literature-search/](file:///workspace/tools/literature-search/)
+
+**核心功能**：
+- 书籍文献搜索
+- 多数据库集成（Google Scholar、PubMed、arXiv等）
+- 高级检索功能
+
+### 6. book-fetch（书籍获取）
+
+**技能描述**：获取书籍内容和信息，支持多种格式和来源，通过Anna's Archive获取电子书。
+
+**技能位置**：[tools/book-fetch/](file:///workspace/tools/book-fetch/)
+
+**核心功能**：
+- 电子书获取（Anna's Archive）
+- 元数据获取
+- 多格式支持
+
+### 7. bilibili-search（B站视频搜索）
 
 **技能描述**：搜索B站视频、获取UP主信息、查询热门视频，基于公开接口，无需API Key。
 
@@ -91,18 +126,7 @@
 - 热门视频排行
 - 视频详情获取
 
-### 5. youtube-transcript（YouTube字幕获取）
-
-**技能描述**：获取YouTube视频字幕，通过住宅IP代理，支持多种语言字幕。
-
-**技能位置**：[tools/youtube-transcript/](file:///workspace/tools/youtube-transcript/)
-
-**核心功能**：
-- YouTube字幕获取
-- 多语言字幕支持
-- 住宅IP代理
-
-### 6. bilibili-transcript（B站字幕获取）
+### 8. bilibili-transcript（B站字幕获取）
 
 **技能描述**：获取B站视频字幕，支持CC字幕、AI字幕、Whisper识别三层回退机制。
 
@@ -113,7 +137,18 @@
 - 自动字幕转换
 - 多种格式输出
 
-### 7. web-researcher（网络研究工具）
+### 9. youtube-transcript（YouTube字幕获取）
+
+**技能描述**：获取YouTube视频字幕，通过住宅IP代理，支持多种语言字幕。
+
+**技能位置**：[tools/youtube-transcript/](file:///workspace/tools/youtube-transcript/)
+
+**核心功能**：
+- YouTube字幕获取
+- 多语言字幕支持
+- 住宅IP代理
+
+### 10. web-researcher（网络研究工具）
 
 **技能描述**：深度网页内容研究，支持多页面分析、信息提取和综合报告生成。
 
@@ -124,7 +159,7 @@
 - 多源信息整合
 - 研究报告生成
 
-### 8. thinking-model-enhancer（思维模型增强器）
+### 11. thinking-model-enhancer（思维模型增强器）
 
 **技能描述**：优化和增强思维框架，提升心智模型、决策启发式和表达DNA的质量。
 
@@ -135,28 +170,6 @@
 - 决策模型增强
 - 表达风格提炼
 
-### 9. literature-search（文学搜索）
-
-**技能描述**：搜索书籍和文献资源，支持多种数据库和检索方式。
-
-**技能位置**：[tools/literature-search/](file:///workspace/tools/literature-search/)
-
-**核心功能**：
-- 书籍文献搜索
-- 多数据库集成
-- 高级检索功能
-
-### 10. book-fetch（书籍获取）
-
-**技能描述**：获取书籍内容和信息，支持多种格式和来源。
-
-**技能位置**：[tools/book-fetch/](file:///workspace/tools/book-fetch/)
-
-**核心功能**：
-- 书籍内容检索
-- 元数据获取
-- 多格式支持
-
 ## Nuwa增强版工作流
 
 为了提升人物蒸馏质量，我们设计了完整的**nuwa增强版工作流**，整合了所有新安装的工具技能。
@@ -166,26 +179,48 @@
 
 ### 核心改进
 
-1. **Phase 0（需求澄清）**：保持不变
-2. **Phase 1（深度调研）**：重点强化
-   - 使用multi-search-engine进行全网搜索
-   - 使用bilibili-search搜索视频资源
-   - 使用youtube-transcript和bilibili-transcript获取视频字幕
-   - 使用web-researcher进行深度研究
-   - 使用literature-search和book-fetch检索书籍文献
+1. **Phase 0（需求分析与分流）**：保持不变
+   - 增强：使用`thinking-model-enhancer`辅助需求诊断
 
-3. **Phase 2（思维框架提炼）**：重点强化
-   - 使用thinking-model-enhancer优化思维框架
+2. **Phase 1（多源信息采集 - 6个并行Agent）**：重点强化
+   - **Agent 1（著作调研）**：multi-search-engine + zlibrary + literature-search + web-researcher
+   - **Agent 2（对话调研）**：multi-search-engine + bilibili-search + bilibili-transcript + youtube-transcript
+   - **Agent 3（表达风格调研）**：multi-search-engine + web-researcher
+   - **Agent 4（他者视角调研）**：multi-search-engine + web-researcher
+   - **Agent 5（决策调研）**：multi-search-engine + web-researcher
+   - **Agent 6（时间线调研）**：multi-search-engine + web-researcher
+
+3. **Phase 1.5（调研质量检查）**：新增
+   - 使用`merge_research.py`生成摘要表格
+   - 增强：使用`thinking-model-enhancer`初步评估信息质量
+
+4. **Phase 2（思维框架提炼）**：重点强化
+   - 使用`thinking-model-enhancer`优化思维框架
    - 应用三重验证方法论（跨域复现、生成力、排他性）
 
-4. **Phase 3（Skill生成）**：保持不变
-5. **Phase 4（质量验证）**：保持不变
-6. **Phase 5（交付与更新）**：保持不变
+5. **Phase 3-4（Skill构建与质量验证）**：保持不变
+   - 增强：使用`skill-creator`辅助构建标准化Skill
+   - 增强：使用`thinking-model-enhancer`优化Skill内容
+
+6. **Phase 5（双Agent精炼）**：增强
+   - `thinking-model-enhancer`作为Agent A（优化视角）
+   - `skill-creator`作为Agent B（Skill构建视角）
+
+### 技能调用优先级
+
+| 维度 | 首选技能 | 次选技能 | 备选技能 |
+|------|---------|---------|---------|
+| **通用搜索** | multi-search-engine | web-researcher | — |
+| **书籍获取** | zlibrary | book-fetch | literature-search |
+| **文献搜索** | literature-search | multi-search-engine | — |
+| **B站视频** | bilibili-search | multi-search-engine | — |
+| **B站字幕** | bilibili-transcript | — | — |
+| **YouTube字幕** | youtube-transcript | — | — |
 
 ### 使用示例
 
-- **蒸馏Elon Musk**：用multi-search-engine搜索，用youtube-transcript获取访谈字幕
-- **蒸馏中国人物**：用bilibili-search搜索，用bilibili-transcript获取字幕
+- **蒸馏Elon Musk**：multi-search-engine + zlibrary + youtube-transcript
+- **蒸馏中国人物**：multi-search-engine(国内引擎) + zlibrary + bilibili-search + bilibili-transcript
 - **模糊需求**：先诊断推荐，再按强化流程执行
 
 ## 当前技能列表
