@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "youtube-transcript": {
+      "version": "1.0.1",
+      "installedAt": 1776199564101
+    },
+    "bilibili-transcript": {
+      "version": "2.2.0",
+      "installedAt": 1776199622195
+    },
+    "web-researcher": {
+      "version": "1.0.0",
+      "installedAt": 1776199625251
+    },
+    "thinking-model-enhancer": {
+      "version": "1.0.0",
+      "installedAt": 1776199683339
+    },
+    "zlibrary": {
+      "version": "2.1.0",
+      "installedAt": 1776200463730
+    },
+    "literature-search": {
+      "version": "1.0.3",
+      "installedAt": 1776200521976
+    },
+    "book-fetch": {
+      "version": "1.0.0",
+      "installedAt": 1776200527081
+    },
+    "bilibili-search": {
+      "version": "0.1.0",
+      "installedAt": 1776200762130
+    },
+    "multi-search-engine": {
+      "version": "2.1.3",
+      "installedAt": 1776201004463
+    }
+  }
+}
