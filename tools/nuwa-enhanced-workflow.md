@@ -4,9 +4,8 @@
 
 ```
 /workspace/
-├── skills/                          # 用户技能目录
-│   └── robert-mckee-perspective/    # 示例人物技能
-└── tools/                           # 工具技能目录
+└── skills/                          # 技能目录
+    ├── robert-mckee-perspective/    # 示例人物技能
     ├── huashu-nuwa/                  # 女娲核心技能
     ├── skill-creator/                 # 技能创建工具
     ├── multi-search-engine/           # 多引擎搜索 ⭐
@@ -351,8 +350,8 @@
 
 ## 📚 参考文档
 
-- [huashu-nuwa/SKILL.md](file:///workspace/tools/huashu-nuwa/SKILL.md) - 女娲核心技能
-- [huashu-nuwa/references/extraction-framework.md](file:///workspace/tools/huashu-nuwa/references/extraction-framework.md) - 思维框架提炼方法论
-- [multi-search-engine/SKILL.md](file:///workspace/tools/multi-search-engine/SKILL.md) - 多引擎搜索技能
-- [skill-creator/SKILL.md](file:///workspace/tools/skill-creator/SKILL.md) - 技能创建工具
-- [thinking-model-enhancer/SKILL.md](file:///workspace/tools/thinking-model-enhancer/SKILL.md) - 思维模型增强
+- [huashu-nuwa/SKILL.md](file:///workspace/skills/huashu-nuwa/SKILL.md) - 女娲核心技能
+- [huashu-nuwa/references/extraction-framework.md](file:///workspace/skills/huashu-nuwa/references/extraction-framework.md) - 思维框架提炼方法论
+- [multi-search-engine/SKILL.md](file:///workspace/skills/multi-search-engine/SKILL.md) - 多引擎搜索技能
+- [skill-creator/SKILL.md](file:///workspace/skills/skill-creator/SKILL.md) - 技能创建工具
+- [thinking-model-enhancer/SKILL.md](file:///workspace/skills/thinking-model-enhancer/SKILL.md) - 思维模型增强
