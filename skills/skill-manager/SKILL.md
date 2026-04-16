@@ -10,7 +10,7 @@ A comprehensive guide for managing skills using the `npx skills` command and Cla
 ## Default Configuration
 
 - **npx skills commands**: Always use `--agent trae` parameter
-- **clawhub commands**: Always use `--dir .trae/skills` parameter
+- **clawhub install command**: Always use `--dir .trae/skills` parameter (only for install only)
 
 ## Command Reference
 
@@ -136,17 +136,17 @@ npx skills list --json
 ### ClawHub Integration
 
 ```bash
-# Install a skill to .trae/skills directory
+# Install a skill to .trae/skills directory (only install uses --dir)
 npx clawhub install <slug> --dir .trae/skills
 
-# Update installed skills in .trae/skills
-npx clawhub update [slug] --dir .trae/skills
+# Update installed skills
+npx clawhub update [slug]
 
-# Uninstall a skill from .trae/skills
-npx clawhub uninstall <slug> --dir .trae/skills
+# Uninstall a skill
+npx clawhub uninstall <slug>
 
-# List installed skills in .trae/skills
-npx clawhub list --dir .trae/skills
+# List installed skills
+npx clawhub list
 ```
 
 ## Workflow Guide
@@ -155,27 +155,27 @@ npx clawhub list --dir .trae/skills
 
 1. Determine the skill package to install
 2. Use the command: `npx skills add <package> --agent trae`
-3. For ClawHub skills, use: `npx clawhub install <slug> --dir .trae/skills`
+3. For ClawHub skills, use: `npx clawhub install <slug> --dir .trae/skills` (only install uses --dir)
 4. Confirm successful installation
 
 ### When the user wants to remove a skill
 
 1. Determine the skill to remove
 2. Use the command: `npx skills remove <skill> --agent trae`
-3. For ClawHub skills, use: `npx clawhub uninstall <slug> --dir .trae/skills`
+3. For ClawHub skills, use: `npx clawhub uninstall <slug>`
 4. Confirm successful removal
 
 ### When the user wants to update skills
 
 1. Determine if updating all skills or specific ones
 2. Use the command: `npx skills update [skills] --agent trae`
-3. For ClawHub skills, use: `npx clawhub update [slug] --dir .trae/skills`
+3. For ClawHub skills, use: `npx clawhub update [slug]`
 4. Confirm successful update
 
 ### When the user wants to list installed skills
 
 1. Use the command: `npx skills list`
-2. For ClawHub skills, use: `npx clawhub list --dir .trae/skills`
+2. For ClawHub skills, use: `npx clawhub list`
 3. Present the list in a clear format
 
 ### When the user wants to search for skills
@@ -193,7 +193,7 @@ npx clawhub list --dir .trae/skills
 ## Important Notes
 
 1. **Always use `--agent trae`** when using `npx skills` commands
-2. **Always use `--dir .trae/skills`** when using `clawhub` commands
+2. **Only `clawhub install` command uses `--dir .trae/skills`** - update/uninstall/list commands do not use --dir parameter
 3. **Ensure the `.trae/skills` directory exists** before installing - create it if necessary with `mkdir -p .trae/skills`
 4. When instructing users, always include the appropriate parameters as specified in the user rules
 

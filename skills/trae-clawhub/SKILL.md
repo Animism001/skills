@@ -47,17 +47,17 @@ npx clawhub inspect <slug> --version <version>
 ### Install & Manage (Trae-Specific)
 
 ```bash
-# Install a skill to .trae/skills directory
+# Install a skill to .trae/skills directory (only install command uses --dir)
 npx clawhub install <slug> --dir .trae/skills
 
-# Update installed skills (all or specific) in .trae/skills
-npx clawhub update [slug] --dir .trae/skills
+# Update installed skills (all or specific)
+npx clawhub update [slug]
 
-# Uninstall a skill from .trae/skills
-npx clawhub uninstall <slug> --dir .trae/skills
+# Uninstall a skill
+npx clawhub uninstall <slug>
 
-# List installed skills in .trae/skills
-npx clawhub list --dir .trae/skills
+# List installed skills
+npx clawhub list
 
 # Use npx skills with --agent trae flag (per user rules)
 npx skills install <skill> --agent trae
@@ -70,7 +70,7 @@ npx skills install <skill> --agent trae
 npx clawhub publish <path>
 
 # Scan local skills dir and publish new/updated ones
-npx clawhub sync --dir .trae/skills
+npx clawhub sync
 ```
 
 ### Account & Auth
@@ -157,10 +157,10 @@ Evaluate each skill by relevance, popularity, community approval, maintenance st
 
 ## Important Notes
 
-1. **Always use `.trae/skills` as the install directory** when installing skills with this skill
+1. **Only `clawhub install` command uses `.trae/skills` directory** - update/uninstall/list/sync commands do not use --dir parameter
 2. **Always use `--agent trae`** when using `npx skills` commands (per user rules)
 3. **Ensure the `.trae/skills` directory exists** before installing - create it if necessary with `mkdir -p .trae/skills`
-4. When instructing users to install skills, remind them that this skill uses the `.trae/skills` directory by default
+4. When instructing users to install skills, remind them that this skill uses the `.trae/skills` directory for install command only
 
 ## Why CLI Only
 
