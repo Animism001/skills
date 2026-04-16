@@ -1,9 +1,9 @@
 ---
-name: trae-clawhub
-description: Search, discover, install, and manage skills on ClawHub (clawhub.ai) specifically for Trae agents. Use when the user wants to find skills, discover new capabilities, browse skills by popularity, install/uninstall skills, inspect skill details, or search for specific functionality on ClawHub for Trae. This skill installs skills to .trae/skills by default and uses --agent trae with npx skills. Triggers on phrases like "search clawhub", "find skills", "browse skills", "popular skills", "best skills for", "install skill", "clawhub", "trae clawhub", or when the user is looking for new agent capabilities for Trae. Always use this skill when the user mentions ClawHub or wants to search for AI agent skills for Trae.
+name: clawhub4trae
+description: Search, discover, install, and manage skills on ClawHub (clawhub.ai) specifically for Trae agents. Use when the user wants to find skills, discover new capabilities, browse skills by popularity, install/uninstall skills, inspect skill details, or search for specific functionality on ClawHub for Trae. This skill installs skills to .trae/skills by default and uses --agent trae with npx skills. Triggers on phrases like "search clawhub", "find skills", "browse skills", "popular skills", "best skills for", "install skill", "clawhub", "clawhub4trae", "trae clawhub", or when the user is looking for new agent capabilities for Trae. Always use this skill when the user mentions ClawHub or wants to search for AI agent skills for Trae.
 ---
 
-# Trae-ClawHub CLI
+# ClawHub4Trae CLI
 
 Interact with ClawHub entirely via `npx clawhub` CLI, customized for Trae agents. This is the only reliable method — the ClawHub website uses Convex WebSocket for data loading, so WebFetch and direct browser URL navigation do not work for search.
 
