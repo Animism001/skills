@@ -10,6 +10,7 @@ import json
 import urllib.request
 import urllib.parse
 import urllib.error
+import time
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
@@ -168,6 +169,64 @@ def get_popular(page_size: int = 10) -> dict:
     return {"results": results}
 
 
+def get_user_videos(mid: int, page_size: int = 30) -> dict:
+    """获取UP主所有视频"""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Referer": f"https://space.bilibili.com/{mid}",
+        "Accept": "application/json",
+        "Cookie": "buvid3=openclaw_bilibili_skill_v1; b_nut=1700000000; buvid4=openclaw_bilibili_skill_v1",
+    }
+    
+    all_videos = []
+    page = 1
+    
+    while True:
+        time.sleep(1)  # 添加1秒延迟避免请求过于频繁
+        
+        arc_req = urllib.request.Request(
+            f"https://api.bilibili.com/x/space/arc/search?mid={mid}&ps={page_size}&pn={page}&order=pubdate&order_avoided=true",
+            headers=headers
+        )
+        
+        try:
+            with urllib.request.urlopen(arc_req, timeout=10) as resp:
+                arc_data = json.loads(resp.read().decode("utf-8"))
+        except Exception as e:
+            return {"error": f"获取视频失败: {e}"}
+        
+        if arc_data.get("code") != 0:
+            return {"error": arc_data.get("message", "获取视频失败")}
+        
+        vlist = arc_data.get("data", {}).get("list", {}).get("vlist", [])
+        if not vlist:
+            break
+        
+        for item in vlist:
+            bvid = item.get("bvid", "")
+            all_videos.append({
+                "bvid": bvid,
+                "url": f"https://www.bilibili.com/video/{bvid}",
+                "title": item.get("title", ""),
+                "play": item.get("play"),
+                "danmaku": item.get("video_review"),
+                "length": item.get("length"),
+                "created": item.get("created"),
+            })
+        
+        total = arc_data.get("data", {}).get("page", {}).get("count", 0)
+        if len(all_videos) >= total:
+            break
+        
+        page += 1
+    
+    return {
+        "mid": mid,
+        "total": len(all_videos),
+        "videos": all_videos
+    }
+
+
 def get_hot_search() -> dict:
     """获取热搜榜"""
     url = "https://s.search.bilibili.com/main/hotword"
@@ -193,6 +252,7 @@ def main():
             "search: {action:'search', query:'关键词', page:1, order:'totalrank'}",
             "video: {action:'video', bvid:'BV1xx411c7mD'}",
             "user: {action:'user', mid:123456}",
+            "user_videos: {action:'user_videos', mid:123456}",
             "popular: {action:'popular', count:10}",
             "hot_search: {action:'hot_search'}",
         ]}, ensure_ascii=False, indent=2))
@@ -226,12 +286,18 @@ def main():
                 result = {"error": "缺少 mid 参数"}
             else:
                 result = get_user_info(int(mid))
+        elif action == "user_videos":
+            mid = params.get("mid")
+            if not mid:
+                result = {"error": "缺少 mid 参数"}
+            else:
+                result = get_user_videos(int(mid))
         elif action == "popular":
             result = get_popular(int(params.get("count", 10)))
         elif action == "hot_search":
             result = get_hot_search()
         else:
-            result = {"error": f"未知 action: {action}，支持: search, video, user, popular, hot_search"}
+            result = {"error": f"未知 action: {action}，支持: search, video, user, user_videos, popular, hot_search"}
 
         print(json.dumps(result, ensure_ascii=False, indent=2))
 
