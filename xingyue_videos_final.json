@@ -1,78 +1,103 @@
 {
   "mid": 382179999,
-  "total": 134,
+  "total": 156,
+  "target": 155,
   "videos": [
     {
       "bvid": "BV1pFoeB6ELF",
       "url": "https://www.bilibili.com/video/BV1pFoeB6ELF",
       "title": "真实采访AI写作都市高武新书榜一作者！日收2500+！真实分享经验心得，公开所有创作流程，星月写作，ai写小说，番茄小说",
-      "play": 2488,
+      "author": "-星月凌云-",
+      "play": 2476,
       "danmaku": 52,
-      "duration": "16:15",
-      "pubdate": 1776934753
+      "favorites": 144,
+      "like": 117,
+      "pubdate": 1776934753,
+      "duration": "16:15"
     },
     {
       "bvid": "BV1bVdhBgETB",
       "url": "https://www.bilibili.com/video/BV1bVdhBgETB",
       "title": "都市种田阅读榜一AI写作开书全流程大公开！公开作者书名与马甲和创作全流程，新书榜第一名居然是用AI创作的？星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 7326,
       "danmaku": 56,
-      "duration": "5:29",
-      "pubdate": 1776331342
+      "favorites": 243,
+      "like": 170,
+      "pubdate": 1776331342,
+      "duration": "5:29"
     },
     {
       "bvid": "BV1pDQEBQEzY",
       "url": "https://www.bilibili.com/video/BV1pDQEBQEzY",
       "title": "用AI写百万字长篇10万稿费的作者，详细AI操作技巧公布！真实分享经验心得，公开所有创作流程，星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 4788,
       "danmaku": 78,
-      "duration": "4:43",
-      "pubdate": 1776245677
+      "favorites": 222,
+      "like": 190,
+      "pubdate": 1776245677,
+      "duration": "4:43"
     },
     {
       "bvid": "BV1bxQYBKEgH",
       "url": "https://www.bilibili.com/video/BV1bxQYBKEgH",
       "title": "番茄小说多书名测试！一键生成爆款书名封面教程！AI生成网文封面与书名教程，ai写小说，ai写作，星月写作，番茄小说",
+      "author": "-星月凌云-",
       "play": 1450,
       "danmaku": 59,
-      "duration": "2:52",
-      "pubdate": 1776137308
+      "favorites": 136,
+      "like": 131,
+      "pubdate": 1776137308,
+      "duration": "2:52"
     },
     {
       "bvid": "BV1iiQsBxEw5",
       "url": "https://www.bilibili.com/video/BV1iiQsBxEw5",
       "title": "90%的人以为AI写作=躺赚，醒醒吧，这才是真相，真正靠AI赚钱的人，从不直接生成——揭秘人机结合的正确姿势，ai写小说，ai写作，星月写作，番茄小说",
+      "author": "-星月凌云-",
       "play": 1148,
       "danmaku": 5,
-      "duration": "3:9",
-      "pubdate": 1776056974
+      "favorites": 20,
+      "like": 23,
+      "pubdate": 1776056974,
+      "duration": "3:9"
     },
     {
       "bvid": "BV1Z4DjBiEYe",
       "url": "https://www.bilibili.com/video/BV1Z4DjBiEYe",
       "title": "用AI写同人日稿费过千元的多年网文作者，详细AI操作技巧公布！真实分享经验心得，公开所有创作流程，星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 27549,
       "danmaku": 129,
-      "duration": "22:7",
-      "pubdate": 1775634559
+      "favorites": 424,
+      "like": 416,
+      "pubdate": 1775634559,
+      "duration": "22:7"
     },
     {
       "bvid": "BV1gh97BeE3L",
       "url": "https://www.bilibili.com/video/BV1gh97BeE3L",
       "title": "Ai网文写作工具？如果你是这类人我劝你还是别用了，详细AI操作技巧公布！真实分享经验心得，公开所有创作流程，星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 5972,
       "danmaku": 60,
-      "duration": "6:25",
-      "pubdate": 1775026786
+      "favorites": 187,
+      "like": 148,
+      "pubdate": 1775026786,
+      "duration": "6:25"
     },
     {
       "bvid": "BV1GkXhB6EW5",
       "url": "https://www.bilibili.com/video/BV1GkXhB6EW5",
       "title": "用AI写百万字玄幻脑洞长篇九万稿费的作者，详细AI操作技巧公布！真实分享经验心得，公开所有创作流程，星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 3739,
       "danmaku": 55,
-      "duration": "3:21",
-      "pubdate": 1774857876
+      "favorites": 222,
+      "like": 169,
+      "pubdate": 1774857876,
+      "duration": "3:21"
     },
     {
       "bvid": "BV1x9XbBWEw5",
@@ -96,10 +121,13 @@
       "bvid": "BV1RcQBBoEsM",
       "url": "https://www.bilibili.com/video/BV1RcQBBoEsM",
       "title": "真实采访用AI写170万字，单本稿费30万的作者！真实分享经验心得，公开所有创作流程，星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 53581,
       "danmaku": 161,
-      "duration": "13:28",
-      "pubdate": 1774321947
+      "favorites": 1384,
+      "like": 1317,
+      "pubdate": 1774321947,
+      "duration": "13:28"
     },
     {
       "bvid": "BV1kZwXz3EkA",
@@ -204,10 +232,13 @@
       "bvid": "BV1Q9ZoBdEgR",
       "url": "https://www.bilibili.com/video/BV1Q9ZoBdEgR",
       "title": "Gemini3.1写网文小说能力如何？Gemini3.1打败其余模型仍然是网文AI首选？现在的AI写作能到什么地步了星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 33631,
       "danmaku": 125,
-      "duration": "3:8",
-      "pubdate": 1771730222
+      "favorites": 694,
+      "like": 398,
+      "pubdate": 1771730222,
+      "duration": "3:8"
     },
     {
       "bvid": "BV1zGZYBiEWe",
@@ -303,19 +334,25 @@
       "bvid": "BV1W2zKBXE8g",
       "url": "https://www.bilibili.com/video/BV1W2zKBXE8g",
       "title": "用Ai在番茄写了本短篇收益十万元，收益构成中番茄收益居然只有77.83？视频内附创作全流程，焚决公开,ai写小说，ai写作，星月写作，番茄小说，短篇网文",
+      "author": "-星月凌云-",
       "play": 20707,
       "danmaku": 112,
-      "duration": "9:49",
-      "pubdate": 1769157000
+      "favorites": 796,
+      "like": 487,
+      "pubdate": 1769157000,
+      "duration": "9:49"
     },
     {
       "bvid": "BV1HPzsBNEbN",
       "url": "https://www.bilibili.com/video/BV1HPzsBNEbN",
       "title": "网文界新书榜一作者流程集合！创作流程大公开！AI写文也能榜一新书榜？新书榜单第一名居然是用AI辅助创作的？星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 31910,
       "danmaku": 121,
-      "duration": "43:15",
-      "pubdate": 1769073027
+      "favorites": 2404,
+      "like": 936,
+      "pubdate": 1769073027,
+      "duration": "43:15"
     },
     {
       "bvid": "BV1dqkYBsEuB",
@@ -357,10 +394,13 @@
       "bvid": "BV1UJrhBNEPG",
       "url": "https://www.bilibili.com/video/BV1UJrhBNEPG",
       "title": "网文界炸弹，AI写作真的颠覆你的认知，首秀当日8万阅读人数！星月写作，Ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 25407,
       "danmaku": 136,
-      "duration": "7:32",
-      "pubdate": 1768208714
+      "favorites": 410,
+      "like": 292,
+      "pubdate": 1768208714,
+      "duration": "7:32"
     },
     {
       "bvid": "BV1FYiXBMEtW",
@@ -402,10 +442,13 @@
       "bvid": "BV1i5BTB6EUk",
       "url": "https://www.bilibili.com/video/BV1i5BTB6EUk",
       "title": "公开作者书名与马甲和创作全流程，都市种田阅读榜一居然是用AI辅助创作的？星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 54928,
       "danmaku": 184,
-      "duration": "16:37",
-      "pubdate": 1766480905
+      "favorites": 1774,
+      "like": 911,
+      "pubdate": 1766480905,
+      "duration": "16:37"
     },
     {
       "bvid": "BV1uAqnBaEDh",
@@ -447,10 +490,13 @@
       "bvid": "BV1JWmEBiEjW",
       "url": "https://www.bilibili.com/video/BV1JWmEBiEjW",
       "title": "AI写作公开作者书名与马甲，悬疑榜单第十名，番茄小说，星月写作，ai写小说",
+      "author": "-星月凌云-",
       "play": 2184,
       "danmaku": 23,
-      "duration": "5:33",
-      "pubdate": 1765531029
+      "favorites": 34,
+      "like": 41,
+      "pubdate": 1765531029,
+      "duration": "5:33"
     },
     {
       "bvid": "BV1SbmgBFEYj",
@@ -474,19 +520,25 @@
       "bvid": "BV1vL2mB6Eph",
       "url": "https://www.bilibili.com/video/BV1vL2mB6Eph",
       "title": "公开作者书名与马甲和创作全流程，20岁小伙用AI辅助创作玄幻榜单第一名？星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 27158,
       "danmaku": 155,
-      "duration": "14:28",
-      "pubdate": 1765243137
+      "favorites": 776,
+      "like": 493,
+      "pubdate": 1765243137,
+      "duration": "14:28"
     },
     {
       "bvid": "BV1NYSCBWEpV",
       "url": "https://www.bilibili.com/video/BV1NYSCBWEpV",
       "title": "这本都市高武新书榜一居然是AI写的！公开作者书名与马甲！用AI写小说都市高武阅读榜第20名！ai写小说，番茄小说，星月写作",
+      "author": "-星月凌云-",
       "play": 27091,
       "danmaku": 138,
-      "duration": "9:10",
-      "pubdate": 1764583262
+      "favorites": 497,
+      "like": 498,
+      "pubdate": 1764583262,
+      "duration": "9:10"
     },
     {
       "bvid": "BV1k5SMBUE53",
@@ -501,10 +553,13 @@
       "bvid": "BV1HDUrBgE74",
       "url": "https://www.bilibili.com/video/BV1HDUrBgE74",
       "title": "纯干货，小说封面、网文封面流程全公开，完全免费，ai写小说，番茄小说，星月写作",
+      "author": "-星月凌云-",
       "play": 7302,
       "danmaku": 95,
-      "duration": "5:11",
-      "pubdate": 1763968656
+      "favorites": 702,
+      "like": 383,
+      "pubdate": 1763968656,
+      "duration": "5:11"
     },
     {
       "bvid": "BV1zHUVBxEyf",
@@ -519,10 +574,13 @@
       "bvid": "BV17xynBwE4b",
       "url": "https://www.bilibili.com/video/BV17xynBwE4b",
       "title": "公开作者书名与马甲和创作全流程，都市高武新书榜第一名居然是用AI辅助创作的？星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 326753,
       "danmaku": 437,
-      "duration": "18:57",
-      "pubdate": 1763546772
+      "favorites": 9090,
+      "like": 7010,
+      "pubdate": 1763546772,
+      "duration": "18:57"
     },
     {
       "bvid": "BV1BKygBNE86",
@@ -532,6 +590,15 @@
       "danmaku": 124,
       "duration": "7:52",
       "pubdate": 1763457412
+    },
+    {
+      "bvid": "BV1JFCiB3Ebw",
+      "url": "https://www.bilibili.com/video/BV1JFCiB3Ebw",
+      "title": "惊天揭秘，番茄榜一作家居然是这么用AI扫榜开书的！ai写作，星月写作，番茄小说",
+      "play": 3000,
+      "danmaku": 19,
+      "duration": "4:11",
+      "pubdate": 1763363239
     },
     {
       "bvid": "BV1zhCTB4EaQ",
@@ -546,10 +613,13 @@
       "bvid": "BV1Vv2cB3EU9",
       "url": "https://www.bilibili.com/video/BV1Vv2cB3EU9",
       "title": "太炸裂了！Gemini3.0偷跑！这或许是最懂网文的AI了！星月写作，ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 26231,
       "danmaku": 132,
-      "duration": "4:56",
-      "pubdate": 1762413719
+      "favorites": 582,
+      "like": 329,
+      "pubdate": 1762413719,
+      "duration": "4:56"
     },
     {
       "bvid": "BV1Qj1xBiEP7",
@@ -559,6 +629,15 @@
       "danmaku": 69,
       "duration": "3:16",
       "pubdate": 1762332377
+    },
+    {
+      "bvid": "BV1Jm1rBhEgR",
+      "url": "https://www.bilibili.com/video/BV1Jm1rBhEgR",
+      "title": "不同网文作者的收入是多少？Ai写出的榜一作品稿费能达到什么高度？Ai写小说，星月写作，番茄小说",
+      "play": 2632,
+      "danmaku": 49,
+      "duration": "4:18",
+      "pubdate": 1762242609
     },
     {
       "bvid": "BV1mj1YBSE2a",
@@ -573,19 +652,25 @@
       "bvid": "BV1Rv1KBQEAC",
       "url": "https://www.bilibili.com/video/BV1Rv1KBQEAC",
       "title": "Ai写的网文现在怎么样了？公开作者书名与马甲，番茄榜单，AI写小说，星月写作，网文界炸弹",
+      "author": "-星月凌云-",
       "play": 32351,
       "danmaku": 127,
-      "duration": "4:8",
-      "pubdate": 1761891877
+      "favorites": 462,
+      "like": 480,
+      "pubdate": 1761891877,
+      "duration": "4:8"
     },
     {
       "bvid": "BV1XSySBMEN6",
       "url": "https://www.bilibili.com/video/BV1XSySBMEN6",
       "title": "【网文风向标】10/29～11/05你该选择什么题材开书？如何用洪荒题材写爆款网文？网文热门题材推荐与解析，AI写小说，星月写作，番茄小说",
+      "author": "-星月凌云-",
       "play": 2041,
       "danmaku": 57,
-      "duration": "6:8",
-      "pubdate": 1761722954
+      "favorites": 91,
+      "like": 110,
+      "pubdate": 1761722954,
+      "duration": "6:8"
     },
     {
       "bvid": "BV1fiyBBEEEA",
@@ -609,10 +694,13 @@
       "bvid": "BV1z2sEzcEL8",
       "url": "https://www.bilibili.com/video/BV1z2sEzcEL8",
       "title": "网文的天又塌了，你说我看过的书都是AI写的？这下完蛋了！Ai写小说，星月写作，番茄小说",
+      "author": "-星月凌云-",
       "play": 52111,
       "danmaku": 143,
-      "duration": "8:12",
-      "pubdate": 1761294610
+      "favorites": 679,
+      "like": 686,
+      "pubdate": 1761294610,
+      "duration": "8:12"
     },
     {
       "bvid": "BV1e8WRz9E2C",
@@ -627,10 +715,22 @@
       "bvid": "BV17esgzTECy",
       "url": "https://www.bilibili.com/video/BV17esgzTECy",
       "title": "网文界炸弹，初中生写网文巅峰作品，首秀当日15万阅读人数！星月写作，Ai写小说，番茄小说",
+      "author": "-星月凌云-",
       "play": 130889,
       "danmaku": 192,
-      "duration": "5:11",
-      "pubdate": 1760950779
+      "favorites": 1175,
+      "like": 1554,
+      "pubdate": 1760950779,
+      "duration": "5:11"
+    },
+    {
+      "bvid": "BV1EZWEzfEF4",
+      "url": "https://www.bilibili.com/video/BV1EZWEzfEF4",
+      "title": "70后姐姐从未接触网文，是怎么实现过稿数十篇短篇网文和两本短剧的？",
+      "play": 2848,
+      "danmaku": 36,
+      "duration": "7:35",
+      "pubdate": 1760693808
     },
     {
       "bvid": "BV15oWvzvEt9",
@@ -645,19 +745,25 @@
       "bvid": "BV14j4izaEoA",
       "url": "https://www.bilibili.com/video/BV14j4izaEoA",
       "title": "AI写小说都市日常榜首！富二代是如何使用ai写小说写出榜一来的！公开书名和作者马甲，番茄小说，白嫖ai写小说，ai写网文，星月写作",
+      "author": "-星月凌云-",
       "play": 30881,
       "danmaku": 159,
-      "duration": "7:34",
-      "pubdate": 1760524566
+      "favorites": 653,
+      "like": 673,
+      "pubdate": 1760524566,
+      "duration": "7:34"
     },
     {
       "bvid": "BV1Vg4bzWEq9",
       "url": "https://www.bilibili.com/video/BV1Vg4bzWEq9",
       "title": "AI写小说玄幻榜首！公开书名和作者马甲，番茄小说，白嫖ai写小说，ai写网文，星月写作，",
+      "author": "-星月凌云-",
       "play": 47095,
       "danmaku": 172,
-      "duration": "7:37",
-      "pubdate": 1760428764
+      "favorites": 772,
+      "like": 1285,
+      "pubdate": 1760428764,
+      "duration": "7:37"
     },
     {
       "bvid": "BV1of42zkEcE",
@@ -687,6 +793,24 @@
       "pubdate": 1760086062
     },
     {
+      "bvid": "BV1MqxkzEEkH",
+      "url": "https://www.bilibili.com/video/BV1MqxkzEEkH",
+      "title": "一百万个人看过的书居然是AI辅助创作的？一条视频告诉你他的创作方式！以及天价稿费的神秘构成！",
+      "play": 4039,
+      "danmaku": 52,
+      "duration": "6:12",
+      "pubdate": 1759993400
+    },
+    {
+      "bvid": "BV1oyxez6ECd",
+      "url": "https://www.bilibili.com/video/BV1oyxez6ECd",
+      "title": "网文作者从负债到日收9000！人生逆袭，离婚、负债、十几年零社交，他用AI敲出一条生路！",
+      "play": 3398,
+      "danmaku": 29,
+      "duration": "69:15",
+      "pubdate": 1759904532
+    },
+    {
       "bvid": "BV1woHJzaEwQ",
       "url": "https://www.bilibili.com/video/BV1woHJzaEwQ",
       "title": "从十年老扑街到日收9000+！离婚、负债、十几年零社交，他用AI敲出一条生路！",
@@ -708,19 +832,25 @@
       "bvid": "BV1NFnXzdEjD",
       "url": "https://www.bilibili.com/video/BV1NFnXzdEjD",
       "title": "年度最强翻身仗！写网文日入9000+！离婚、负债、十几年零社交，他用AI敲出一条生路！",
+      "author": "-星月凌云-",
       "play": 1372,
       "danmaku": 0,
-      "duration": "0:21",
-      "pubdate": 1759032091
+      "favorites": 26,
+      "like": 23,
+      "pubdate": 1759032091,
+      "duration": "0:21"
     },
     {
       "bvid": "BV1tdnMzzEzR",
       "url": "https://www.bilibili.com/video/BV1tdnMzzEzR",
       "title": "不懂写作也能月入50万？揭秘前辅警“王百万”如何靠网文逆袭！",
+      "author": "-星月凌云-",
       "play": 31377,
       "danmaku": 136,
-      "duration": "28:19",
-      "pubdate": 1758866771
+      "favorites": 1135,
+      "like": 883,
+      "pubdate": 1758866771,
+      "duration": "28:19"
     },
     {
       "bvid": "BV1SkHhz6EVY",
@@ -750,6 +880,15 @@
       "pubdate": 1757323007
     },
     {
+      "bvid": "BV1wDamziEkD",
+      "url": "https://www.bilibili.com/video/BV1wDamziEkD",
+      "title": "【星月教程】纯AI写作从入门到飞升全教程！星月写作教程！第二期（写作板块工具栏所有工具使用方法）",
+      "play": 4034,
+      "danmaku": 36,
+      "duration": "4:2",
+      "pubdate": 1756976807
+    },
+    {
       "bvid": "BV1twhRzbEbH",
       "url": "https://www.bilibili.com/video/BV1twhRzbEbH",
       "title": "番茄榜单第一名是用AI写的！AI写小说公开书名与作者马甲！绝对真实数据！绝不造假！星月写作教程！",
@@ -768,6 +907,15 @@
       "pubdate": 1756369476
     },
     {
+      "bvid": "BV1ikvczKEiU",
+      "url": "https://www.bilibili.com/video/BV1ikvczKEiU",
+      "title": "公开书名与马甲！！番茄日收1658.79元！用AI写小说！绝不造假随便查验！",
+      "play": 2877,
+      "danmaku": 17,
+      "duration": "11:23",
+      "pubdate": 1756176920
+    },
+    {
       "bvid": "BV1kFedz8Ezt",
       "url": "https://www.bilibili.com/video/BV1kFedz8Ezt",
       "title": "【星月教程】纯AI写作从入门到飞升全教程！星月写作教程！",
@@ -777,13 +925,34 @@
       "pubdate": 1756102907
     },
     {
+      "bvid": "BV1jgYfz4Eg4",
+      "url": "https://www.bilibili.com/video/BV1jgYfz4Eg4",
+      "title": "公开书名和作者马甲，日收近2000，番茄榜一，番茄小说，白嫖ai写小说，ai写网文，星月写作教程",
+      "play": 3618,
+      "danmaku": 13,
+      "duration": "2:11",
+      "pubdate": 1755832822
+    },
+    {
       "bvid": "BV1qzYXzVEM5",
       "url": "https://www.bilibili.com/video/BV1qzYXzVEM5",
       "title": "百万在读作者直播分享经验！网文头部作者月稿费收入让人惊呆！星月写作教程！",
+      "author": "-星月凌云-",
       "play": 2060,
       "danmaku": 0,
-      "duration": "79:23",
-      "pubdate": 1755762236
+      "favorites": 76,
+      "like": 33,
+      "pubdate": 1755762236,
+      "duration": "79:23"
+    },
+    {
+      "bvid": "BV1sLe3zrEWb",
+      "url": "https://www.bilibili.com/video/BV1sLe3zrEWb",
+      "title": "纯AI写作占领榜单？不仅新书榜也有阅读榜榜首？榜单占领！星月写作教程",
+      "play": 3022,
+      "danmaku": 16,
+      "duration": "2:18",
+      "pubdate": 1755683233
     },
     {
       "bvid": "BV1VieFztEdP",
@@ -798,10 +967,31 @@
       "bvid": "BV1wibnznED4",
       "url": "https://www.bilibili.com/video/BV1wibnznED4",
       "title": "发稿费的第二天我人都傻了...百万在读网文头部的收入居然达到了这个数字？我认识的那个大神，劝我别写网文了…星月写作实用教程",
+      "author": "-星月凌云-",
       "play": 41524,
       "danmaku": 75,
-      "duration": "3:28",
-      "pubdate": 1755249941
+      "favorites": 1039,
+      "like": 619,
+      "pubdate": 1755249941,
+      "duration": "3:28"
+    },
+    {
+      "bvid": "BV1LubazBEqG",
+      "url": "https://www.bilibili.com/video/BV1LubazBEqG",
+      "title": "网文最强正反馈方向？同人衍生赛道到底该怎么写！一条视频教会你！星月写作教程！",
+      "play": 3541,
+      "danmaku": 33,
+      "duration": "8:42",
+      "pubdate": 1755076233
+    },
+    {
+      "bvid": "BV1T3bGzvEGq",
+      "url": "https://www.bilibili.com/video/BV1T3bGzvEGq",
+      "title": "【网文新人必看】纯新人如何使用Ai写作？从入门到入土全教程概览，一条学会。星月写作教程。",
+      "play": 2303,
+      "danmaku": 28,
+      "duration": "3:9",
+      "pubdate": 1754904098
     },
     {
       "bvid": "BV16wtUzWEci",
@@ -825,10 +1015,13 @@
       "bvid": "BV1A2tnzSEhG",
       "url": "https://www.bilibili.com/video/BV1A2tnzSEhG",
       "title": "新书榜六本榜首全是AI写的？随便质疑全数据真实可验！三本榜首大公开！Ai写作流程教学，星月写作使用教学",
+      "author": "-星月凌云-",
       "play": 54840,
       "danmaku": 106,
-      "duration": "3:38",
-      "pubdate": 1754384714
+      "favorites": 974,
+      "like": 1439,
+      "pubdate": 1754384714,
+      "duration": "3:38"
     },
     {
       "bvid": "BV1XQtGzVEXv",
@@ -840,85 +1033,130 @@
       "pubdate": 1754302952
     },
     {
+      "bvid": "BV1fLh8zkEAL",
+      "url": "https://www.bilibili.com/video/BV1fLh8zkEAL",
+      "title": "再也不用一个个分析爆款榜单拆书扫榜了！星月写作一秒帮你解决！西红柿所有榜单爆款书！一键拆解爆款元素！Ai写小说！星月写作教程！",
+      "play": 3324,
+      "danmaku": 17,
+      "duration": "3:47",
+      "pubdate": 1754129424
+    },
+    {
       "bvid": "BV1jChJzCEAx",
       "url": "https://www.bilibili.com/video/BV1jChJzCEAx",
       "title": "K75稿费作者用星月写作开书到万字全流程过程大公开！纯干货！星月写作基础教程！看完就会！",
+      "author": "-星月凌云-",
       "play": 12887,
       "danmaku": 103,
-      "duration": "4:2",
-      "pubdate": 1754027220
+      "favorites": 757,
+      "like": 391,
+      "pubdate": 1754027220,
+      "duration": "4:2"
     },
     {
       "bvid": "BV15r8CzuECF",
       "url": "https://www.bilibili.com/video/BV15r8CzuECF",
       "title": "长篇小说开书到写作全流程！大公开！看完直接学会顶级开书思路！星月写作教程！十分钟教会你单日阅读10w+作者同款开书方法！",
+      "author": "-星月凌云-",
       "play": 26677,
       "danmaku": 104,
-      "duration": "9:58",
-      "pubdate": 1753953520
+      "favorites": 2051,
+      "like": 1020,
+      "pubdate": 1753953520,
+      "duration": "9:58"
+    },
+    {
+      "bvid": "BV1aU8RzPEzy",
+      "url": "https://www.bilibili.com/video/BV1aU8RzPEzy",
+      "title": "网文作者的天又双叒叕塌了，Ai写小说占领某茄多个榜首？‘写故事的人’到底还重不重要？星月写作，Ai写小说",
+      "play": 1584,
+      "danmaku": 14,
+      "duration": "1:50",
+      "pubdate": 1753779623
     },
     {
       "bvid": "BV1xi8JzsETk",
       "url": "https://www.bilibili.com/video/BV1xi8JzsETk",
       "title": "开局一方丈？结尾····如果用AI写网文都想不到的反差是什么效果？",
+      "author": "-星月凌云-",
       "play": 3142,
       "danmaku": 47,
-      "duration": "2:17",
-      "pubdate": 1753698109
+      "favorites": 128,
+      "like": 253,
+      "pubdate": 1753698109,
+      "duration": "2:17"
     },
     {
       "bvid": "BV1Pp8FzYELG",
       "url": "https://www.bilibili.com/video/BV1Pp8FzYELG",
       "title": "起初我以为是一次普通的采访，但看完我真的泪目了。写网文一年，他让“保安逆袭作家”从笑话变成真话，Ai写小说，星月写作",
+      "author": "-星月凌云-",
       "play": 7015,
       "danmaku": 64,
-      "duration": "10:41",
-      "pubdate": 1753266907
+      "favorites": 446,
+      "like": 1490,
+      "pubdate": 1753266907,
+      "duration": "10:41"
     },
     {
       "bvid": "BV1t5gHzUEHU",
       "url": "https://www.bilibili.com/video/BV1t5gHzUEHU",
       "title": "短篇网文作者的天塌了！有人用工作流一键直出短篇修改后签约k75！",
+      "author": "-星月凌云-",
       "play": 7816,
       "danmaku": 80,
-      "duration": "4:34",
-      "pubdate": 1753178734
+      "favorites": 437,
+      "like": 312,
+      "pubdate": 1753178734,
+      "duration": "4:34"
     },
     {
       "bvid": "BV1cZgVzEEcX",
       "url": "https://www.bilibili.com/video/BV1cZgVzEEcX",
       "title": "十年网文作者，聊一聊现阶段的网文发展趋势。‘或许有一天写故事的人，不再重要’",
+      "author": "-星月凌云-",
       "play": 7834,
       "danmaku": 94,
-      "duration": "4:10",
-      "pubdate": 1753092197
+      "favorites": 543,
+      "like": 651,
+      "pubdate": 1753092197,
+      "duration": "4:10"
     },
     {
       "bvid": "BV1CTutz9EqT",
       "url": "https://www.bilibili.com/video/BV1CTutz9EqT",
       "title": "某茄百万在读这个数据？！网文作者真的天塌了，网文作者·真实收入大揭秘！星月写作详细使用方法，星月教程！",
+      "author": "-星月凌云-",
       "play": 23181,
       "danmaku": 108,
-      "duration": "3:49",
-      "pubdate": 1752651314
+      "favorites": 1116,
+      "like": 1245,
+      "pubdate": 1752651314,
+      "duration": "3:49"
     },
     {
       "bvid": "BV1aZugzdEkW",
       "url": "https://www.bilibili.com/video/BV1aZugzdEkW",
       "title": "一条视频教会你爆款网文封面的制作方式！",
+      "author": "-星月凌云-",
       "play": 7075,
       "danmaku": 0,
-      "duration": "0:47",
-      "pubdate": 1752227425
+      "favorites": 373,
+      "like": 205,
+      "pubdate": 1752227425,
+      "duration": "0:47"
     },
     {
       "bvid": "BV1D8GGzeEHq",
       "url": "https://www.bilibili.com/video/BV1D8GGzeEHq",
       "title": "番茄新书榜榜首！直播教你开书！直播分享所有写作经验！纯干货！",
+      "author": "-星月凌云-",
       "play": 3330,
       "danmaku": 24,
-      "duration": "53:27",
-      "pubdate": 1752141771
+      "favorites": 136,
+      "like": 46,
+      "pubdate": 1752141771,
+      "duration": "53:27"
     },
     {
       "bvid": "BV1eZGJz4EVA",
@@ -933,19 +1171,25 @@
       "bvid": "BV1xU3yzmEht",
       "url": "https://www.bilibili.com/video/BV1xU3yzmEht",
       "title": "网文里该怎么描写“痛”？一个视频教会你最有文笔的“痛”，Ai写作，Ai写小说，星月写作",
+      "author": "-星月凌云-",
       "play": 11872,
       "danmaku": 117,
-      "duration": "3:18",
-      "pubdate": 1751880789
+      "favorites": 1218,
+      "like": 2013,
+      "pubdate": 1751880789,
+      "duration": "3:18"
     },
     {
       "bvid": "BV1tn3rzgEhK",
       "url": "https://www.bilibili.com/video/BV1tn3rzgEhK",
       "title": "公开书名！用Ai写作斩获新书榜榜首！首秀第一天七万加阅读！",
+      "author": "-星月凌云-",
       "play": 1677,
       "danmaku": 4,
-      "duration": "6:2",
-      "pubdate": 1751862600
+      "favorites": 21,
+      "like": 13,
+      "pubdate": 1751862600,
+      "duration": "6:2"
     },
     {
       "bvid": "BV1jw3rzpE3H",
@@ -957,103 +1201,145 @@
       "pubdate": 1751852908
     },
     {
+      "bvid": "BV1QD3tzGE4f",
+      "url": "https://www.bilibili.com/video/BV1QD3tzGE4f",
+      "title": "淘金热里只有卖铲子的挣钱？在AI写作里完全就是胡言！来看多位百万在读大佬如何看待AI写作。AI写小说，星月写作",
+      "play": 2026,
+      "danmaku": 24,
+      "duration": "3:18",
+      "pubdate": 1751450512
+    },
+    {
       "bvid": "BV1BD3szyEiV",
       "url": "https://www.bilibili.com/video/BV1BD3szyEiV",
       "title": "短篇大神分享自己的亲身经历，如何从失业走到小说的正确道路？",
+      "author": "-星月凌云-",
       "play": 998,
       "danmaku": 6,
-      "duration": "4:10",
-      "pubdate": 1751446675
+      "favorites": 12,
+      "like": 8,
+      "pubdate": 1751446675,
+      "duration": "4:10"
     },
     {
       "bvid": "BV1crgDz9E8o",
       "url": "https://www.bilibili.com/video/BV1crgDz9E8o",
       "title": "短篇作者用星月写作，是如何做到k75的？",
+      "author": "-星月凌云-",
       "play": 3619,
       "danmaku": 39,
-      "duration": "4:29",
-      "pubdate": 1751352726
+      "favorites": 151,
+      "like": 110,
+      "pubdate": 1751352726,
+      "duration": "4:29"
     },
     {
       "bvid": "BV16tgkz8EBY",
       "url": "https://www.bilibili.com/video/BV16tgkz8EBY",
       "title": "第一本书零基础！写作小白用星月写作！半个月创新高！某茄新书榜前三！",
+      "author": "-星月凌云-",
       "play": 3160,
       "danmaku": 35,
-      "duration": "7:38",
-      "pubdate": 1751277303
+      "favorites": 98,
+      "like": 83,
+      "pubdate": 1751277303,
+      "duration": "7:38"
     },
     {
       "bvid": "BV1cxKBzrEWs",
       "url": "https://www.bilibili.com/video/BV1cxKBzrEWs",
       "title": "新人短篇用星月尝试！两个月打造百万级别阅读的爆款短篇！星月写作AI，用AI写小说",
+      "author": "-星月凌云-",
       "play": 5354,
       "danmaku": 46,
-      "duration": "3:35",
-      "pubdate": 1751017817
+      "favorites": 197,
+      "like": 148,
+      "pubdate": 1751017817,
+      "duration": "3:35"
     },
     {
       "bvid": "BV1RJKzzeE9j",
       "url": "https://www.bilibili.com/video/BV1RJKzzeE9j",
       "title": "「星月Ai写作教程」‘橙子老师’免费直讲脑洞生成器，看完就会！白嫖AI写小说教程！",
+      "author": "-星月凌云-",
       "play": 2551,
       "danmaku": 0,
-      "duration": "6:30",
-      "pubdate": 1751009887
+      "favorites": 60,
+      "like": 21,
+      "pubdate": 1751009887,
+      "duration": "6:30"
     },
     {
       "bvid": "BV16wKZzfEqC",
       "url": "https://www.bilibili.com/video/BV16wKZzfEqC",
       "title": "第一本小说用星月写同人文！十天十万字直接提前首秀！单日阅读人数夸张！",
+      "author": "-星月凌云-",
       "play": 7182,
       "danmaku": 22,
-      "duration": "3:47",
-      "pubdate": 1750926044
+      "favorites": 54,
+      "like": 91,
+      "pubdate": 1750926044,
+      "duration": "3:47"
     },
     {
       "bvid": "BV1CYKdzfE7c",
       "url": "https://www.bilibili.com/video/BV1CYKdzfE7c",
       "title": "「星月Ai写作教程」‘橙子老师’免费直讲名字生成器，看完就会！白嫖AI写小说教程！",
+      "author": "-星月凌云-",
       "play": 2605,
       "danmaku": 10,
-      "duration": "5:16",
-      "pubdate": 1750912848
+      "favorites": 28,
+      "like": 18,
+      "pubdate": 1750912848,
+      "duration": "5:16"
     },
     {
       "bvid": "BV1BrKHzxEyS",
       "url": "https://www.bilibili.com/video/BV1BrKHzxEyS",
       "title": "纯新人!人生第一本小说，自述70%全部使用用星月写作！首秀第一天！日收600+",
+      "author": "-星月凌云-",
       "play": 7160,
       "danmaku": 6,
-      "duration": "7:31",
-      "pubdate": 1750843921
+      "favorites": 145,
+      "like": 125,
+      "pubdate": 1750843921,
+      "duration": "7:31"
     },
     {
       "bvid": "BV1d2KgzpE2T",
       "url": "https://www.bilibili.com/video/BV1d2KgzpE2T",
       "title": "写作小白用不到二十天，用星月写作的第一本书，阅读怒破两万八！收益惊人！",
+      "author": "-星月凌云-",
       "play": 2802,
       "danmaku": 26,
-      "duration": "3:45",
-      "pubdate": 1750760549
+      "favorites": 41,
+      "like": 25,
+      "pubdate": 1750760549,
+      "duration": "3:45"
     },
     {
       "bvid": "BV16LKuzREhh",
       "url": "https://www.bilibili.com/video/BV16LKuzREhh",
       "title": "「星月Ai写作教程」‘白鸽老师’免费直讲名字生成器，看完就会！白嫖AI写小说教程！",
+      "author": "-星月凌云-",
       "play": 1982,
       "danmaku": 4,
-      "duration": "9:2",
-      "pubdate": 1750743943
+      "favorites": 17,
+      "like": 10,
+      "pubdate": 1750743943,
+      "duration": "9:2"
     },
     {
       "bvid": "BV1AKK8zpEyb",
       "url": "https://www.bilibili.com/video/BV1AKK8zpEyb",
       "title": "使用AI写小说日入破千？攻占新书榜，白嫖ai写小说，ai写网文，星月写作",
+      "author": "-星月凌云-",
       "play": 2920,
       "danmaku": 25,
-      "duration": "3:45",
-      "pubdate": 1750682700
+      "favorites": 96,
+      "like": 82,
+      "pubdate": 1750682700,
+      "duration": "3:45"
     },
     {
       "bvid": "BV1DbKtzZE7H",
@@ -1086,19 +1372,25 @@
       "bvid": "BV1QHNJzqEYC",
       "url": "https://www.bilibili.com/video/BV1QHNJzqEYC",
       "title": "我用AI拆解《斩神》的林七夜？还可以直接续写后文？白嫖AI写小说，星月写作",
+      "author": "-星月凌云-",
       "play": 2106,
       "danmaku": 8,
-      "duration": "2:38",
-      "pubdate": 1750239641
+      "favorites": 24,
+      "like": 12,
+      "pubdate": 1750239641,
+      "duration": "2:38"
     },
     {
       "bvid": "BV1ccN7z5Eci",
       "url": "https://www.bilibili.com/video/BV1ccN7z5Eci",
       "title": "作者与书名完全公开！纯使用AI写作！收入过万！Ai写网文，星月写作，白嫖AI写小说",
+      "author": "-星月凌云-",
       "play": 1363,
       "danmaku": 0,
-      "duration": "7:32",
-      "pubdate": 1750226330
+      "favorites": 23,
+      "like": 10,
+      "pubdate": 1750226330,
+      "duration": "7:32"
     },
     {
       "bvid": "BV13YNvzjE4N",
@@ -1110,22 +1402,37 @@
       "pubdate": 1750161600
     },
     {
+      "bvid": "BV1ahNvz2Ep5",
+      "url": "https://www.bilibili.com/video/BV1ahNvz2Ep5",
+      "title": "我用Ai拆解《十日终焉》里的齐夏？白嫖Ai写小说，AI写作的免费教程！",
+      "play": 1613,
+      "danmaku": 7,
+      "duration": "1:39",
+      "pubdate": 1750153280
+    },
+    {
       "bvid": "BV1c6Miz3ELo",
       "url": "https://www.bilibili.com/video/BV1c6Miz3ELo",
       "title": "「星月Ai写作教程」‘老菠萝老师’免费直讲简介生成器，看完就会！白嫖AI写小说教程！",
+      "author": "-星月凌云-",
       "play": 3306,
       "danmaku": 18,
-      "duration": "6:46",
-      "pubdate": 1750075200
+      "favorites": 40,
+      "like": 23,
+      "pubdate": 1750075200,
+      "duration": "6:46"
     },
     {
       "bvid": "BV1qmMizvEjn",
       "url": "https://www.bilibili.com/video/BV1qmMizvEjn",
       "title": "我用AI续写爆款网文《异兽迷城》？白嫖AI写小说",
+      "author": "-星月凌云-",
       "play": 1196,
       "danmaku": 10,
-      "duration": "2:2",
-      "pubdate": 1750066053
+      "favorites": 15,
+      "like": 13,
+      "pubdate": 1750066053,
+      "duration": "2:2"
     },
     {
       "bvid": "BV15CMuzWEHf",
@@ -1146,6 +1453,15 @@
       "pubdate": 1749741048
     },
     {
+      "bvid": "BV1h4M7zTEVR",
+      "url": "https://www.bilibili.com/video/BV1h4M7zTEVR",
+      "title": "网文开篇怎么写？看完包你学会！无脑写出黄金开篇",
+      "play": 1298,
+      "danmaku": 10,
+      "duration": "3:45",
+      "pubdate": 1749630472
+    },
+    {
       "bvid": "BV1yQT6zsEsG",
       "url": "https://www.bilibili.com/video/BV1yQT6zsEsG",
       "title": "我用AI仿写《我不是戏神》？居然有这效果？Ai写作免费教程！",
@@ -1164,6 +1480,15 @@
       "pubdate": 1749447231
     },
     {
+      "bvid": "BV1XYTKzzE93",
+      "url": "https://www.bilibili.com/video/BV1XYTKzzE93",
+      "title": "网文书名简介秒生成教程，Ai写小说的重要步骤",
+      "play": 620,
+      "danmaku": 2,
+      "duration": "1:5",
+      "pubdate": 1749272371
+    },
+    {
       "bvid": "BV1BPTTzEE2y",
       "url": "https://www.bilibili.com/video/BV1BPTTzEE2y",
       "title": "我用AI仿写《十日终焉》，Ai写作的免费教程！",
@@ -1176,10 +1501,49 @@
       "bvid": "BV1ikTxzNE7C",
       "url": "https://www.bilibili.com/video/BV1ikTxzNE7C",
       "title": "我用AI仿写了《我在精神病院学斩神》？",
+      "author": "-星月凌云-",
       "play": 32083,
       "danmaku": 111,
-      "duration": "2:12",
-      "pubdate": 1749113754
+      "favorites": 673,
+      "like": 3717,
+      "pubdate": 1749113754,
+      "duration": "2:12"
+    },
+    {
+      "bvid": "BV1xST7ztEug",
+      "url": "https://www.bilibili.com/video/BV1xST7ztEug",
+      "title": "【不会用Ai就要被淘汰】从小白到稿费作者，我的Ai增效成果",
+      "play": 837,
+      "danmaku": 6,
+      "duration": "1:44",
+      "pubdate": 1749028876
+    },
+    {
+      "bvid": "BV1bu7hzbEMh",
+      "url": "https://www.bilibili.com/video/BV1bu7hzbEMh",
+      "title": "靠AI写作赚出一线城市工资，AI写作暴利拆解",
+      "play": 1150,
+      "danmaku": 10,
+      "duration": "1:43",
+      "pubdate": 1748929078
+    },
+    {
+      "bvid": "BV1fX7nzEE3V",
+      "url": "https://www.bilibili.com/video/BV1fX7nzEE3V",
+      "title": "血泪教训！副业试错3年，发现真利润是AI写作...",
+      "play": 1423,
+      "danmaku": 15,
+      "duration": "1:41",
+      "pubdate": 1748591029
+    },
+    {
+      "bvid": "BV1657VzwEAT",
+      "url": "https://www.bilibili.com/video/BV1657VzwEAT",
+      "title": "【副业真相】80%兼职是陷阱？AI写作+网络小说，0基础吃红利！",
+      "play": 1107,
+      "danmaku": 2,
+      "duration": "2:25",
+      "pubdate": 1748507708
     },
     {
       "bvid": "BV18xjvzgEjp",
@@ -1207,6 +1571,15 @@
       "danmaku": 10,
       "duration": "1:49",
       "pubdate": 1748259900
+    },
+    {
+      "bvid": "BV1ikj7zvEmC",
+      "url": "https://www.bilibili.com/video/BV1ikj7zvEmC",
+      "title": "《用Claude4.0写网文像开挂？实测下来完全是爆款生成器！》",
+      "play": 3423,
+      "danmaku": 12,
+      "duration": "2:3",
+      "pubdate": 1748225874
     }
   ]
 }
