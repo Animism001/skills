@@ -53,12 +53,23 @@ echo ""
 VIDEO_INFO=$(yt-dlp $COOKIE_PARAM --dump-json "$VIDEO_URL" 2>/dev/null | head -1)
 
 if [ -z "$VIDEO_INFO" ]; then
-    # 尝试不用cookie
-    VIDEO_INFO=$(yt-dlp --dump-json "$VIDEO_URL" 2>/dev/null | head -1)
-    if [ -z "$VIDEO_INFO" ]; then
-        echo "❌ 无法获取视频信息"
-        exit 1
-    fi
+    # 尝试不用cookie，添加更多反反爬措施
+        VIDEO_INFO=$(yt-dlp --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" \
+            --referer "https://www.bilibili.com" \
+            --add-header "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8" \
+            --add-header "Accept-Language: zh-CN,zh;q=0.9,en;q=0.8" \
+            --add-header "Accept-Encoding: gzip, deflate, br" \
+            --add-header "Connection: keep-alive" \
+            --add-header "Upgrade-Insecure-Requests: 1" \
+            --add-header "Sec-Fetch-Dest: document" \
+            --add-header "Sec-Fetch-Mode: navigate" \
+            --add-header "Sec-Fetch-Site: same-origin" \
+            --add-header "Sec-Fetch-User: ?1" \
+            --dump-json "$VIDEO_URL" 2>/dev/null | head -1)
+        if [ -z "$VIDEO_INFO" ]; then
+            echo "❌ 无法获取视频信息"
+            exit 1
+        fi
 fi
 
 # 提取元数据
