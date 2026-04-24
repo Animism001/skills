@@ -1,0 +1,17 @@
+{
+  "name": "bilibili",
+  "version": "1.0.0",
+  "description": "B站视频搜索、链接获取和字幕转换技能",
+  "author": "AI Assistant",
+  "tags": ["bilibili", "video", "search", "subtitle", "transcript"],
+  "dependencies": {
+    "python": "3.7+",
+    "packages": ["beautifulsoup4"]
+  },
+  "entry_point": "scripts/bilibili_main.py",
+  "commands": {
+    "search": "搜索B站视频",
+    "get_up": "获取UP主的所有视频",
+    "convert": "转换视频为字幕"
+  }
+}
