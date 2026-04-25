@@ -3,7 +3,10 @@ import json
 import urllib.parse
 import gzip
 from io import BytesIO
-from .anti_crawler import get_anti_crawler
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from anti_crawler import get_anti_crawler
 
 # 搜索B站视频
 def search_bilibili_videos(keyword, page=1, pagesize=20):
@@ -43,12 +46,23 @@ def search_bilibili_videos(keyword, page=1, pagesize=20):
         
         # 处理响应，支持gzip压缩
         content_encoding = resp.getheader('Content-Encoding')
+        content = resp.read()
+        print(f"响应状态码: {resp.getcode()}")
+        print(f"响应头: {dict(resp.getheaders())}")
+        print(f"响应内容长度: {len(content)}")
+        
         if content_encoding and 'gzip' in content_encoding:
-            buffer = BytesIO(resp.read())
+            buffer = BytesIO(content)
             with gzip.GzipFile(fileobj=buffer) as f:
-                data = json.loads(f.read().decode('utf-8'))
-        else:
-            data = json.loads(resp.read().decode('utf-8'))
+                content = f.read()
+                print(f"解压后内容长度: {len(content)}")
+        
+        try:
+            data = json.loads(content.decode('utf-8'))
+        except json.JSONDecodeError as e:
+            print(f"JSON解析错误: {e}")
+            print(f"响应内容: {content[:500]}...")  # 只打印前500个字符
+            return {"error": f"JSON解析失败: {str(e)}"}
         
         # 处理响应
         if data.get("code") != 0:

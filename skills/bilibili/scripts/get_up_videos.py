@@ -6,7 +6,9 @@ import random
 import time
 import os
 import gzip
-from .anti_crawler import get_anti_crawler
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from anti_crawler import get_anti_crawler
 
 # 搜索UP主
 def search_up(up_name):

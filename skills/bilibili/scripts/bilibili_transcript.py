@@ -8,7 +8,9 @@ import urllib.parse
 import re
 import gzip
 from bs4 import BeautifulSoup
-from .anti_crawler import get_anti_crawler
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from anti_crawler import get_anti_crawler
 
 # 获取视频页面内容
 def get_video_page(url):
