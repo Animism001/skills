@@ -1,0 +1,9 @@
+{
+  "title": "星河直播4月23日签约（仙子操作60分）",
+  "bvid": "BV1atoLBBEtZ",
+  "url": "https://www.bilibili.com/video/BV1atoLBBEtZ",
+  "has_subtitle": false,
+  "error": "No subtitles available",
+  "stdout": "[BiliBili] Extracting URL: https://www.bilibili.com/video/BV1atoLBBEtZ\n[BiliBili] 1atoLBBEtZ: Downloading webpage\n",
+  "stderr": "ERROR: [BiliBili] 1atoLBBEtZ: Unable to download webpage: HTTP Error 412: Precondition Failed (caused by <HTTPError 412: Precondition Failed>)\n"
+}
