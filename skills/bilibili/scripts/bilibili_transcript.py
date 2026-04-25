@@ -6,21 +6,9 @@ import random
 import urllib.request
 import urllib.parse
 import re
+import gzip
 from bs4 import BeautifulSoup
-
-# 获取随机用户代理
-def get_random_user_agent():
-    """
-    获取随机用户代理
-    """
-    user_agents = [
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1",
-        "Mozilla/5.0 (iPad; CPU OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1",
-        "Mozilla/5.0 (Linux; Android 13; SM-G998U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36",
-    ]
-    return random.choice(user_agents)
+from .anti_crawler import get_anti_crawler
 
 # 获取视频页面内容
 def get_video_page(url):
@@ -28,23 +16,25 @@ def get_video_page(url):
     获取视频页面内容
     url: 视频链接
     """
-    headers = {
-        "User-Agent": get_random_user_agent(),
-        "Referer": "https://www.bilibili.com",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Connection": "keep-alive",
-        "Upgrade-Insecure-Requests": "1",
-        "Sec-Fetch-Dest": "document",
-        "Sec-Fetch-Mode": "navigate",
-        "Sec-Fetch-Site": "same-origin",
-        "Sec-Fetch-User": "?1",
-    }
+    anti_crawler = get_anti_crawler()
+    
+    headers = anti_crawler.get_complete_headers(
+        referer="https://www.bilibili.com",
+        is_video=True
+    )
     
     try:
-        response = urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=30)
-        return response.read().decode('utf-8')
+        # 随机延迟
+        anti_crawler.random_delay()
+        
+        resp = anti_crawler.make_request(url, headers=headers)
+        
+        # 处理gzip压缩
+        content = resp.read()
+        if resp.info().get('Content-Encoding') == 'gzip':
+            content = gzip.decompress(content)
+        
+        return content.decode('utf-8')
     except Exception as e:
         print(f"获取视频页面失败: {e}")
         return None
@@ -138,15 +128,12 @@ def convert_video_to_subtitle(video_url, output_dir):
     video_url: 视频链接
     output_dir: 输出目录
     """
+    anti_crawler = get_anti_crawler()
+    
     # 确保输出目录存在
     os.makedirs(output_dir, exist_ok=True)
     
     print(f"处理视频: {video_url}")
-    
-    # 随机延迟 2-3 秒
-    delay = random.uniform(2, 3)
-    print(f"等待 {delay:.2f} 秒...")
-    time.sleep(delay)
     
     # 获取视频页面
     page_content = get_video_page(video_url)

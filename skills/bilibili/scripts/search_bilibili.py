@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import json
-import urllib.request
 import urllib.parse
-import random
+import gzip
+from io import BytesIO
+from .anti_crawler import get_anti_crawler
 
 # 搜索B站视频
 def search_bilibili_videos(keyword, page=1, pagesize=20):
@@ -12,6 +13,9 @@ def search_bilibili_videos(keyword, page=1, pagesize=20):
     page: 页码
     pagesize: 每页结果数
     """
+    # 获取反爬管理器
+    anti_crawler = get_anti_crawler()
+    
     # 构建搜索URL
     params = urllib.parse.urlencode({
         "keyword": keyword,
@@ -21,25 +25,30 @@ def search_bilibili_videos(keyword, page=1, pagesize=20):
     })
     url = f"https://api.bilibili.com/x/web-interface/search/type?{params}"
     
-    # 随机用户代理
-    user_agents = [
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1"
-    ]
+    # 随机延迟
+    if page == 1:
+        anti_crawler.random_delay(1, 3)
+    else:
+        anti_crawler.random_delay(3, 8)
     
-    headers = {
-        "User-Agent": random.choice(user_agents),
-        "Referer": "https://www.bilibili.com",
-        "Accept": "application/json",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
-    }
+    # 获取完整请求头
+    headers = anti_crawler.get_complete_headers(
+        referer="https://search.bilibili.com",
+        is_json=True
+    )
     
     try:
-        # 发送请求
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
+        # 发送请求（使用反爬管理器）
+        resp = anti_crawler.make_request(url, headers=headers, max_retries=5, timeout=30)
+        
+        # 处理响应，支持gzip压缩
+        content_encoding = resp.getheader('Content-Encoding')
+        if content_encoding and 'gzip' in content_encoding:
+            buffer = BytesIO(resp.read())
+            with gzip.GzipFile(fileobj=buffer) as f:
+                data = json.loads(f.read().decode('utf-8'))
+        else:
+            data = json.loads(resp.read().decode('utf-8'))
         
         # 处理响应
         if data.get("code") != 0:

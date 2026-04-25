@@ -5,6 +5,8 @@ import urllib.parse
 import random
 import time
 import os
+import gzip
+from .anti_crawler import get_anti_crawler
 
 # 搜索UP主
 def search_up(up_name):
@@ -12,6 +14,8 @@ def search_up(up_name):
     搜索UP主
     up_name: UP主名称
     """
+    anti_crawler = get_anti_crawler()
+    
     params = urllib.parse.urlencode({
         "keyword": up_name,
         "search_type": "bili_user",
@@ -20,23 +24,23 @@ def search_up(up_name):
     })
     url = f"https://api.bilibili.com/x/web-interface/search/type?{params}"
     
-    user_agents = [
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1"
-    ]
-    
-    headers = {
-        "User-Agent": random.choice(user_agents),
-        "Referer": "https://www.bilibili.com",
-        "Accept": "application/json",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
-    }
+    headers = anti_crawler.get_complete_headers(
+        referer="https://www.bilibili.com",
+        is_json=True
+    )
     
     try:
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
+        # 随机延迟
+        anti_crawler.random_delay()
+        
+        resp = anti_crawler.make_request(url, headers=headers)
+        
+        # 处理gzip压缩
+        content = resp.read()
+        if resp.info().get('Content-Encoding') == 'gzip':
+            content = gzip.decompress(content)
+        
+        data = json.loads(content.decode("utf-8"))
         
         if data.get("code") != 0:
             return {"error": data.get("message", "搜索失败")}
@@ -72,6 +76,8 @@ def get_up_videos(mid, page=1, pagesize=50):
     page: 页码
     pagesize: 每页结果数
     """
+    anti_crawler = get_anti_crawler()
+    
     params = urllib.parse.urlencode({
         "mid": mid,
         "ps": pagesize,
@@ -82,23 +88,23 @@ def get_up_videos(mid, page=1, pagesize=50):
     })
     url = f"https://api.bilibili.com/x/space/wbi/arc/search?{params}"
     
-    user_agents = [
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Mobile/15E148 Safari/604.1"
-    ]
-    
-    headers = {
-        "User-Agent": random.choice(user_agents),
-        "Referer": f"https://space.bilibili.com/{mid}",
-        "Accept": "application/json",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8"
-    }
+    headers = anti_crawler.get_complete_headers(
+        referer=f"https://space.bilibili.com/{mid}",
+        is_json=True
+    )
     
     try:
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
+        # 随机延迟
+        anti_crawler.random_delay()
+        
+        resp = anti_crawler.make_request(url, headers=headers)
+        
+        # 处理gzip压缩
+        content = resp.read()
+        if resp.info().get('Content-Encoding') == 'gzip':
+            content = gzip.decompress(content)
+        
+        data = json.loads(content.decode("utf-8"))
         
         if data.get("code") != 0:
             return {"error": data.get("message", "获取视频失败")}
@@ -137,6 +143,8 @@ def get_all_up_videos(up_name, output_dir="."):
     up_name: UP主名称
     output_dir: 输出目录
     """
+    anti_crawler = get_anti_crawler()
+    
     # 搜索UP主
     up_info = search_up(up_name)
     if "error" in up_info:
@@ -176,8 +184,11 @@ def get_all_up_videos(up_name, output_dir="."):
             break
         
         page += 1
-        # 随机延迟，避免请求过于频繁
-        time.sleep(random.uniform(1, 3))
+        
+        # 每3页进行一次长延迟
+        if page % 3 == 0:
+            print("进行长延迟，避免触发风控...")
+            anti_crawler.long_delay(10, 15)
     
     # 保存JSON文件
     with open(output_json, "w", encoding="utf-8") as f:
