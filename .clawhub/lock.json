@@ -44,6 +44,10 @@
     "self-improving": {
       "version": "1.2.16",
       "installedAt": 1777868532363
+    },
+    "inkos": {
+      "version": "2.3.3",
+      "installedAt": 1777868799960
     }
   }
 }
