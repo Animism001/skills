@@ -1,0 +1,9 @@
+{
+  "title": "起点编辑星河直播4月24日录播",
+  "bvid": "BV1MJoEBrErB",
+  "url": "https://www.bilibili.com/video/BV1MJoEBrErB",
+  "has_subtitle": false,
+  "error": "No subtitles available",
+  "stdout": "[BiliBili] Extracting URL: https://www.bilibili.com/video/BV1MJoEBrErB\n[BiliBili] 1MJoEBrErB: Downloading webpage\n",
+  "stderr": "ERROR: [BiliBili] 1MJoEBrErB: Unable to download webpage: HTTP Error 412: Precondition Failed (caused by <HTTPError 412: Precondition Failed>)\n"
+}

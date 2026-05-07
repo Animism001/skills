@@ -21,6 +21,10 @@
   - **youtube-transcript/**: YouTube字幕获取 - 支持住宅IP代理
   - **web-researcher/**: 网络研究工具 - 深度网页内容研究
   - **thinking-model-enhancer/**: 思维模型增强器 - 思维框架优化
+  - **self-improving/**: 自我优化工具
+  - **self-improving-agent/**: 自我优化Agent
+  - **inkos/**: 小说写作技能
+  - **ima-skill/**: 腾讯IMA知识库管理
 
 ## 技术栈
 
@@ -33,6 +37,7 @@
 - 使用 **bilibili-search** 搜索视频资源
 - 使用 **web-researcher** 进行深度网络研究
 - 使用 **thinking-model-enhancer** 优化思维框架
+- 使用 **ima-skill** 管理笔记和知识库
 
 ## 工具技能
 
@@ -125,6 +130,7 @@
 - UP主信息查询
 - 热门视频排行
 - 视频详情获取
+- 获取UP主所有视频列表
 
 ### 8. bilibili-transcript（B站字幕获取）
 
@@ -169,6 +175,30 @@
 - 思维框架优化
 - 决策模型增强
 - 表达风格提炼
+
+### 12. self-improving（自我优化）
+
+**技能描述**：排行榜第1名的自我优化技能，持续改进Agent能力。
+
+**技能位置**：[skills/self-improving/](file:///workspace/skills/self-improving/)
+
+### 13. self-improving-agent（自我优化Agent）
+
+**技能描述**：排行榜第3名的自我优化Agent技能。
+
+**技能位置**：[skills/self-improving-agent/](file:///workspace/skills/self-improving-agent/)
+
+### 14. inkos（小说写作）
+
+**技能描述**：专业的小说写作技能，支持多种类型和风格。
+
+**技能位置**：[skills/inkos/](file:///workspace/skills/inkos/)
+
+### 15. ima-skill（IMA知识库）
+
+**技能描述**：腾讯IMA的统一API技能，支持笔记管理和知识库操作。
+
+**技能位置**：[skills/ima-skill/](file:///workspace/skills/ima-skill/)
 
 ## Nuwa增强版工作流
 

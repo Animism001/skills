@@ -1,0 +1,9 @@
+{
+  "title": "起点编辑星河神人害圈（9分侮辱主播）",
+  "bvid": "BV1FhoUB1E78",
+  "url": "https://www.bilibili.com/video/BV1FhoUB1E78",
+  "has_subtitle": false,
+  "error": "No subtitles available",
+  "stdout": "[BiliBili] Extracting URL: https://www.bilibili.com/video/BV1FhoUB1E78\n[BiliBili] 1FhoUB1E78: Downloading webpage\n",
+  "stderr": "ERROR: [BiliBili] 1FhoUB1E78: Unable to download webpage: HTTP Error 412: Precondition Failed (caused by <HTTPError 412: Precondition Failed>)\n"
+}

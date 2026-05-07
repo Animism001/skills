@@ -53,8 +53,19 @@ echo ""
 VIDEO_INFO=$(yt-dlp $COOKIE_PARAM --dump-json "$VIDEO_URL" 2>/dev/null | head -1)
 
 if [ -z "$VIDEO_INFO" ]; then
-    # 尝试不用cookie
-    VIDEO_INFO=$(yt-dlp --dump-json "$VIDEO_URL" 2>/dev/null | head -1)
+    # 尝试不用cookie，添加更多反反爬措施
+    VIDEO_INFO=$(yt-dlp --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" \
+        --referer "https://www.bilibili.com" \
+        --add-header "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8" \
+        --add-header "Accept-Language: zh-CN,zh;q=0.9,en;q=0.8" \
+        --add-header "Accept-Encoding: gzip, deflate, br" \
+        --add-header "Connection: keep-alive" \
+        --add-header "Upgrade-Insecure-Requests: 1" \
+        --add-header "Sec-Fetch-Dest: document" \
+        --add-header "Sec-Fetch-Mode: navigate" \
+        --add-header "Sec-Fetch-Site: same-origin" \
+        --add-header "Sec-Fetch-User: ?1" \
+        --dump-json "$VIDEO_URL" 2>/dev/null | head -1)
     if [ -z "$VIDEO_INFO" ]; then
         echo "❌ 无法获取视频信息"
         exit 1
@@ -108,12 +119,12 @@ TRANSCRIPT_TEXT=""
 # 第1级：人工CC字幕
 if [ "$HAS_CC_SUBS" = true ]; then
     echo "✅ 发现人工CC字幕，优先下载..."
-    
+
     yt-dlp $COOKIE_PARAM --skip-download --write-subs --sub-langs zh-CN,zh-TW,zh-Hans,zh --convert-subs srt \
         -o "${OUTPUT_DIR}/bilibili_subtitle.%(ext)s" "$VIDEO_URL" 2>&1
-    
+
     SUB_FILE=$(find "$OUTPUT_DIR" -maxdepth 1 -name "bilibili_subtitle*.srt" -type f 2>/dev/null | head -1)
-    
+
     if [ -n "$SUB_FILE" ] && [ -s "$SUB_FILE" ]; then
         echo "✅ CC字幕下载成功"
         TRANSCRIPT_SOURCE="B站CC字幕"
@@ -127,12 +138,12 @@ fi
 # 第2级：AI字幕
 if [ -z "$TRANSCRIPT_TEXT" ] && [ "$HAS_AI_SUBS" = true ]; then
     echo "✅ 发现AI字幕（$AI_LANG），正在下载..."
-    
+
     yt-dlp $COOKIE_PARAM --skip-download --write-subs --write-auto-subs --sub-langs "$AI_LANG" --convert-subs srt \
         -o "${OUTPUT_DIR}/bilibili_ai_subtitle.%(ext)s" "$VIDEO_URL" 2>&1
-    
+
     SUB_FILE=$(find "$OUTPUT_DIR" -maxdepth 1 -name "bilibili_ai_subtitle*.srt" -type f 2>/dev/null | head -1)
-    
+
     if [ -n "$SUB_FILE" ] && [ -s "$SUB_FILE" ]; then
         echo "✅ AI字幕下载成功"
         TRANSCRIPT_SOURCE="B站AI字幕 ($AI_LANG)"
@@ -147,23 +158,23 @@ fi
 if [ -z "$TRANSCRIPT_TEXT" ]; then
     echo "🎤 未发现字幕，使用Whisper本地转录（GPU加速）..."
     echo "⏳ 这可能需要一些时间，请耐心等待..."
-    
+
     # 下载音频
     yt-dlp $COOKIE_PARAM -x --audio-format mp3 -o "${OUTPUT_DIR}/bilibili_audio.%(ext)s" "$VIDEO_URL" 2>&1 || \
     yt-dlp -x --audio-format mp3 -o "${OUTPUT_DIR}/bilibili_audio.%(ext)s" "$VIDEO_URL" 2>&1
-    
+
     AUDIO_FILE=$(find "$OUTPUT_DIR" -maxdepth 1 \( -name "bilibili_audio*.mp3" -o -name "bilibili_audio*.m4a" \) 2>/dev/null | head -1)
-    
+
     if [ -z "$AUDIO_FILE" ]; then
         echo "❌ 音频下载失败"
         exit 1
     fi
-    
+
     # 使用 medium 模型 + GPU
     whisper "$AUDIO_FILE" --model medium --language Chinese --output_format txt --output_dir "$OUTPUT_DIR" 2>&1
-    
+
     TXT_FILE=$(find "$OUTPUT_DIR" -maxdepth 1 -name "*.txt" -type f 2>/dev/null | head -1)
-    
+
     if [ -n "$TXT_FILE" ] && [ -s "$TXT_FILE" ]; then
         echo "✅ 转录完成"
         TRANSCRIPT_SOURCE="Whisper medium 模型"
