@@ -21,9 +21,11 @@
   - **youtube-transcript/**: YouTube字幕获取 - 支持住宅IP代理
   - **web-researcher/**: 网络研究工具 - 深度网页内容研究
   - **thinking-model-enhancer/**: 思维模型增强器 - 思维框架优化
-- **./tools/**: 工具技能
-  - **huashu-nuwa**: 女娲造人 - 人物蒸馏技能
-  - **skill-creator**: 技能创建器 - 技能创建、优化和测试工具
+- **./skills/** (续):
+  - **self-improving/**: 自我优化工具
+  - **self-improving-agent/**: 自我优化Agent
+  - **inkos/**: 小说写作技能
+  - **ima-skill/**: 腾讯IMA知识库管理
 
 ## 技术栈
 
@@ -36,6 +38,7 @@
 - 使用 **bilibili-search** 搜索视频资源
 - 使用 **web-researcher** 进行深度网络研究
 - 使用 **thinking-model-enhancer** 优化思维框架
+- 使用 **ima-skill** 管理笔记和知识库
 
 ## 工具技能
 
@@ -43,7 +46,7 @@
 
 **技能描述**：输入人名/主题/甚至只是模糊需求，自动深度调研→思维框架提炼→生成可运行的人物Skill。两种入口：(1)明确人名→直接蒸馏 (2)模糊需求→诊断推荐→再蒸馏。触发词：「造skill」「蒸馏XX」「女娲」「造人」「XX的思维方式」「做个XX视角」「更新XX的skill」。
 
-**技能位置**：[skills/huashu-nuwa/](file:///workspace/skills/huashu-nuwa/) | [tools/huashu-nuwa/](file:///workspace/tools/huashu-nuwa/)
+**技能位置**：[skills/huashu-nuwa/](file:///workspace/skills/huashu-nuwa/)
 
 **核心功能**：
 - 多源信息采集（6个并行Agent）
@@ -63,7 +66,7 @@
 
 **技能描述**：创建新技能，修改和优化现有技能，测量技能性能。用于当用户想要从头创建技能、编辑或优化现有技能、运行评估来测试技能、用方差分析来基准测试技能性能或优化技能的描述以提高触发准确性时。
 
-**技能位置**：[skills/skill-creator/](file:///workspace/skills/skill-creator/) | [tools/skill-creator/](file:///workspace/tools/skill-creator/)
+**技能位置**：[skills/skill-creator/](file:///workspace/skills/skill-creator/)
 
 **核心功能**：
 - 技能创建（从零开始创建新技能）
@@ -172,6 +175,30 @@
 - 思维框架优化
 - 决策模型增强
 - 表达风格提炼
+
+### 12. self-improving（自我优化）
+
+**技能描述**：排行榜第1名的自我优化技能，持续改进Agent能力。
+
+**技能位置**：[skills/self-improving/](file:///workspace/skills/self-improving/)
+
+### 13. self-improving-agent（自我优化Agent）
+
+**技能描述**：排行榜第3名的自我优化Agent技能。
+
+**技能位置**：[skills/self-improving-agent/](file:///workspace/skills/self-improving-agent/)
+
+### 14. inkos（小说写作）
+
+**技能描述**：专业的小说写作技能，支持多种类型和风格。
+
+**技能位置**：[skills/inkos/](file:///workspace/skills/inkos/)
+
+### 15. ima-skill（IMA知识库）
+
+**技能描述**：腾讯IMA的统一API技能，支持笔记管理和知识库操作。
+
+**技能位置**：[skills/ima-skill/](file:///workspace/skills/ima-skill/)
 
 ## Nuwa增强版工作流
 
