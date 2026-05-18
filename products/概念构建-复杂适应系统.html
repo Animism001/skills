@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概念构建 — 复杂适应系统理论</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0f0f23;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Noto Serif SC', serif;
+    padding: 20px;
+  }
+
+  .card-wrapper {
+    width: 100%;
+    max-width: 760px;        /* 720 SVG + 20*2 padding */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 120px rgba(201, 169, 97, 0.05);
+  }
+
+  /* 响应式 SVG：宽度自适应容器，高度按 viewBox 比例自动缩放 */
+  .concept-card-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card-wrapper">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 507" class="concept-card-svg">
+  <defs>
+    <radialGradient id="bgGradient" cx="50%" cy="40%" r="70%" fx="50%" fy="40%">
+      <stop offset="0%" stop-color="#0f0f23"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </radialGradient>
+    <linearGradient id="sepGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a4358" stop-opacity="0"/>
+      <stop offset="15%" stop-color="#4a4358" stop-opacity="1"/>
+      <stop offset="85%" stop-color="#4a4358" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#4a4358" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="diamondGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c9a961" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c9a961" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="borderGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.788  0 0 0 0 0.663  0 0 0 0 0.380  0 0 0 0.35 0" result="colorBlur"/>
+      <feMerge>
+        <feMergeNode in="colorBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="cardShadow" x="-2%" y="-5%" width="104%" height="115%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(201, 169, 97, 0.03)" stroke-width="0.5"/>
+    </pattern>
+    <filter id="noiseTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feComponentTransfer in="grayNoise" result="faintNoise">
+        <feFuncA type="linear" slope="0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="faintNoise" mode="overlay"/>
+    </filter>
+  </defs>
+  <style>
+    .concept-card { transition: all 0.2s ease; }
+    .concept-card:hover { filter: brightness(1.3); }
+    .concept-card:hover .card-bg { fill: rgba(201, 169, 97, 0.12); stroke: rgba(201, 169, 97, 0.35); stroke-width: 0.8; }
+    .concept-card:hover .card-text { fill: #f0e6d3; }
+    .axiom-card { transition: all 0.2s ease; }
+    .axiom-card:hover { filter: brightness(1.2); }
+    .axiom-card:hover .card-bg { fill: rgba(201, 169, 97, 0.10); stroke: rgba(201, 169, 97, 0.30); }
+  </style>
+  <rect width="720" height="507" fill="url(#bgGradient)" rx="6"/>
+  <rect width="720" height="507" fill="url(#gridPattern)" rx="6"/>
+  <rect width="720" height="507" fill="transparent" filter="url(#noiseTexture)" rx="6"/>
+  <rect x="28" y="28" width="664" height="451" fill="none" stroke="#c9a961" stroke-width="1" rx="4" filter="url(#borderGlow)" opacity="0.7"/>
+  <rect x="42" y="42" width="636" height="423" fill="none" stroke="#c9a961" stroke-width="0.5" rx="2" opacity="0.5"/>
+  <rect x="30" y="30" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <rect x="686" y="30" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <rect x="30" y="473" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <rect x="686" y="473" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <polygon points="52,61 57,66 52,71 47,66" fill="url(#diamondGradient)"/>
+  <text x="68" y="72" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="22" fill="#f0e6d3" font-weight="bold" letter-spacing="4">概念构建</text>
+  <line x1="190" y1="66" x2="668" y2="66" stroke="#c9a961" stroke-width="0.5" opacity="0.3"/>
+  <text x="668" y="94" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="17" fill="#c9a961" text-anchor="end" font-weight="bold" letter-spacing="2">复杂适应系统理论</text>
+  <line x1="52" y1="104" x2="668" y2="104" stroke="url(#sepGradient)" stroke-width="0.6"/>
+  <text x="52" y="136" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="13" fill="#c9a961" font-weight="bold" letter-spacing="2">公理</text>
+  <g class="axiom-card">
+    <rect class="card-bg" x="52" y="148" width="616" height="29" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <circle cx="68" cy="162.5" r="9" fill="#c9a961" opacity="0.2"/>
+    <circle cx="68" cy="162.5" r="9" fill="none" stroke="#c9a961" stroke-width="0.6" opacity="0.6"/>
+    <text x="68" y="166.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="9" fill="#c9a961" text-anchor="middle" font-weight="bold">A1</text>
+    <foreignObject x="86" y="154" width="574" height="34">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: KingHwa_OldSong, Noto Serif SC, SimSun, serif; font-size: 12px; color: #e8dcc8; line-height: 17px; overflow: hidden; word-break: break-word;">
+        系统由大量相互作用的适应性主体组成，主体的局部行为通过非线性交互涌现出全局模式
+      </div>
+    </foreignObject>
+  </g>
+  <g class="axiom-card">
+    <rect class="card-bg" x="52" y="182" width="616" height="29" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <circle cx="68" cy="196.5" r="9" fill="#c9a961" opacity="0.2"/>
+    <circle cx="68" cy="196.5" r="9" fill="none" stroke="#c9a961" stroke-width="0.6" opacity="0.6"/>
+    <text x="68" y="200.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="9" fill="#c9a961" text-anchor="middle" font-weight="bold">A2</text>
+    <foreignObject x="86" y="188" width="574" height="34">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: KingHwa_OldSong, Noto Serif SC, SimSun, serif; font-size: 12px; color: #e8dcc8; line-height: 17px; overflow: hidden; word-break: break-word;">
+        系统不存在中央控制者，秩序通过主体间的局部交互和反馈自发涌现
+      </div>
+    </foreignObject>
+  </g>
+  <g class="axiom-card">
+    <rect class="card-bg" x="52" y="216" width="616" height="29" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <circle cx="68" cy="230.5" r="9" fill="#c9a961" opacity="0.2"/>
+    <circle cx="68" cy="230.5" r="9" fill="none" stroke="#c9a961" stroke-width="0.6" opacity="0.6"/>
+    <text x="68" y="234.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="9" fill="#c9a961" text-anchor="middle" font-weight="bold">A3</text>
+    <foreignObject x="86" y="222" width="574" height="34">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: KingHwa_OldSong, Noto Serif SC, SimSun, serif; font-size: 12px; color: #e8dcc8; line-height: 17px; overflow: hidden; word-break: break-word;">
+        系统持续通过变异、选择和保留的循环过程进化，在混沌边缘保持创新与稳定的动态平衡
+      </div>
+    </foreignObject>
+  </g>
+  <line x1="52" y1="251" x2="668" y2="251" stroke="url(#sepGradient)" stroke-width="0.6"/>
+  <text x="52" y="283" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="13" fill="#c9a961" font-weight="bold" letter-spacing="2">内核概念</text>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="295" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">01</text>
+    <text class="card-text" x="82.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">涌现</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="295" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">02</text>
+    <text class="card-text" x="395.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">主体</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="326" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">03</text>
+    <text class="card-text" x="82.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">适应</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="326" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">04</text>
+    <text class="card-text" x="395.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">非线性</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="357" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">05</text>
+    <text class="card-text" x="82.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">反馈</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="357" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">06</text>
+    <text class="card-text" x="395.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">自组织</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="388" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">07</text>
+    <text class="card-text" x="82.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">吸引子</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="388" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">08</text>
+    <text class="card-text" x="395.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">混沌边缘</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="419" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">09</text>
+    <text class="card-text" x="82.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">共演化</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="419" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">10</text>
+    <text class="card-text" x="395.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">规模等级</text>
+  </g>
+  <line x1="52" y1="451" x2="668" y2="451" stroke="url(#sepGradient)" stroke-width="0.6"/>
+  <text x="668" y="469" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="end" letter-spacing="1">李继刚 2024</text>
+</svg>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520">
+  <rect width="720" height="520" fill="#1a1a2e" rx="4"/>
+  <rect x="30" y="30" width="660" height="460" fill="none" stroke="#c9a961" stroke-width="0.8" rx="2"/>
+  <text x="50" y="70" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="22" fill="#f0e6d3" font-weight="bold">概念构建</text>
+  <text x="670" y="92" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="16" fill="#c9a961" text-anchor="end">热力学</text>
+  <line x1="50" y1="100" x2="670" y2="100" stroke="#4a4358" stroke-width="0.5"/>
+  <text x="50" y="128" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="13" fill="#c9a961" font-weight="bold">公理</text>
+  <text x="54" y="150" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#c9a961" font-weight="bold">A1</text>
+  <text x="86" y="150" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">能量在孤立系统中守恒</text>
+  <text x="54" y="170" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#c9a961" font-weight="bold">A2</text>
+  <text x="86" y="170" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">孤立系统的熵永不减少</text>
+  <text x="54" y="190" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#c9a961" font-weight="bold">A3</text>
+  <text x="86" y="190" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">绝对零度不可达到</text>
+  <line x1="50" y1="204" x2="670" y2="204" stroke="#4a4358" stroke-width="0.5"/>
+  <text x="50" y="232" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="13" fill="#c9a961" font-weight="bold">内核概念</text>
+  <text x="54" y="254" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">01</text>
+  <text x="78" y="254" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">系统</text>
+  <text x="54" y="272" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">02</text>
+  <text x="78" y="272" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">状态</text>
+  <text x="54" y="290" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">03</text>
+  <text x="78" y="290" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">能量</text>
+  <text x="54" y="308" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">04</text>
+  <text x="78" y="308" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">熵</text>
+  <text x="54" y="326" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">05</text>
+  <text x="78" y="326" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">温度</text>
+  <text x="364.0" y="254" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">06</text>
+  <text x="388.0" y="254" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">平衡</text>
+  <text x="364.0" y="272" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">07</text>
+  <text x="388.0" y="272" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">功</text>
+  <text x="364.0" y="290" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">08</text>
+  <text x="388.0" y="290" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">热</text>
+  <text x="364.0" y="308" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">09</text>
+  <text x="388.0" y="308" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">可逆</text>
+  <text x="364.0" y="326" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#8a7d6b">10</text>
+  <text x="388.0" y="326" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12" fill="#e8dcc8">耗散</text>
+  <line x1="50" y1="464" x2="670" y2="464" stroke="#4a4358" stroke-width="0.5"/>
+  <text x="670" y="482" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="end">李继刚 2024</text>
+</svg>

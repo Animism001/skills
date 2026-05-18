@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概念构建 — 热力学</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0f0f23;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Noto Serif SC', sans-serif;
+    padding: 24px 16px 40px;
+  }
+
+  .page-container {
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .card-wrapper {
+    width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 120px rgba(201, 169, 97, 0.05);
+  }
+
+  .concept-card-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  /* ========== 导出工具栏 ========== */
+  .export-bar {
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px 18px;
+    background: rgba(26, 26, 46, 0.85);
+    border: 1px solid rgba(201, 169, 97, 0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(8px);
+  }
+
+  .export-bar .bar-label {
+    font-size: 12px;
+    color: #6b6155;
+    letter-spacing: 2px;
+    margin-right: 2px;
+    user-select: none;
+    text-transform: uppercase;
+  }
+
+  .export-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 7px 14px;
+    font-family: 'Noto Serif SC', sans-serif;
+    font-size: 13px;
+    color: #c9a961;
+    background: rgba(201, 169, 97, 0.06);
+    border: 1px solid rgba(201, 169, 97, 0.18);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .export-btn:hover {
+    background: rgba(201, 169, 97, 0.16);
+    border-color: rgba(201, 169, 97, 0.4);
+    color: #f0e6d3;
+  }
+
+  .export-btn:active {
+    transform: scale(0.97);
+    background: rgba(201, 169, 97, 0.22);
+  }
+
+  .export-btn .btn-icon {
+    display: inline-flex;
+    width: 14px;
+    height: 14px;
+  }
+
+  .export-btn .btn-icon svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .export-btn.active {
+    background: rgba(201, 169, 97, 0.2);
+    border-color: rgba(201, 169, 97, 0.5);
+    color: #f0e6d3;
+  }
+
+  /* ========== 展开面板（内联，非浮动） ========== */
+  .export-panel {
+    width: 100%;
+    margin-top: 12px;
+    background: rgba(26, 26, 46, 0.92);
+    border: 1px solid rgba(201, 169, 97, 0.14);
+    border-radius: 10px;
+    padding: 20px 22px 18px;
+    display: none;
+  }
+
+  .export-panel.visible {
+    display: block;
+    animation: panelIn 0.25s ease;
+  }
+
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    align-items: end;
+  }
+
+  .panel-field {}
+
+  .panel-field-label {
+    font-size: 11px;
+    color: #6b6155;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+    user-select: none;
+  }
+
+  .panel-select {
+    width: 100%;
+    padding: 8px 32px 8px 12px;
+    font-family: 'Noto Serif SC', sans-serif;
+    font-size: 13px;
+    color: #e8dcc8;
+    background: rgba(15, 15, 35, 0.8);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b6155' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.2s ease;
+  }
+
+  .panel-select:hover {
+    border-color: rgba(201, 169, 97, 0.35);
+  }
+
+  .panel-select:focus {
+    border-color: rgba(201, 169, 97, 0.55);
+    box-shadow: 0 0 0 2px rgba(201, 169, 97, 0.08);
+  }
+
+  .panel-select option {
+    background: #1a1a2e;
+    color: #e8dcc8;
+    padding: 6px;
+  }
+
+  .panel-action {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+  }
+
+  .panel-export-btn {
+    padding: 9px 48px;
+    font-family: 'Noto Serif SC', sans-serif;
+    font-size: 13px;
+    color: #0f0f23;
+    background: linear-gradient(135deg, #c9a961 0%, #a88b3d 100%);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+
+  .panel-export-btn:hover {
+    filter: brightness(1.12);
+    box-shadow: 0 2px 12px rgba(201, 169, 97, 0.3);
+  }
+
+  .panel-export-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* ========== Toast ========== */
+  .toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-60px);
+    padding: 10px 28px;
+    background: rgba(201, 169, 97, 0.92);
+    color: #0f0f23;
+    font-size: 13px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ========== 移动端适配 ========== */
+  @media (max-width: 480px) {
+    body { padding: 12px 8px 32px; }
+    .card-wrapper { padding: 10px; }
+    .export-bar { padding: 10px 12px; gap: 6px; }
+    .export-btn { padding: 6px 10px; font-size: 12px; }
+    .panel-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-container">
+  <div class="card-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 503" class="concept-card-svg">
+  <defs>
+    <radialGradient id="bgGradient" cx="50%" cy="40%" r="70%" fx="50%" fy="40%">
+      <stop offset="0%" stop-color="#0f0f23"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </radialGradient>
+    <linearGradient id="sepGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a4358" stop-opacity="0"/>
+      <stop offset="15%" stop-color="#4a4358" stop-opacity="1"/>
+      <stop offset="85%" stop-color="#4a4358" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#4a4358" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="diamondGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c9a961" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c9a961" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="borderGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.788  0 0 0 0 0.663  0 0 0 0 0.380  0 0 0 0.35 0" result="colorBlur"/>
+      <feMerge>
+        <feMergeNode in="colorBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="cardShadow" x="-2%" y="-5%" width="104%" height="115%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(201, 169, 97, 0.03)" stroke-width="0.5"/>
+    </pattern>
+    <filter id="noiseTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feComponentTransfer in="grayNoise" result="faintNoise">
+        <feFuncA type="linear" slope="0.03"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="faintNoise" mode="overlay"/>
+    </filter>
+  </defs>
+  <style>
+    .concept-card { transition: all 0.2s ease; }
+    .concept-card:hover { filter: brightness(1.3); }
+    .concept-card:hover .card-bg { fill: rgba(201, 169, 97, 0.12); stroke: rgba(201, 169, 97, 0.35); stroke-width: 0.8; }
+    .concept-card:hover .card-text { fill: #f0e6d3; }
+    .axiom-card { transition: all 0.2s ease; }
+    .axiom-card:hover { filter: brightness(1.2); }
+    .axiom-card:hover .card-bg { fill: rgba(201, 169, 97, 0.10); stroke: rgba(201, 169, 97, 0.30); }
+  </style>
+  <rect width="720" height="503" fill="url(#bgGradient)" rx="6"/>
+  <rect width="720" height="503" fill="url(#gridPattern)" rx="6"/>
+  <rect width="720" height="503" fill="transparent" filter="url(#noiseTexture)" rx="6"/>
+  <rect x="28" y="28" width="664" height="447" fill="none" stroke="#c9a961" stroke-width="1" rx="4" filter="url(#borderGlow)" opacity="0.7"/>
+  <rect x="42" y="42" width="636" height="419" fill="none" stroke="#c9a961" stroke-width="0.5" rx="2" opacity="0.5"/>
+  <rect x="30" y="30" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <rect x="686" y="30" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <rect x="30" y="469" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <rect x="686" y="469" width="4" height="4" fill="#c9a961" opacity="0.6"/>
+  <polygon points="52,61 57,66 52,71 47,66" fill="url(#diamondGradient)"/>
+  <text x="68" y="72" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="22" fill="#f0e6d3" font-weight="bold" letter-spacing="4">概念构建</text>
+  <line x1="190" y1="66" x2="668" y2="66" stroke="#c9a961" stroke-width="0.5" opacity="0.3"/>
+  <text x="668" y="94" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="17" fill="#c9a961" text-anchor="end" font-weight="bold" letter-spacing="2">热力学</text>
+  <line x1="52" y1="104" x2="668" y2="104" stroke="url(#sepGradient)" stroke-width="0.6"/>
+  <text x="52" y="136" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="13" fill="#c9a961" font-weight="bold" letter-spacing="2">公理</text>
+  <g class="axiom-card">
+    <rect class="card-bg" x="52" y="148" width="616" height="29" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <circle cx="68" cy="162.5" r="9" fill="#c9a961" opacity="0.2"/>
+    <circle cx="68" cy="162.5" r="9" fill="none" stroke="#c9a961" stroke-width="0.6" opacity="0.6"/>
+    <text x="68" y="166.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="9" fill="#c9a961" text-anchor="middle" font-weight="bold">A1</text>
+    <foreignObject x="86" y="154" width="574" height="34">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: KingHwa_OldSong, Noto Serif SC, SimSun, serif; font-size: 12px; color: #e8dcc8; line-height: 17px; overflow: hidden; word-break: break-word;">
+        能量在孤立系统中守恒
+      </div>
+    </foreignObject>
+  </g>
+  <g class="axiom-card">
+    <rect class="card-bg" x="52" y="182" width="616" height="29" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <circle cx="68" cy="196.5" r="9" fill="#c9a961" opacity="0.2"/>
+    <circle cx="68" cy="196.5" r="9" fill="none" stroke="#c9a961" stroke-width="0.6" opacity="0.6"/>
+    <text x="68" y="200.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="9" fill="#c9a961" text-anchor="middle" font-weight="bold">A2</text>
+    <foreignObject x="86" y="188" width="574" height="34">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: KingHwa_OldSong, Noto Serif SC, SimSun, serif; font-size: 12px; color: #e8dcc8; line-height: 17px; overflow: hidden; word-break: break-word;">
+        孤立系统的熵永不减少
+      </div>
+    </foreignObject>
+  </g>
+  <g class="axiom-card">
+    <rect class="card-bg" x="52" y="216" width="616" height="29" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <circle cx="68" cy="230.5" r="9" fill="#c9a961" opacity="0.2"/>
+    <circle cx="68" cy="230.5" r="9" fill="none" stroke="#c9a961" stroke-width="0.6" opacity="0.6"/>
+    <text x="68" y="234.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="9" fill="#c9a961" text-anchor="middle" font-weight="bold">A3</text>
+    <foreignObject x="86" y="222" width="574" height="34">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: KingHwa_OldSong, Noto Serif SC, SimSun, serif; font-size: 12px; color: #e8dcc8; line-height: 17px; overflow: hidden; word-break: break-word;">
+        绝对零度不可达到
+      </div>
+    </foreignObject>
+  </g>
+  <line x1="52" y1="251" x2="668" y2="251" stroke="url(#sepGradient)" stroke-width="0.6"/>
+  <text x="52" y="283" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="13" fill="#c9a961" font-weight="bold" letter-spacing="2">内核概念</text>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="295" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">01</text>
+    <text class="card-text" x="82.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">系统</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="295" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">02</text>
+    <text class="card-text" x="395.0" y="312.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">状态</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="326" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">03</text>
+    <text class="card-text" x="82.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">能量</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="326" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">04</text>
+    <text class="card-text" x="395.0" y="343.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">熵</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="357" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">05</text>
+    <text class="card-text" x="82.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">温度</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="357" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">06</text>
+    <text class="card-text" x="395.0" y="374.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">平衡</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="388" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">07</text>
+    <text class="card-text" x="82.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">功</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="388" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">08</text>
+    <text class="card-text" x="395.0" y="405.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">热</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="52.0" y="419" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="64.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">09</text>
+    <text class="card-text" x="82.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">可逆</text>
+  </g>
+  <g class="concept-card">
+    <rect class="card-bg" x="365.0" y="419" width="303.0" height="26" fill="rgba(201, 169, 97, 0.06)" stroke="rgba(201, 169, 97, 0.15)" stroke-width="0.5" rx="4"/>
+    <text x="377.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="10" fill="#8a7d6b" text-anchor="middle">10</text>
+    <text class="card-text" x="395.0" y="436.5" font-family="'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif" font-size="12.5" fill="#e8dcc8">耗散</text>
+  </g>
+  <line x1="52" y1="451" x2="668" y2="451" stroke="url(#sepGradient)" stroke-width="0.6"/>
+</svg>
+  </div>
+
+  <!-- 导出工具栏 -->
+  <div class="export-bar">
+    <span class="bar-label">导出</span>
+    <button class="export-btn" onclick="exportSVG()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span>
+      SVG
+    </button>
+    <button class="export-btn" onclick="exportPNG()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span>
+      PNG
+    </button>
+    <button class="export-btn" onclick="exportJPG()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span>
+      JPG
+    </button>
+    <button class="export-btn" id="otherBtn" onclick="togglePanel()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></span>
+      其他
+    </button>
+  </div>
+
+  <!-- 展开面板（内联，稳定可交互） -->
+  <div class="export-panel" id="exportPanel">
+    <div class="panel-grid">
+      <div class="panel-field">
+        <div class="panel-field-label">尺寸</div>
+        <select class="panel-select" id="sizeSelect">
+          <option value="1">原始 (720px)</option>
+          <option value="1.5">1.5x (1080px)</option>
+          <option value="2" selected>2x (1440px)</option>
+          <option value="3">3x (2160px)</option>
+          <option value="4">4x (2880px)</option>
+        </select>
+      </div>
+      <div class="panel-field">
+        <div class="panel-field-label">分辨率</div>
+        <select class="panel-select" id="dpiSelect">
+          <option value="72">72 DPI (屏幕)</option>
+          <option value="150">150 DPI (打印)</option>
+          <option value="300" selected>300 DPI (高清)</option>
+        </select>
+      </div>
+      <div class="panel-field">
+        <div class="panel-field-label">格式</div>
+        <select class="panel-select" id="formatSelect">
+          <option value="png">PNG (透明)</option>
+          <option value="jpg">JPG (白底)</option>
+          <option value="webp">WebP (透明)</option>
+        </select>
+      </div>
+      <div class="panel-action">
+        <button class="panel-export-btn" onclick="exportCustom()">导出</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  const DOMAIN = '热力学';
+  const svgEl = document.querySelector('.concept-card-svg');
+
+  // ---- Toast ----
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function() { t.classList.remove('show'); }, 2200);
+  }
+
+  // ---- SVG 序列化 ----
+  function getSVGString() {
+    var clone = svgEl.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    clone.removeAttribute('class');
+    return new XMLSerializer().serializeToString(clone);
+  }
+
+  // ---- 文件下载 ----
+  function downloadBlob(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 5000);
+  }
+
+  // ---- SVG → Canvas ----
+  function svgToCanvas(scale) {
+    return new Promise(function(resolve, reject) {
+      var vb = svgEl.viewBox.baseVal;
+      var w = vb.width * scale;
+      var h = vb.height * scale;
+
+      var svgStr = getSVGString();
+      var img = new Image();
+      var blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        resolve(canvas);
+      };
+      img.onerror = function() {
+        URL.revokeObjectURL(url);
+        reject(new Error('SVG rendering failed'));
+      };
+      img.src = url;
+    });
+  }
+
+  function canvasToBlob(canvas, type, quality) {
+    return new Promise(function(resolve) { canvas.toBlob(resolve, type, quality); });
+  }
+
+  // ---- 导出 SVG ----
+  window.exportSVG = function() {
+    var svgStr = getSVGString();
+    var blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+    downloadBlob(blob, '概念构建-' + DOMAIN + '.svg');
+    showToast('SVG 已导出');
+  };
+
+  // ---- 导出 PNG（2x） ----
+  window.exportPNG = function() {
+    svgToCanvas(2).then(function(canvas) {
+      return canvasToBlob(canvas, 'image/png');
+    }).then(function(blob) {
+      downloadBlob(blob, '概念构建-' + DOMAIN + '.png');
+      showToast('PNG 已导出 (2x)');
+    }).catch(function() { showToast('导出失败'); });
+  };
+
+  // ---- 导出 JPG（2x，白底） ----
+  window.exportJPG = function() {
+    svgToCanvas(2).then(function(canvas) {
+      var w = canvas.width, h = canvas.height;
+      var c2 = document.createElement('canvas');
+      c2.width = w; c2.height = h;
+      var ctx = c2.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(canvas, 0, 0);
+      return canvasToBlob(c2, 'image/jpeg', 0.92);
+    }).then(function(blob) {
+      downloadBlob(blob, '概念构建-' + DOMAIN + '.jpg');
+      showToast('JPG 已导出 (2x)');
+    }).catch(function() { showToast('导出失败'); });
+  };
+
+  // ---- 面板切换 ----
+  window.togglePanel = function() {
+    var panel = document.getElementById('exportPanel');
+    var btn = document.getElementById('otherBtn');
+    var isVisible = panel.classList.contains('visible');
+    if (isVisible) {
+      panel.classList.remove('visible');
+      btn.classList.remove('active');
+    } else {
+      panel.classList.add('visible');
+      btn.classList.add('active');
+    }
+  };
+
+  // ---- 自定义导出 ----
+  window.exportCustom = function() {
+    var scale = parseFloat(document.getElementById('sizeSelect').value);
+    var dpi = parseInt(document.getElementById('dpiSelect').value, 10);
+    var format = document.getElementById('formatSelect').value;
+
+    var dpiFactor = dpi / 300;
+    var finalScale = scale * dpiFactor;
+
+    var mimeMap = { png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp' };
+    var extMap  = { png: 'png', jpg: 'jpg', webp: 'webp' };
+
+    var mime = mimeMap[format];
+    var ext = extMap[format];
+    var quality = format === 'jpg' ? 0.95 : undefined;
+
+    svgToCanvas(finalScale).then(function(canvas) {
+      if (format === 'jpg') {
+        var w = canvas.width, h = canvas.height;
+        var c2 = document.createElement('canvas');
+        c2.width = w; c2.height = h;
+        var ctx = c2.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(canvas, 0, 0);
+        return canvasToBlob(c2, mime, quality);
+      }
+      return canvasToBlob(canvas, mime, quality);
+    }).then(function(blob) {
+      var label = scale + 'x-' + dpi + 'DPI';
+      downloadBlob(blob, '概念构建-' + DOMAIN + '-' + label + '.' + ext);
+      showToast(ext.toUpperCase() + ' 已导出 (' + scale + 'x / ' + dpi + 'DPI)');
+      // 关闭面板
+      document.getElementById('exportPanel').classList.remove('visible');
+      document.getElementById('otherBtn').classList.remove('active');
+    }).catch(function() { showToast('导出失败'); });
+  };
+
+})();
+</script>
+
+</body>
+</html>
