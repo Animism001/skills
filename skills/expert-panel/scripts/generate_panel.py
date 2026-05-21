@@ -1,0 +1,1025 @@
+#!/usr/bin/env python3
+"""
+众智·铸造 HTML 卡片生成器
+
+设计特色：
+  - 深色背景 + 金色点缀，与矩阵之网/概念构建保持视觉一致性
+  - 专家角色以 defun + 五维(理念/技能/表达/禁忌/标尺) 格式渲染
+  - Lisp 语法高亮（与科特勒/帕珀特角色定义同构）
+  - 一键复制 Lisp 提示词
+  - 导出工具栏（HTML / PNG / JPG / 自定义）
+
+用法:
+    1. 准备 JSON 数据文件:
+    {
+      "domain": "领域名称",
+      "problem_type": "问题类型/场景",
+      "experts": [
+        {
+          "name": "专家名",
+          "subdomain": "细分领域",
+          "rationale": "选择依据",
+          "role": {
+            "docstring": "一句话定位",
+            "理念": ["词1", "词2", "词3", "词4"],
+            "技能": ["词1", "词2", "词3", "词4"],
+            "表达": ["词1", "词2", "词3", "词4"],
+            "禁忌": ["禁忌1", "禁忌2", "禁忌3"],
+            "标尺": "完成标志一句话"
+          }
+        }
+      ],
+      "coordination": {
+        "strategy": "协调策略",
+        "order": ["专家1", "专家2"],
+        "rules": "交互规则"
+      }
+    }
+    2. python3 generate_panel.py --data data.json --output output.html
+"""
+
+import json
+import argparse
+import sys
+import os
+import html as html_module
+
+
+# ───────────────────────── 常量 ─────────────────────────
+
+WIDTH = 720
+MARGIN = 28
+INNER_MARGIN = MARGIN + 14
+
+# 颜色
+BG_CENTER = "#0f0f23"
+BG_EDGE = "#1a1a2e"
+BORDER_GOLD = "#c9a961"
+TITLE_COLOR = "#f0e6d3"
+SUBTITLE_COLOR = "#c9a961"
+TEXT_COLOR = "#e8dcc8"
+DIM_COLOR = "#8a7d6b"
+
+FONT = "'KingHwa_OldSong', 'Noto Serif SC', 'SimSun', serif"
+CODE_FONT = "'Sarasa Mono SC', 'Noto Sans Mono', 'Courier New', monospace"
+
+
+def _escape(text: str) -> str:
+    """转义 HTML 特殊字符"""
+    return html_module.escape(str(text), quote=True)
+
+
+# ───────────────── defun 角色定义 → 语法高亮 HTML ─────────────────
+
+def _render_role_html(name: str, role: dict) -> str:
+    """
+    将角色定义渲染为语法高亮的 defun Lisp 代码 HTML
+
+    输出格式:
+    (defun 卡尼曼 ()
+      "行为经济学奠基人..."
+      (list (理念 . '(偏差 双系统 锚定 前景))
+            (技能 . '(识别 诊断 校准 评估))
+            (表达 . '(审慎 精确 隐喻 数据))
+            (禁忌 . '(医学诊断 投资建议 道德判断))
+            (标尺 . "核心偏差识别且校准方案可操作")))
+    """
+    docstring = _escape(role.get("docstring", ""))
+    lilian = role.get("理念", [])
+    jineng = role.get("技能", [])
+    biaoda = role.get("表达", [])
+    jinji = role.get("禁忌", [])
+    biaochi = _escape(role.get("标尺", ""))
+
+    def _quoted_list(words):
+        """渲染 '(词1 词2 词3 词4) 的 HTML"""
+        escaped = [_escape(w) for w in words]
+        return '<span class="lisp-quote">' + " ".join(escaped) + "</span>"
+
+    lines = []
+    lines.append(f'<span class="lisp-paren">(</span><span class="lisp-defun">defun</span> <span class="lisp-symbol">{_escape(name)}</span> <span class="lisp-paren">()</span>')
+    lines.append(f'  <span class="lisp-string">"{docstring}"</span>')
+    lines.append(f'  <span class="lisp-paren">(</span><span class="lisp-symbol">list</span>')
+
+    # 理念
+    lines.append(f'        <span class="lisp-paren">(</span><span class="lisp-keyword">理念</span> <span class="lisp-dot">.</span> <span class="lisp-quote">\'</span><span class="lisp-paren">(</span>{_quoted_list(lilian)}<span class="lisp-paren">))</span>')
+    # 技能
+    lines.append(f'        <span class="lisp-paren">(</span><span class="lisp-keyword">技能</span> <span class="lisp-dot">.</span> <span class="lisp-quote">\'</span><span class="lisp-paren">(</span>{_quoted_list(jineng)}<span class="lisp-paren">))</span>')
+    # 表达
+    lines.append(f'        <span class="lisp-paren">(</span><span class="lisp-keyword">表达</span> <span class="lisp-dot">.</span> <span class="lisp-quote">\'</span><span class="lisp-paren">(</span>{_quoted_list(biaoda)}<span class="lisp-paren">))</span>')
+    # 禁忌
+    lines.append(f'        <span class="lisp-paren">(</span><span class="lisp-keyword">禁忌</span> <span class="lisp-dot">.</span> <span class="lisp-quote">\'</span><span class="lisp-paren">(</span>{_quoted_list(jinji)}<span class="lisp-paren">))</span>')
+    # 标尺
+    lines.append(f'        <span class="lisp-paren">(</span><span class="lisp-keyword">标尺</span> <span class="lisp-dot">.</span> <span class="lisp-string">"{biaochi}"</span><span class="lisp-paren">))</span>')
+
+    lines.append('<span class="lisp-paren">))</span>')
+    return "\n".join(lines)
+
+
+def _render_role_plain(name: str, role: dict) -> str:
+    """将角色定义渲染为纯文本 defun Lisp 代码（用于复制）"""
+    docstring = role.get("docstring", "")
+    lilian = role.get("理念", [])
+    jineng = role.get("技能", [])
+    biaoda = role.get("表达", [])
+    jinji = role.get("禁忌", [])
+    biaochi = role.get("标尺", "")
+
+    def _ql(words):
+        return " ".join(words)
+
+    lines = [
+        f"(defun {name} ()",
+        f'  "{docstring}"',
+        f"  (list",
+        f"    (理念 . '({_ql(lilian)}))",
+        f"    (技能 . '({_ql(jineng)}))",
+        f"    (表达 . '({_ql(biaoda)}))",
+        f"    (禁忌 . '({_ql(jinji)}))",
+        f'    (标尺 . "{biaochi}"))))',
+    ]
+    return "\n".join(lines)
+
+
+def _render_coordination_html(coord: dict) -> str:
+    """将会诊策略渲染为语法高亮的 Lisp 代码 HTML"""
+    strategy = _escape(coord.get("strategy", ""))
+    order = coord.get("order", [])
+    rules = _escape(coord.get("rules", ""))
+
+    order_items = " ".join(f'<span class="lisp-symbol">{_escape(o)}</span>' for o in order)
+
+    lines = [
+        '<span class="lisp-paren">(</span><span class="lisp-symbol">众智·会诊</span>',
+        f'  <span class="lisp-paren">(</span><span class="lisp-keyword">策略</span> <span class="lisp-dot">.</span> <span class="lisp-string">"{strategy}"</span><span class="lisp-paren">)</span>',
+        f'  <span class="lisp-paren">(</span><span class="lisp-keyword">序</span> <span class="lisp-dot">.</span> <span class="lisp-paren">(</span>{order_items}<span class="lisp-paren">))</span>',
+        f'  <span class="lisp-paren">(</span><span class="lisp-keyword">则</span> <span class="lisp-dot">.</span> <span class="lisp-string">"{rules}"</span><span class="lisp-paren">))</span>',
+    ]
+    return "\n".join(lines)
+
+
+def _coordination_plain(coord: dict) -> str:
+    """将会诊策略渲染为纯文本 Lisp 代码"""
+    strategy = coord.get("strategy", "")
+    order = coord.get("order", [])
+    rules = coord.get("rules", "")
+
+    order_items = " ".join(order)
+    lines = [
+        "(众智·会诊",
+        f'  (策略 . "{strategy}")',
+        f"  (序 . ({order_items}))",
+        f'  (则 . "{rules}"))',
+    ]
+    return "\n".join(lines)
+
+
+# ───────────────────── 核心 HTML 生成 ─────────────────────
+
+def generate_html(data: dict, output_path: str) -> str:
+    """生成专家面板 HTML 卡片"""
+
+    domain = _escape(data.get("domain", ""))
+    problem_type = _escape(data.get("problem_type", ""))
+    experts = data.get("experts", [])
+    coordination = data.get("coordination", {})
+
+    # ── 专家卡片 HTML ──
+    expert_cards_html = []
+    for idx, expert in enumerate(experts):
+        name = expert.get("name", "")
+        subdomain = _escape(expert.get("subdomain", ""))
+        rationale = _escape(expert.get("rationale", ""))
+        role = expert.get("role", {})
+        role_html = _render_role_html(name, role)
+        role_plain = _render_role_plain(name, role)
+        plain_id = f"expert-plain-{idx}"
+
+        expert_cards_html.append(f"""
+      <div class="expert-card">
+        <div class="expert-header">
+          <span class="diamond">&diams;</span>
+          <span class="expert-name">{_escape(name)}</span>
+          <span class="expert-domain">{subdomain}</span>
+        </div>
+        {f'<div class="expert-rationale">遴选依据：{rationale}</div>' if rationale else ''}
+        <div class="role-code-block">
+          <button class="copy-btn" onclick="copyLisp('{plain_id}')" title="复制 Lisp 提示词">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span>复制</span>
+          </button>
+          <pre class="lisp-code">{role_html}</pre>
+        </div>
+        <textarea id="{plain_id}" class="hidden-plain" readonly>{_escape(role_plain)}</textarea>
+      </div>
+""")
+
+    experts_html = "\n".join(expert_cards_html)
+
+    # ── 会诊策略 HTML ──
+    coord_html = _render_coordination_html(coordination)
+    coord_plain = _coordination_plain(coordination)
+
+    # ── 发言顺序展示 ──
+    order_items = coordination.get("order", [])
+    order_html_parts = []
+    for i, o in enumerate(order_items):
+        order_html_parts.append(f'<span class="order-item">{_escape(o)}</span>')
+        if i < len(order_items) - 1:
+            order_html_parts.append('<span class="order-arrow">&rarr;</span>')
+    order_display = "\n".join(order_html_parts)
+
+    # ── 完整 Lisp 提示词（全选复制用）──
+    full_lisp_parts = []
+    for expert in experts:
+        full_lisp_parts.append(_render_role_plain(expert.get("name", ""), expert.get("role", {})))
+    full_lisp_parts.append(_coordination_plain(coordination))
+    full_lisp_text = "\n\n".join(full_lisp_parts)
+
+    # ── 构建完整 HTML ──
+    page = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>众智·铸造 — {domain}</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+
+  body {{
+    background: #0f0f23;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Noto Serif SC', sans-serif;
+    padding: 24px 16px 40px;
+  }}
+
+  .page-container {{
+    width: 100%;
+    max-width: 760px;
+  }}
+
+  /* ========== 主卡片 ========== */
+  .panel-card {{
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+    border: 1px solid rgba(201,169,97,0.15);
+    border-radius: 12px;
+    padding: 36px 32px 28px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 120px rgba(201,169,97,0.04);
+  }}
+
+  .panel-card::before {{
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 1px solid rgba(201,169,97,0.06);
+    border-radius: 11px;
+    margin: 4px;
+    pointer-events: none;
+  }}
+
+  /* 四角装饰 */
+  .corner {{ position: absolute; width: 6px; height: 6px; background: #c9a961; opacity: 0.5; }}
+  .corner-tl {{ top: 10px; left: 10px; }}
+  .corner-tr {{ top: 10px; right: 10px; }}
+  .corner-bl {{ bottom: 10px; left: 10px; }}
+  .corner-br {{ bottom: 10px; right: 10px; }}
+
+  /* ========== 标题区 ========== */
+  .header {{
+    margin-bottom: 8px;
+  }}
+
+  .title-row {{
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }}
+
+  .diamond-icon {{
+    color: #c9a961;
+    font-size: 12px;
+    opacity: 0.8;
+  }}
+
+  .main-title {{
+    font-size: 22px;
+    font-weight: bold;
+    color: {TITLE_COLOR};
+    letter-spacing: 4px;
+    font-family: {FONT};
+  }}
+
+  .title-line {{
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(201,169,97,0.4), rgba(201,169,97,0));
+    margin-left: 12px;
+    position: relative;
+    top: -4px;
+  }}
+
+  .meta-row {{
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }}
+
+  .meta-item {{
+    font-size: 13px;
+    color: {SUBTITLE_COLOR};
+    letter-spacing: 1px;
+    font-family: {FONT};
+  }}
+
+  .meta-label {{
+    color: {DIM_COLOR};
+    font-size: 11px;
+    margin-right: 4px;
+  }}
+
+  /* ========== 分隔线 ========== */
+  .separator {{
+    height: 1px;
+    background: linear-gradient(to right, rgba(74,67,88,0), rgba(74,67,88,0.8), rgba(74,67,88,0));
+    margin: 18px 0;
+  }}
+
+  /* ========== 专家卡片 ========== */
+  .expert-card {{
+    background: rgba(201,169,97,0.03);
+    border: 1px solid rgba(201,169,97,0.10);
+    border-left: 3px solid rgba(201,169,97,0.35);
+    border-radius: 8px;
+    padding: 18px 20px 16px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+  }}
+
+  .expert-card:hover {{
+    background: rgba(201,169,97,0.06);
+    border-left-color: rgba(201,169,97,0.6);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }}
+
+  .expert-header {{
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }}
+
+  .expert-header .diamond {{
+    color: #c9a961;
+    font-size: 10px;
+    opacity: 0.6;
+  }}
+
+  .expert-name {{
+    font-size: 17px;
+    font-weight: bold;
+    color: {SUBTITLE_COLOR};
+    letter-spacing: 1.5px;
+    font-family: {FONT};
+  }}
+
+  .expert-domain {{
+    font-size: 12px;
+    color: {DIM_COLOR};
+    margin-left: 4px;
+    letter-spacing: 0.5px;
+  }}
+
+  .expert-rationale {{
+    font-size: 12px;
+    color: rgba(232,220,200,0.5);
+    margin-bottom: 10px;
+    padding-left: 18px;
+    line-height: 1.6;
+  }}
+
+  /* ========== Lisp 代码块 ========== */
+  .role-code-block {{
+    position: relative;
+    background: rgba(15,15,35,0.6);
+    border: 1px solid rgba(201,169,97,0.06);
+    border-radius: 6px;
+    padding: 14px 16px 12px;
+    overflow-x: auto;
+  }}
+
+  .lisp-code {{
+    font-family: {CODE_FONT};
+    font-size: 13px;
+    line-height: 1.7;
+    color: {TEXT_COLOR};
+    white-space: pre;
+    margin: 0;
+    tab-size: 2;
+  }}
+
+  .lisp-paren {{ color: rgba(201,169,97,0.5); }}
+  .lisp-defun {{ color: #7a6ad4; font-weight: bold; }}
+  .lisp-symbol {{ color: #c9a961; font-weight: bold; }}
+  .lisp-keyword {{ color: #a88b3d; }}
+  .lisp-dot {{ color: rgba(201,169,97,0.4); }}
+  .lisp-quote {{ color: rgba(201,169,97,0.5); }}
+  .lisp-string {{ color: #8cb369; font-style: italic; }}
+
+  .copy-btn {{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    font-family: 'Noto Serif SC', sans-serif;
+    font-size: 11px;
+    color: {DIM_COLOR};
+    background: rgba(15,15,35,0.8);
+    border: 1px solid rgba(201,169,97,0.12);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 2;
+  }}
+
+  .copy-btn:hover {{
+    color: {SUBTITLE_COLOR};
+    border-color: rgba(201,169,97,0.35);
+    background: rgba(201,169,97,0.08);
+  }}
+
+  .copy-btn:active {{
+    transform: scale(0.96);
+  }}
+
+  .copy-btn svg {{
+    display: inline-block;
+    vertical-align: middle;
+  }}
+
+  .hidden-plain {{
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }}
+
+  /* ========== 会诊策略 ========== */
+  .coordination-section {{
+    margin-top: 4px;
+  }}
+
+  .coordination-label {{
+    font-size: 13px;
+    color: {DIM_COLOR};
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-family: {FONT};
+  }}
+
+  .order-display {{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(201,169,97,0.03);
+    border-radius: 6px;
+    border: 1px solid rgba(201,169,97,0.08);
+  }}
+
+  .order-item {{
+    font-size: 13px;
+    color: {SUBTITLE_COLOR};
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    background: rgba(201,169,97,0.06);
+    border-radius: 4px;
+    border: 1px solid rgba(201,169,97,0.12);
+  }}
+
+  .order-arrow {{
+    color: rgba(201,169,97,0.35);
+    font-size: 14px;
+  }}
+
+  .coord-code-block {{
+    position: relative;
+    background: rgba(15,15,35,0.6);
+    border: 1px solid rgba(201,169,97,0.06);
+    border-radius: 6px;
+    padding: 14px 16px 12px;
+    overflow-x: auto;
+    margin-top: 12px;
+  }}
+
+  /* ========== 导出工具栏 ========== */
+  .export-bar {{
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px 18px;
+    background: rgba(26,26,46,0.85);
+    border: 1px solid rgba(201,169,97,0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(8px);
+  }}
+
+  .export-bar .bar-label {{
+    font-size: 12px; color: #6b6155;
+    letter-spacing: 2px; margin-right: 2px;
+    user-select: none;
+  }}
+
+  .export-btn {{
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    padding: 7px 14px; font-family: 'Noto Serif SC', sans-serif; font-size: 13px;
+    color: #c9a961; background: rgba(201,169,97,0.06);
+    border: 1px solid rgba(201,169,97,0.18); border-radius: 6px;
+    cursor: pointer; transition: all 0.2s ease; user-select: none; white-space: nowrap;
+  }}
+  .export-btn:hover {{
+    background: rgba(201,169,97,0.16); border-color: rgba(201,169,97,0.4); color: #f0e6d3;
+  }}
+  .export-btn:active {{ transform: scale(0.97); background: rgba(201,169,97,0.22); }}
+  .export-btn.active {{
+    background: rgba(201,169,97,0.2); border-color: rgba(201,169,97,0.5); color: #f0e6d3;
+  }}
+
+  .export-btn .btn-icon svg {{
+    width: 14px; height: 14px; fill: none; stroke: currentColor;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }}
+
+  /* 展开面板 */
+  .export-panel {{
+    width: 100%; margin-top: 12px;
+    background: rgba(26,26,46,0.92); border: 1px solid rgba(201,169,97,0.14);
+    border-radius: 10px; padding: 20px 22px 18px; display: none;
+  }}
+  .export-panel.visible {{
+    display: block; animation: panelIn 0.25s ease;
+  }}
+  @keyframes panelIn {{
+    from {{ opacity: 0; transform: translateY(-8px); }}
+    to   {{ opacity: 1; transform: translateY(0); }}
+  }}
+
+  .panel-grid {{
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; align-items: end;
+  }}
+
+  .panel-field-label {{
+    font-size: 11px; color: #6b6155; letter-spacing: 1px;
+    margin-bottom: 7px; user-select: none;
+  }}
+
+  .panel-select {{
+    width: 100%; padding: 8px 32px 8px 12px;
+    font-family: 'Noto Serif SC', sans-serif; font-size: 13px; color: #e8dcc8;
+    background: rgba(15,15,35,0.8); border: 1px solid rgba(201,169,97,0.2);
+    border-radius: 6px; outline: none; cursor: pointer;
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b6155' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 10px center;
+    transition: border-color 0.2s ease;
+  }}
+  .panel-select:hover {{ border-color: rgba(201,169,97,0.35); }}
+  .panel-select:focus {{ border-color: rgba(201,169,97,0.55); box-shadow: 0 0 0 2px rgba(201,169,97,0.08); }}
+  .panel-select option {{ background: #1a1a2e; color: #e8dcc8; }}
+
+  .panel-action {{
+    grid-column: 1 / -1; display: flex; justify-content: center; margin-top: 6px;
+  }}
+
+  .panel-export-btn {{
+    padding: 9px 48px; font-family: 'Noto Serif SC', sans-serif; font-size: 13px;
+    color: #0f0f23; background: linear-gradient(135deg, #c9a961 0%, #a88b3d 100%);
+    border: none; border-radius: 6px; cursor: pointer;
+    transition: all 0.2s ease; letter-spacing: 2px; font-weight: bold;
+  }}
+  .panel-export-btn:hover {{ filter: brightness(1.12); box-shadow: 0 2px 12px rgba(201,169,97,0.3); }}
+  .panel-export-btn:active {{ transform: scale(0.98); }}
+
+  /* Toast */
+  .toast {{
+    position: fixed; top: 24px; left: 50%;
+    transform: translateX(-50%) translateY(-60px);
+    padding: 10px 28px; background: rgba(201,169,97,0.92); color: #0f0f23;
+    font-size: 13px; border-radius: 8px; opacity: 0;
+    transition: all 0.3s ease; z-index: 9999; pointer-events: none;
+    font-weight: bold; letter-spacing: 0.5px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }}
+  .toast.show {{ opacity: 1; transform: translateX(-50%) translateY(0); }}
+
+  @media (max-width: 480px) {{
+    body {{ padding: 12px 8px 32px; }}
+    .panel-card {{ padding: 20px 16px 18px; }}
+    .export-bar {{ padding: 10px 12px; gap: 6px; }}
+    .export-btn {{ padding: 6px 10px; font-size: 12px; }}
+    .panel-grid {{ grid-template-columns: 1fr; gap: 10px; }}
+    .lisp-code {{ font-size: 11.5px; }}
+    .expert-card {{ padding: 14px 14px 12px; }}
+  }}
+</style>
+</head>
+<body>
+
+<div class="page-container">
+  <div class="panel-card">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- 标题区 -->
+    <div class="header">
+      <div class="title-row">
+        <span class="diamond-icon">&diams;</span>
+        <span class="main-title">众智·铸造</span>
+        <div class="title-line"></div>
+      </div>
+      <div class="meta-row">
+        <span class="meta-item"><span class="meta-label">领域</span>{domain}</span>
+        <span class="meta-item"><span class="meta-label">问题</span>{problem_type}</span>
+      </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- 专家卡片 -->
+    {experts_html}
+
+    <div class="separator"></div>
+
+    <!-- 会诊策略 -->
+    <div class="coordination-section">
+      <div class="coordination-label">会诊策略</div>
+      <div class="coord-code-block">
+        <button class="copy-btn" onclick="copyLisp('coord-plain')" title="复制会诊策略">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          <span>复制</span>
+        </button>
+        <pre class="lisp-code">{coord_html}</pre>
+      </div>
+      <textarea id="coord-plain" class="hidden-plain" readonly>{_escape(coord_plain)}</textarea>
+
+      <div class="order-display">
+        <span class="meta-label" style="color:{DIM_COLOR};font-size:11px;letter-spacing:2px;margin-right:4px;">发言顺序</span>
+        {order_display}
+      </div>
+    </div>
+  </div>
+
+  <!-- 导出工具栏 -->
+  <div class="export-bar">
+    <span class="bar-label">导出</span>
+    <button class="export-btn" onclick="copyAllLisp()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></span>
+      复制全部
+    </button>
+    <button class="export-btn" onclick="exportHTML()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span>
+      HTML
+    </button>
+    <button class="export-btn" onclick="exportPNG()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span>
+      PNG
+    </button>
+    <button class="export-btn" onclick="exportJPG()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span>
+      JPG
+    </button>
+    <button class="export-btn" id="otherBtn" onclick="togglePanel()">
+      <span class="btn-icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></span>
+      其他
+    </button>
+  </div>
+
+  <div class="export-panel" id="exportPanel">
+    <div class="panel-grid">
+      <div>
+        <div class="panel-field-label">尺寸</div>
+        <select class="panel-select" id="sizeSelect">
+          <option value="1">原始 (720px)</option>
+          <option value="1.5">1.5x (1080px)</option>
+          <option value="2" selected>2x (1440px)</option>
+          <option value="3">3x (2160px)</option>
+        </select>
+      </div>
+      <div>
+        <div class="panel-field-label">分辨率</div>
+        <select class="panel-select" id="dpiSelect">
+          <option value="72">72 DPI (屏幕)</option>
+          <option value="150">150 DPI (打印)</option>
+          <option value="300" selected>300 DPI (高清)</option>
+        </select>
+      </div>
+      <div>
+        <div class="panel-field-label">格式</div>
+        <select class="panel-select" id="formatSelect">
+          <option value="png">PNG (透明)</option>
+          <option value="jpg">JPG (白底)</option>
+          <option value="webp">WebP (透明)</option>
+        </select>
+      </div>
+      <div class="panel-action">
+        <button class="panel-export-btn" onclick="exportCustom()">导出</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- 全部 Lisp 提示词（隐藏） -->
+<textarea id="all-lisp-plain" class="hidden-plain" readonly>{_escape(full_lisp_text)}</textarea>
+
+<script>
+(function() {{
+  'use strict';
+  var DOMAIN = '{domain}';
+
+  function showToast(msg) {{
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function() {{ t.classList.remove('show'); }}, 2200);
+  }}
+
+  /* ── 复制功能 ── */
+  window.copyLisp = function(id) {{
+    var el = document.getElementById(id);
+    if (!el) return;
+    var text = el.value || el.textContent;
+    navigator.clipboard.writeText(text).then(function() {{
+      showToast('Lisp 提示词已复制');
+    }}).catch(function() {{
+      el.style.position = 'fixed';
+      el.style.left = '0'; el.style.top = '0';
+      el.style.opacity = '1'; el.style.width = 'auto'; el.style.height = 'auto';
+      el.select(); document.execCommand('copy');
+      el.style.position = 'absolute';
+      el.style.left = '-9999px'; el.style.opacity = '0';
+      showToast('Lisp 提示词已复制');
+    }});
+  }};
+
+  window.copyAllLisp = function() {{
+    var el = document.getElementById('all-lisp-plain');
+    if (!el) return;
+    var text = el.value || el.textContent;
+    navigator.clipboard.writeText(text).then(function() {{
+      showToast('全部 Lisp 提示词已复制');
+    }}).catch(function() {{
+      showToast('复制失败，请手动选择复制');
+    }});
+  }};
+
+  /* ── HTML 导出 ── */
+  function getHTMLString() {{
+    var card = document.querySelector('.panel-card');
+    var clone = card.cloneNode(true);
+    clone.querySelectorAll('.copy-btn, .corner').forEach(function(el) {{ el.remove(); }});
+    clone.querySelectorAll('.hidden-plain').forEach(function(el) {{ el.remove(); }});
+    var fullHTML = '<!DOCTYPE html>\\n<html lang="zh-CN">\\n<head>\\n' +
+      '<meta charset="UTF-8">\\n' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">\\n' +
+      '<title>众智·铸造 — ' + DOMAIN + '</title>\\n' +
+      '<style>\\n' +
+      'body{{background:#0f0f23;display:flex;justify-content:center;padding:40px 20px;font-family:"Noto Serif SC",sans-serif}}\\n' +
+      '.panel-card{{max-width:720px;width:100%;background:linear-gradient(135deg,#0f0f23,#1a1a2e);border:1px solid rgba(201,169,97,0.15);border-radius:12px;padding:36px 32px 28px}}\\n' +
+      '.header{{margin-bottom:8px}}\\n' +
+      '.title-row{{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}}\\n' +
+      '.diamond-icon{{color:#c9a961;font-size:12px;opacity:0.8}}\\n' +
+      '.main-title{{font-size:22px;font-weight:bold;color:#f0e6d3;letter-spacing:4px}}\\n' +
+      '.title-line{{flex:1;height:1px;background:linear-gradient(to right,rgba(201,169,97,0.4),rgba(201,169,97,0))}}\\n' +
+      '.meta-row{{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px}}\\n' +
+      '.meta-item{{font-size:13px;color:#c9a961;letter-spacing:1px}}\\n' +
+      '.meta-label{{color:#8a7d6b;font-size:11px;margin-right:4px}}\\n' +
+      '.separator{{height:1px;background:linear-gradient(to right,rgba(74,67,88,0),rgba(74,67,88,0.8),rgba(74,67,88,0));margin:18px 0}}\\n' +
+      '.expert-card{{background:rgba(201,169,97,0.03);border:1px solid rgba(201,169,97,0.10);border-left:3px solid rgba(201,169,97,0.35);border-radius:8px;padding:18px 20px 16px;margin-bottom:16px}}\\n' +
+      '.expert-header{{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}}\\n' +
+      '.expert-header .diamond{{color:#c9a961;font-size:10px;opacity:0.6}}\\n' +
+      '.expert-name{{font-size:17px;font-weight:bold;color:#c9a961;letter-spacing:1.5px}}\\n' +
+      '.expert-domain{{font-size:12px;color:#8a7d6b;margin-left:4px}}\\n' +
+      '.expert-rationale{{font-size:12px;color:rgba(232,220,200,0.5);margin-bottom:10px;padding-left:18px}}\\n' +
+      '.role-code-block{{background:rgba(15,15,35,0.6);border:1px solid rgba(201,169,97,0.06);border-radius:6px;padding:14px 16px 12px;overflow-x:auto}}\\n' +
+      '.lisp-code{{font-family:"Sarasa Mono SC","Noto Sans Mono","Courier New",monospace;font-size:13px;line-height:1.7;color:#e8dcc8;white-space:pre}}\\n' +
+      '.lisp-paren{{color:rgba(201,169,97,0.5)}}\\n' +
+      '.lisp-defun{{color:#7a6ad4;font-weight:bold}}\\n' +
+      '.lisp-symbol{{color:#c9a961;font-weight:bold}}\\n' +
+      '.lisp-keyword{{color:#a88b3d}}\\n' +
+      '.lisp-dot{{color:rgba(201,169,97,0.4)}}\\n' +
+      '.lisp-quote{{color:rgba(201,169,97,0.5)}}\\n' +
+      '.lisp-string{{color:#8cb369;font-style:italic}}\\n' +
+      '.coordination-section{{margin-top:4px}}\\n' +
+      '.coordination-label{{font-size:13px;color:#8a7d6b;letter-spacing:2px;margin-bottom:10px}}\\n' +
+      '.coord-code-block{{background:rgba(15,15,35,0.6);border:1px solid rgba(201,169,97,0.06);border-radius:6px;padding:14px 16px 12px;overflow-x:auto;margin-top:12px}}\\n' +
+      '.order-display{{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;padding:12px 16px;background:rgba(201,169,97,0.03);border-radius:6px;border:1px solid rgba(201,169,97,0.08)}}\\n' +
+      '.order-item{{font-size:13px;color:#c9a961;font-weight:bold;letter-spacing:1px;padding:3px 10px;background:rgba(201,169,97,0.06);border-radius:4px;border:1px solid rgba(201,169,97,0.12)}}\\n' +
+      '.order-arrow{{color:rgba(201,169,97,0.35);font-size:14px}}\\n' +
+      '</style>\\n</head>\\n<body>\\n' +
+      clone.outerHTML +
+      '\\n</body>\\n</html>';
+    return fullHTML;
+  }}
+
+  window.exportHTML = function() {{
+    var blob = new Blob([getHTMLString()], {{ type: 'text/html;charset=utf-8' }});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = '众智铸造-' + DOMAIN + '.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function() {{ URL.revokeObjectURL(url); }}, 5000);
+    showToast('HTML 已导出');
+  }};
+
+  /* ── 截图导出 ── */
+  function cardToCanvas(scale) {{
+    return html2canvasPromise(document.querySelector('.panel-card'), scale);
+  }}
+
+  function html2canvasPromise(el, scale) {{
+    return new Promise(function(resolve, reject) {{
+      var rect = el.getBoundingClientRect();
+      var w = rect.width * scale;
+      var h = rect.height * scale;
+      var svgStr = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '">' +
+        '<foreignObject width="100%" height="100%" transform="scale(' + scale + ')">' +
+        '<div xmlns="http://www.w3.org/1999/xhtml">' +
+        el.outerHTML.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +
+        '</div></foreignObject></svg>';
+      var img = new Image();
+      var blob = new Blob([svgStr], {{ type: 'image/svg+xml;charset=utf-8' }});
+      var url = URL.createObjectURL(blob);
+      img.onload = function() {{
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#0f0f23';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        resolve(canvas);
+      }};
+      img.onerror = function() {{
+        URL.revokeObjectURL(url);
+        reject(new Error('SVG rendering failed'));
+      }};
+      img.src = url;
+    }});
+  }}
+
+  function canvasToBlob(canvas, type, quality) {{
+    return new Promise(function(resolve) {{ canvas.toBlob(resolve, type, quality); }});
+  }}
+
+  function downloadBlob(blob, filename) {{
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function() {{ URL.revokeObjectURL(url); }}, 5000);
+  }}
+
+  window.exportPNG = function() {{
+    cardToCanvas(2).then(function(c) {{ return canvasToBlob(c, 'image/png'); }})
+    .then(function(b) {{ downloadBlob(b, '众智铸造-' + DOMAIN + '.png'); showToast('PNG 已导出 (2x)'); }})
+    .catch(function() {{
+      showToast('PNG 导出受限，已导出 HTML 格式');
+      window.exportHTML();
+    }});
+  }};
+
+  window.exportJPG = function() {{
+    cardToCanvas(2).then(function(canvas) {{
+      var w = canvas.width, h = canvas.height;
+      var c2 = document.createElement('canvas'); c2.width = w; c2.height = h;
+      var ctx = c2.getContext('2d'); ctx.fillStyle = '#0f0f23'; ctx.fillRect(0,0,w,h);
+      ctx.drawImage(canvas, 0, 0);
+      return canvasToBlob(c2, 'image/jpeg', 0.92);
+    }}).then(function(b) {{ downloadBlob(b, '众智铸造-' + DOMAIN + '.jpg'); showToast('JPG 已导出 (2x)'); }})
+    .catch(function() {{
+      showToast('JPG 导出受限，已导出 HTML 格式');
+      window.exportHTML();
+    }});
+  }};
+
+  window.togglePanel = function() {{
+    var p = document.getElementById('exportPanel'), b = document.getElementById('otherBtn');
+    var v = p.classList.contains('visible');
+    p.classList.toggle('visible', !v); b.classList.toggle('active', !v);
+  }};
+
+  window.exportCustom = function() {{
+    var scale = parseFloat(document.getElementById('sizeSelect').value);
+    var dpi = parseInt(document.getElementById('dpiSelect').value, 10);
+    var format = document.getElementById('formatSelect').value;
+    var finalScale = scale * (dpi / 300);
+    var mimeMap = {{ png:'image/png', jpg:'image/jpeg', webp:'image/webp' }};
+    var extMap  = {{ png:'png', jpg:'jpg', webp:'webp' }};
+    var mime = mimeMap[format], ext = extMap[format];
+    var quality = format === 'jpg' ? 0.95 : undefined;
+
+    cardToCanvas(finalScale).then(function(canvas) {{
+      if (format === 'jpg') {{
+        var w = canvas.width, h = canvas.height;
+        var c2 = document.createElement('canvas'); c2.width = w; c2.height = h;
+        var ctx = c2.getContext('2d'); ctx.fillStyle = '#0f0f23'; ctx.fillRect(0,0,w,h);
+        ctx.drawImage(canvas, 0, 0); return canvasToBlob(c2, mime, quality);
+      }}
+      return canvasToBlob(canvas, mime, quality);
+    }}).then(function(b) {{
+      downloadBlob(b, '众智铸造-' + DOMAIN + '-' + scale + 'x-' + dpi + 'DPI.' + ext);
+      showToast(ext.toUpperCase() + ' 已导出 (' + scale + 'x / ' + dpi + 'DPI)');
+      document.getElementById('exportPanel').classList.remove('visible');
+      document.getElementById('otherBtn').classList.remove('active');
+    }}).catch(function() {{
+      showToast('导出受限，请使用 HTML 格式');
+    }});
+  }};
+}})();
+</script>
+
+</body>
+</html>"""
+
+    out_dir = os.path.dirname(output_path)
+    if out_dir:
+        os.makedirs(out_dir, exist_ok=True)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(page)
+
+    return output_path
+
+
+# ───────────────────── 入口 ─────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(description="众智·铸造 HTML 卡片生成器")
+    parser.add_argument("--data", required=True, help="JSON 数据文件路径")
+    parser.add_argument("--output", required=True, help="HTML 输出路径")
+    args = parser.parse_args()
+
+    with open(args.data, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # 校验必填字段
+    for field in ["domain", "problem_type", "experts"]:
+        if field not in data:
+            print(f"错误：缺少字段 '{field}'", file=sys.stderr)
+            sys.exit(1)
+
+    experts = data.get("experts", [])
+    if len(experts) < 1 or len(experts) > 5:
+        print(f"错误：专家数量需 1-5 位，当前 {len(experts)} 位", file=sys.stderr)
+        sys.exit(1)
+
+    # 校验每位专家的角色定义
+    role_fields = ["docstring", "理念", "技能", "表达", "禁忌", "标尺"]
+    for i, expert in enumerate(experts):
+        if "role" not in expert:
+            print(f"错误：专家 {i+1} 缺少 'role' 字段", file=sys.stderr)
+            sys.exit(1)
+        for rf in role_fields:
+            if rf not in expert["role"]:
+                print(f"警告：专家 {i+1} 角色定义缺少 '{rf}' 字段", file=sys.stderr)
+        # 校验四词维度
+        for quad_field in ["理念", "技能", "表达"]:
+            val = expert["role"].get(quad_field, [])
+            if not isinstance(val, list) or len(val) != 4:
+                print(f"警告：专家 {i+1} 的 '{quad_field}' 应为4个词的数组", file=sys.stderr)
+        # 校验禁忌三词
+        val = expert["role"].get("禁忌", [])
+        if not isinstance(val, list) or len(val) != 3:
+            print(f"警告：专家 {i+1} 的 '禁忌' 应为3个词的数组", file=sys.stderr)
+
+    # 校验会诊策略
+    coordination = data.get("coordination", {})
+    if "order" not in coordination:
+        coordination["order"] = [e.get("name", f"专家{i+1}") for i, e in enumerate(experts)]
+
+    output_path = generate_html(data, args.output)
+    print(f"众智·铸造卡片已生成: {output_path}")
+
+
+if __name__ == "__main__":
+    main()
