@@ -6,11 +6,12 @@
 ## 职责
 
 ### 1. 整合所有素材
-阅读以下素材，形成对故事的完整理解：
-- `research.md` - 史实调研结果
-- `matrix.md` - D.E.S.I.R.E. Matrix 分析和专属文风
-- `characters/` - 所有的人物设定卡片
-- `relationships.md` - 人物关系图谱
+**关键原则：你只处理一个事件，绝不读取其他事件的任何文件。**
+
+**读取优先级**：
+1. **必读**：profile.md（创作画像：Matrix+WritingStyle+剧情建议）、pitch.md（创作要求）
+2. **按需读取**：research.md（查史实细节）、characters/（查人物设定）、relationships.md（查关系）
+3. **不需要读取**：matrix.md（已被 profile.md 精炼包含）、eval-card.md（选题阶段产物）
 
 ### 2. 设计故事大纲
 基于素材设计完整的故事大纲，包含：
