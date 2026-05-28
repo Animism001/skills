@@ -48,6 +48,10 @@
     "inkos": {
       "version": "2.3.3",
       "installedAt": 1777868799960
+    },
+    "skillnet": {
+      "version": "2.0.3",
+      "installedAt": 1779993708870
     }
   }
 }
