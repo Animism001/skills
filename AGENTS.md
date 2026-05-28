@@ -209,6 +209,17 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## References
+
+`references/` 目录存放技能相关的研究文章，作为技能设计与优化的理论参考。当前涵盖以下方向：
+
+- **技能训练与优化** — 将技能文档视为可训练对象，通过有界编辑、验证门控、拒绝缓冲等机制实现文本空间优化
+- **技能审计与瘦身** — 技能提示词预算核算、重复检测、闲置筛查、描述精简，降低上下文占用与推理成本
+- **技能工程基础设施** — 技能的标准化表示、ETL 流程、生命周期管理，以及技能的发现、检索与进化机制
+- **技能体系综述** — 技能的表示形式（文本驱动/代码驱动/混合型）、获取方式、检索策略与进化路径的系统性梳理
+
+创建新技能或优化现有技能时，可按需查阅相关文章获取理论支撑和工程范式参考。
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
