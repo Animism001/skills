@@ -86,6 +86,10 @@ Use heartbeats productively, not just `HEARTBEAT_OK`. Edit `HEARTBEAT.md` with c
 ### 评测与优化
 - 通过 **skill-creator** 进行技能评测和迭代优化
 
+### 记录规则
+- **TOOLS.md 仅在用户要求时更新**，且只记录与技能开发管理直接相关的技能
+- **AGENTS.md 记工作流规则**，TOOLS.md 记技能索引，职责不混
+
 ### 去AI味
 
 **适用范围**：角色扮演类/创作类技能（需个性化输出的技能）创建后必须去AI味；工具类技能不需要。
