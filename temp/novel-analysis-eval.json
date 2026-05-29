@@ -1,0 +1,53 @@
+{
+  "skill_name": "novel-analysis",
+  "evals": [
+    {
+      "id": 1,
+      "type": "should_trigger",
+      "prompt": "帮我分析一下《三体》中叶文洁这个角色的心理动机",
+      "expected": "触发 novel-analysis，使用 D.E.S.I.R.E. Matrix 六维分析"
+    },
+    {
+      "id": 2,
+      "type": "should_trigger",
+      "prompt": "我写了一个短篇小说，想从心理学角度分析一下主角的行为逻辑",
+      "expected": "触发 novel-analysis，识别为文本分析需求"
+    },
+    {
+      "id": 3,
+      "type": "should_trigger",
+      "prompt": "用 D.E.S.I.R.E. Matrix 分析一下《活着》里福贵的人物弧线",
+      "expected": "触发 novel-analysis，明确提到 Matrix 方法"
+    },
+    {
+      "id": 4,
+      "type": "should_trigger",
+      "prompt": "我想理解小说中反派角色的决策模式，有没有什么分析框架？",
+      "expected": "触发 novel-analysis，识别为角色分析需求"
+    },
+    {
+      "id": 5,
+      "type": "should_trigger",
+      "prompt": "分析一下这段文本中人物的情感偏好和风险偏好",
+      "expected": "触发 novel-analysis，涉及 E² 和 R 维度分析"
+    },
+    {
+      "id": 6,
+      "type": "should_not_trigger",
+      "prompt": "帮我写一个科幻小说的开头",
+      "expected": "不应触发 novel-analysis，这是创作需求不是分析需求"
+    },
+    {
+      "id": 7,
+      "type": "should_not_trigger",
+      "prompt": "帮我分析一下这段 Python 代码的性能瓶颈",
+      "expected": "不应触发 novel-analysis，这是代码分析"
+    },
+    {
+      "id": 8,
+      "type": "should_not_trigger",
+      "prompt": "我想了解一下认知心理学的基本理论",
+      "expected": "不应触发 novel-analysis，这是知识查询不是文本分析"
+    }
+  ]
+}

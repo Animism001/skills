@@ -1,0 +1,40 @@
+{
+  "skill": "novel-analysis",
+  "phase": "after_refactor",
+  "timestamp": "2026-05-29T04:50:00",
+  "skill_version": "road_sign_42lines",
+  "trigger_eval": {
+    "input1_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input2_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input3_should_trigger": {"triggered": "novel-analysis", "correct": true, "note": "改造后正确触发！description中包含D.E.S.I.R.E.关键词"},
+    "input4_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input5_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input6_should_not_trigger": {"triggered": "none", "correct": true},
+    "input7_should_not_trigger": {"triggered": "none", "correct": true},
+    "input8_should_not_trigger": {"triggered": "none", "correct": true, "note": "改造后不再误触发concept-builder"}
+  },
+  "trigger_accuracy": {
+    "should_trigger_hit": "5/5",
+    "should_not_trigger_hit": "3/3",
+    "overall": "8/8 = 100%"
+  },
+  "execution_eval": {
+    "understood_desire_matrix": true,
+    "knew_output_format": true,
+    "would_use_cross_discipline": true,
+    "steps_identified": 8,
+    "steps_complete": true,
+    "missing_info": "references/文件尚未读取（Agent知道需要读取）",
+    "would_read_references": true,
+    "execution_score": "9/10"
+  },
+  "structural_metrics": {
+    "line_count": 42,
+    "token_count": 567,
+    "desc_words": 38,
+    "health_score": 100,
+    "has_frontmatter": true,
+    "has_refs": true,
+    "has_scripts": false
+  }
+}

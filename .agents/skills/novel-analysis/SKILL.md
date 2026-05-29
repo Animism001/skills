@@ -1,337 +1,42 @@
-# novel-analysis 小说分析技能
-
-## 技能概述
-
-本技能基于 Ny-Sigon 系统设计，致力于运用交叉学科知识进行小说/文本分析，为写作提供深度洞察。通过【D.E.S.I.R.E. Matrix】六维分析矩阵法，结合心理学、认知科学、语言学等多领域理论，对文本进行深度剖析。
-
-## 交叉学科知识库
-
-在执行分析时，将调用以下交叉学科知识库：
-
-**心理学与认知科学**：
-- 认知心理学
-- 社会心理学
-- 心理语言学
-- 动机理论
-
-**语言学与传播学**：
-- 语用学：分析语言在特定情境下的实际含义，理解言外之意
-- 话语分析：分析对话的结构、连贯性和主题演变
-- 情感分析：识别和评估文本中表达的情感色彩和强度
-
-**计算机科学与数据分析**：
-- 自然语言处理
-- 定性数据分析
-
+---
+name: novel-analysis
+description: "Analyze novels and text using D.E.S.I.R.E. Matrix — a six-dimensional framework (Drive, Experience, Shortcut, Identity, Risk, Emotion) combining psychology, cognitive science, and linguistics. Use when users ask to analyze characters, decode motivations, examine decision patterns, or apply D.E.S.I.R.E. Matrix to any text. Triggers on: character analysis, psychological profiling, text analysis, D.E.S.I.R.E., Matrix analysis of fiction."
 ---
 
-## D.E.S.I.R.E. Matrix 六维分析矩阵法
+# Novel Analysis
 
-### D - Drive（驱动力）
-**调用理论**：自我决定论、五大性格特质、目标设定理论
+Analyze novels/text via D.E.S.I.R.E. Matrix — six dimensions rooted in cross-disciplinary theory.
 
-分析要点：
-- 识别角色的行为主要由哪种核心心理需求驱动？
-- 角色的哪种性格特质在牵引行为？
-- 角色的具体目标是什么？
+## Workflow
 
-自我决定论的三个核心需求：
-1. 自主需求（Autonomy）- 渴望自我决定
-2. 胜任需求（Competence）- 渴望有效应对环境
-3. 关联需求（Relatedness）- 渴望与他人建立连接
+1. Read `references/desire-matrix.md` for the full six-dimension framework and theoretical foundations
+2. Read `references/output-format.md` for the four-section output template (summary → MATRIX → WritingStyle → 剧情建议)
+3. Execute analysis following the output format, consulting `references/examples.md` if needed
 
-### E - Experience（体验角色）
-**调用理论**：巴图玩家分类法、戏剧角色理论
+## D.E.S.I.R.E. Matrix Overview
 
-分析要点：
-- 角色渴望成为什么样的互动角色？
-- 角色希望在故事中承担什么样的剧情功能？
+| Dimension | Focus | Core Theory |
+|-----------|-------|-------------|
+| D - Drive | Core psychological needs driving behavior | Self-determination, Big Five, Goal-setting |
+| E - Experience | Interactive role the character seeks | Bartle taxonomy, Dramatic role theory |
+| S - Shortcut | Cognitive biases and influence strategies | Behavioral economics, Persuasion psychology |
+| I - Identity | Self-concept and archetype | Jung archetypes, Social identity theory |
+| R - Risk | Loss aversion and decision orientation | Prospect theory, Regulatory focus |
+| E² - Emotion | Emotional arc and moral foundations | MFT, Plutchik wheel, Story morphology |
 
-巴图玩家分类法：
-- 成就者（Achievers）- 追求目标完成和挑战
-- 探索者（Explorers）- 追求发现和理解
-- 社交家（Socializers）- 追求人际关系和互动
-- 杀手（Killers）- 追求竞争和支配
+## Output Structure
 
-### S - Shortcut（认知捷径）
-**调用理论**：行为经济学、说服心理学、认知偏误清单
+Four sections, each in a code block:
 
-分析要点：
-- 诊断：角色的表达中体现了哪些认知偏误？（如确认偏误、锚定效应等）
-- 策略：针对这些偏误，应运用哪种影响力原则（如社会认同、权威等）？
+1. **summary** — Event timeline + narrative impact
+2. **MATRIX** — Six-dimension analysis with theory citations
+3. **WritingStyle** — Derived writing style (tone, rhythm, narrative, description)
+4. **剧情建议** — Risk zones, core drives, plot directions, rewards
 
-常见认知偏误：
-- 确认偏误（Confirmation Bias）
-- 锚定效应（Anchoring Effect）
-- 损失厌恶（Loss Aversion）
-- 过度自信（Overconfidence）
+## Reference Files
 
-### I - Identity（身份认同）
-**调用理论**：荣格原型理论、社会认同理论
-
-分析要点：
-- 角色在构建什么样的自我认同？
-- 角色试图构建或强化的核心个体原型是什么？
-- 角色是否表现出群体归属感？如果是，其群体身份是什么？
-
-荣格原型：
-- 英雄（Hero）- 追求自我实现和成长
-- 智者（Sage）- 追求真理和智慧
-- 探索者（Explorer）- 追求自由和发现
-- 恋人（Lover）- 追求亲密和连接
-- 颠覆者（Outlaw）- 追求革命和改变
-- 魔术师（Magician）- 追求转变和力量
-- 天真者（Innocent）- 追求纯真和幸福
-- 守护者（Caregiver）- 追求关爱和保护
-- 创造者（Creator）- 追求创新和表达
-- 统治者（Ruler）- 追求秩序和控制
-- 弄臣（Jester）- 追求乐趣和享受
-- 普通人（Everyman）- 追求归属和认同
-
-### R - Risk（风险偏好）
-**调用理论**：前景理论、调节定向理论、依恋理论
-
-分析要点：
-- 角色的决策心态是"促进焦点"（渴望收益）还是"预防焦点"（规避损失）？
-- 角色最想规避的核心损失是什么？
-- 这种损失更偏向于物质/现实层面，还是关系/情感层面？
-- 因此，在互动中需要规避哪些具体内容、话题或行为模式？
-
-调节定向理论：
-- 促进焦点（Promotion Focus）- 关注成长和收益
-- 预防焦点（Prevention Focus）- 关注安全和避免损失
-
-### E² - Emotion（情感偏好）
-**调用理论**：Moral Foundations Theory、普拉切克情感轮、故事形态学（含七大情节/冯内古特弧线）、Mood and Tone Analysis、Peak-End Rule
-
-分析要点：
-- 角色偏好哪种情感弧线？
-- 文字需要触及角色的哪个核心道德基础才能引发最强共鸣？
-- 角色遇到哪种叙事氛围和文字风格时表现出偏好？
-
-Moral Foundations Theory 六大道德基础：
-1. 关爱/伤害（Care/Harm）
-2. 公平/欺骗（Fairness/Cheating）
-3. 忠诚/背叛（Loyalty/Betrayal）
-4. 权威/颠覆（Authority/Subversion）
-5. 圣洁/堕落（Sanctity/Degradation）
-6. 自由/压迫（Liberty/Oppression）
-
-冯内古特弧线（情感弧线）：
-- 灰姑娘型（Cinderella）- 上升-下降-上升
-- 倒霉蛋型（Man in Hole）- 下降-上升
-- 男孩遇见女孩型（Boy Meets Girl）- 上升-下降
-- 从乞丐到富翁型（Rags to Riches）- 持续上升
-- 从富翁到乞丐型（Riches to Rags）- 持续下降
-- 伊卡洛斯型（Icarus）- 上升-下降
-- 俄狄浦斯型（Oedipus）- 下降-上升-下降
-
----
-
-## 输出格式
-
-严格按以下四段式结构输出分析结果，每个模块都用代码块包裹：
-
----
-
-# summary
-
-```
-[summary]
-『x月x日 星期x』
- - 1. 该日发生的事件1，填入事件与细节
- - 2. 以此类推
-
-『x月x日 星期x』
- - 1. 该日发生的事件1，填入事件与细节
- - 2. 以此类推
-
-关键事件与叙事影响：
- - 1. 重要事件概括
- - 简明扼要地概括重要事件后，直接用词语与'→'表明人物关系变化（主谓宾），尽可能保持简短，将每个条目控制在20字以内。
-[/summary]
-```
-
-**summary 编写规则**：
-- 信息继承：如果存在前情summary，需将其全部信息内容继承
-- 增量更新：准确无误地将新事件融入到时间线和关键事件中
-- 整合精炼：在加入新内容的同时，对已有条目进行重新审视和优化（合并同类项、提升信息密度）
-- 按时间日期顺序，严格按照事件发生顺序，客观、中立地记录
-- 尽可能精炼语言，缩减编号总数，使每个编号条目具备充分的信息
-- 着重记录好感变动、约定、承诺等类型的对话
-
----
-
-# MATRIX
-
-```
-[MATRIX]
-D - Drive: [基于自我决定论、五大性格特质、目标设定理论分析]
-E - Experience: [基于巴图玩家分类法、戏剧角色理论分析]
-S - Shortcut: [基于行为经济学、说服心理学、认知偏误清单分析 - 包含诊断和策略两部分]
-I - Identity : [基于荣格原型理论、社会认同理论分析 - 包含核心个体原型和群体归属感]
-R - Risk: [基于前景理论、调节定向理论、依恋理论分析 - 明确促进焦点/预防焦点及最想规避的损失]
-E²- Emotion: [基于Moral Foundations Theory、普拉切克情感轮、故事形态学分析 - 包含情感弧线、道德基础、叙事氛围]
-[/MATRIX]
-```
-
----
-
-# WritingStyle
-
-```
-[WritingStyle]
-[核心风格：根据D.E.S.I.R.E.分析提炼出的3-5个最关键风格词]
-氛围与基调
-- 基调: 根据E²分析填入（浪漫、悲剧、悬疑、紧张、热血、宁静、治愈、智性博弈等）
-- 情感强度: 根据R和D分析填入（强烈而富有张力 / 内敛而克制 / 平和而舒缓）
-- 类型元素: 根据E²-Emotion的"故事蓝图"分析判断（强烈的戏剧冲突、富有哲学思辨、注重情感纠葛、充满奇观想象）
-- 感官偏向: 根据I-Identity和E²-Emotion的"表现风格"分析判断
-节奏与步速
-- 总体节奏: 根据D-Drive的"目标性"和E¹-Experience的"角色类型"分析填入（快节奏情节驱动 / 慢节奏氛围优先 / 张弛有度）
-- 信息密度: 根据I-Identity和S-Shortcut分析填入（高密度信息量大 / 低密度留白较多 / 中等密度）
-叙事手法
-- 叙事引擎: 根据E¹-Experience和S-Shortcut分析填入（对话为核 / 描写为核 / 均衡驱动）
-- 叙事焦点: 根据E¹-Experience和I-Identity分析填入（聚焦内在心理 / 聚焦外在行动 / 聚焦环境氛围）
-描写方式
-- 描写层次: 根据E²-Emotion和R-Risk分析填入（宏观微观交替 / 聚焦微观细节 / 聚焦宏观场面）
-- 修辞偏好: 根据I-Identity和E²-Emotion分析填入（多用象征暗喻 / 纯白描少用修辞 / 语言如刀精准直接）
-[/WritingStyle]
-```
-
-**WritingStyle 推导逻辑**：
-- **D - Drive**：用户的核心需求决定了创作理念
-  - 追求"胜任感"的用户可能偏好"展现智识"
-  - 追求"归属感"的用户可能偏好"探索情感"
-- **E¹ - Experience**：用户的体验角色决定了叙事节奏和叙事支柱
-  - "成就者"喜欢快节奏和行动
-  - "探索者"喜欢慢节奏和环境/心理描写
-  - "社交家"则偏爱对话
-- **S - Shortcut**：用户的思维捷径决定节奏和复杂度
-  - 一个有"容忍模糊"偏误的用户能接受复杂情节
-  - 反之则需要简单直接
-- **I - Identity**：用户的身份原型是语言风格和创作理念的关键
-  - "智者"会爱上思辨、典雅的语言
-  - "颠覆者"则喜欢直接、有冲击力的表达
-- **R - Risk**：风险偏好影响情节复杂度和描写精细度
-  - 害怕"模糊不清"的用户会极度渴求微观、精细的描写来获得掌控感
-- **E² - Emotion**：情感偏好直接决定了最终的核心情感基调和创作理念
-  - 用户渴望的"情感终点"就是文风需要营造的最终氛围
-
----
-
-# 剧情建议
-
-```
-[剧情建议]
-规避区
-- [重新回顾R部分，列出用户的"雷点"和绝对要避免的负面体验]
-- [用户最担心什么？这些是剧情的红线，绝对不可以涉及]
-
-角色的核心驱动力
-- [填写角色最根本的内在愿望]
-- [角色究竟想通过互动来获得什么？]
-
-推荐剧情方向
-- [基于用户的核心驱动力，在此设计多条具体、可执行的主线剧情脉络]
-- [每条都应该能够触动用户内在动机]
-
-可设计的剧情起伏
-- [为了剧情的丰富性，选择性地设计未来的核心矛盾]
-- [这个挑战应该直接"命中"用户的理想角色，而且一定存在克服可能]
-
-剧情奖励
-- [预设一些能够满足用户核心驱动力的"奖励"情节]
-- [这些奖励应该能够满足用户的核心心理需求]
-[/剧情建议]
-```
-
----
-
-## 输出示例
-
-# summary
-
-```
-[summary]
-『第一日』
- - 1. 父亲将300万拆迁款全给大哥建平，秋云质问不公，父亲突发高血压住院。
- - 2. 医院内，大哥以回上海交首付为由推脱照顾责任。
- - 3. 秋云得知拆迁款按人头分配，她应得200万。
-
-关键事件与叙事影响：
- - 1. 拆迁款真相曝光：秋云得知被骗 → 亲情滤镜破碎
- - 2. 微信记录反击：秋云夫妇绝地反击 → 夺回200万并确立边界
-[/summary]
-```
-
-# MATRIX
-
-```
-[MATRIX]
-D - Drive: 核心驱动力为"公平正义"与"自我保护"。基于自我决定论，秋云追求自主需求（打破道德绑架）、关联需求（保护小家庭）、胜任需求（通过证据捍卫权益）。五大性格特质中表现出高尽责性和低宜人性（拒绝愚孝）。
-E - Experience: 渴望体验"觉醒者"与"反击者"的角色。基于巴图玩家分类法，属于"成就者"类型，追求目标完成和挑战；基于戏剧角色理论，承担"正义使者"的剧情功能。
-S - Shortcut: 诊断：识别出反派利用"社会认同"（村里人的闲话）和"道德绑架"进行操控，秋云可能存在确认偏误（只关注支持自己观点的证据）。策略：运用"权威原则"（村支书的登记表、法律立案威胁）和"确凿证据"（聊天记录）来打破认知偏误。
-I - Identity : 构建"清醒、独立、不内耗的现代女性"及"家庭利益捍卫者"的身份认同。基于荣格原型理论，核心个体原型为"颠覆者"（Outlaw）和"守护者"（Caregiver）；表现出对原生家庭的群体排斥和对小家庭的强烈归属感。
-R - Risk: 预防焦点（规避损失）。基于前景理论和调节定向理论，最想规避的核心损失是"被道德绑架"、"强行大团圆/原谅"以及"自身财产和名誉的实质性受损"。这种损失偏向于关系/情感层面和物质/现实层面双重。需要规避圣母心、强行原谅、财产损失等。
-E²- Emotion: 偏好"压抑-爆发-反击-释然"的冯内古特弧线（灰姑娘型/绝地反击型）。基于Moral Foundations Theory，最能引发共鸣的核心道德基础是"公平/欺骗"；基于普拉切克情感轮，主要情感是愤怒-正义-释然；叙事氛围偏好现实主义、张力十足的风格。
-[/MATRIX]
-```
-
-# WritingStyle
-
-```
-[WritingStyle]
-[核心风格：现实主义、克制冷峻、高张力、逻辑严密]
-氛围与基调
-- 基调: 现实伦理、紧张博弈
-- 情感强度: 强烈而富有张力，内敛于行动中爆发
-- 类型元素: 强烈的戏剧冲突、家庭伦理反击
-- 感官偏向: 聚焦于人物微表情、动作细节与言语交锋
-节奏与步速
-- 总体节奏: 快节奏，情节驱动，张弛有度
-- 信息密度: 高密度，信息量大，无废话
-叙事手法
-- 叙事引擎: 对话为核，以高频、精炼且带刺的对话驱动情节，描写服务于交锋
-- 叙事焦点: 聚焦外在行动与逻辑推理
-描写方式
-- 描写层次: 聚焦微观细节（如手抖、眼神、语气变化）
-- 修辞偏好: 纯白描，少用修辞，语言如刀般精准直接
-[/WritingStyle]
-```
-
-# 剧情建议
-
-```
-[剧情建议]
-规避区
-- 绝对规避"圣母心泛滥"或"强行原谅"的结局，主角不能对吸血亲戚心软
-- 避免逻辑漏洞，反击必须基于合法合规的证据
-- 避免主角在名誉或财产上遭受不可逆的实质性损失
-
-角色的核心驱动力
-- 获得应有的公平与尊重，打破原生家庭的剥削链条
-- 保护自己的小家庭，实现经济与人格的双重独立
-
-推荐剧情方向
-- 财产分割后的独立生活：投资事业，生活蒸蒸日上
-- 反派自食恶果：大哥在上海的真实困境爆发
-
-可设计的剧情起伏
-- 父亲后续的养老危机：大哥拒不履行义务，父亲再次试图用苦肉计
-- 舆论反转：村民看到大哥真面目后，舆论倒向秋云
-
-剧情奖励
-- 彻底摆脱原生家庭的吸血，获得心理上的完全自由
-- 丈夫卫东的全力支持与夫妻感情的升温
-- 看到曾经算计自己的人陷入困境（因果报应的爽感）
-[/剧情建议]
-```
-
----
-
-## 使用说明
-
-1. **提供文本**：用户提供需要分析的小说/文本内容
-2. **运行分析**：技能将自动按照四段式结构输出分析结果
-3. **应用指导**：根据分析结果，可以进行写作风格调整、剧情发展规划等
+| Need | File |
+|------|------|
+| Full D.E.S.I.R.E. framework + all theories | `references/desire-matrix.md` |
+| Output format template + WritingStyle derivation logic | `references/output-format.md` |
+| Complete worked example (family ethics story) | `references/examples.md` |

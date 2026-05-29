@@ -1,0 +1,45 @@
+{
+  "skill": "novel-analysis",
+  "phase": "baseline",
+  "timestamp": "2026-05-29T04:40:00",
+  "skill_version": "original_337lines",
+  "trigger_eval": {
+    "input1_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input2_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input3_should_trigger": {"triggered": "matrix-web", "correct": false, "note": "误触发到 matrix-web，因为用户提到 Matrix 关键词"},
+    "input4_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input5_should_trigger": {"triggered": "novel-analysis", "correct": true},
+    "input6_should_not_trigger": {"triggered": "none", "correct": true},
+    "input7_should_not_trigger": {"triggered": "none", "correct": true},
+    "input8_should_not_trigger": {"triggered": "concept-builder", "correct": true, "note": "虽然触发了别的技能，但确实不应触发 novel-analysis"}
+  },
+  "trigger_accuracy": {
+    "should_trigger_hit": "4/5",
+    "should_not_trigger_hit": "3/3",
+    "overall": "7/8 = 87.5%"
+  },
+  "execution_eval": {
+    "understood_desire_matrix": true,
+    "knew_output_format": true,
+    "would_use_cross_discipline": true,
+    "steps_identified": 12,
+    "steps_complete": true,
+    "missing_info": "分析范围边界、输出形式偏好（非关键缺失）",
+    "execution_score": "9/10"
+  },
+  "structural_metrics": {
+    "line_count": 337,
+    "token_count": 3630,
+    "desc_words": 0,
+    "health_score": 45,
+    "has_frontmatter": false,
+    "has_refs": false,
+    "has_scripts": false
+  },
+  "key_findings": [
+    "输入3误触发：用户说'D.E.S.I.R.E. Matrix'时被 matrix-web 抢走，因为 novel-analysis 没有 description",
+    "无 frontmatter 导致 description 为空，Agent 只能靠 SKILL.md 标题猜测触发条件",
+    "执行完整度很高：337行详细理论让 Agent 完全理解了六维矩阵和输出格式",
+    "Token成本高：3630 token 占了 2% 预算的 90.75%"
+  ]
+}
