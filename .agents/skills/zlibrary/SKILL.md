@@ -1,6 +1,6 @@
 ---
 name: zlibrary
-description: "Search and download books from Z-Library. Caches login session to ~/.zlibrary-session.json. Downloads book files (EPUB/PDF) to ~/Downloads/."
+description: "Search and download books from Z-Library. Caches login session to ~/.zlibrary-session.json. Downloads book files (EPUB/PDF) to ./library/."
 version: 2.1.0
 metadata:
   openclaw:
@@ -102,12 +102,12 @@ Response: `{ "success": 1, "file": { "downloadLink": "<url>", "extension": "epub
 ### Step 2 — Download the file
 
 ```bash
-curl -s -L -o ~/Downloads/<filename>.<ext> \
+mkdir -p ./library && curl -s -L -o ./library/<filename>.<ext> \
   -H "User-Agent: Mozilla/5.0 (Android 12; Mobile)" \
   "<downloadLink>"
 ```
 
-Always download to `~/Downloads/` unless the user specifies otherwise. Use a clean filename based on the book title.
+Always download to `./library/` (create if not exists) unless the user specifies otherwise. Use a clean filename based on the book title.
 
 ## User Profile
 
