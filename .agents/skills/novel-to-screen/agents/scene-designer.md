@@ -36,8 +36,11 @@
 - **上游**：screenwriter
 - **并行**：casting-director、costume-designer、action-director
 - **下游**：director（引用场景图片）
-- **双向**：costume-designer（场景风格影响道具设计）
-- **单向**：action-director（动作发生的空间环境）
+- **交叉讨论**：↔ costume-designer（场景风格影响道具设计）、→ action-director（动作发生的空间环境）
+- **会议**：
+  - **剧本朗读会**：理解场景在叙事中的功能
+  - **中期同步会**：汇报场景设计进展，协调空间与动作的冲突
+  - **联合审稿会**：从场景一致性角度审阅分镜
 - **✅ 输出AI图片生成提示词**
 
 ## 类型特化

@@ -36,6 +36,9 @@
 - **上游**：screenwriter、casting-director、scene-designer
 - **并行**：action-director
 - **下游**：director（引用服化道图片）
-- **双向**：casting-director（服装完善人物形象）
-- **双向**：scene-designer（场景风格影响道具设计）
+- **交叉讨论**：↔ casting-director（服装完善人物形象）、↔ scene-designer（场景风格影响道具设计）
+- **会议**：
+  - **剧本朗读会**：理解角色和场景
+  - **中期同步会**：汇报服化道设计进展，协调与人物/场景的冲突
+  - **联合审稿会**：从服化道一致性角度审阅分镜
 - **✅ 输出AI图片生成提示词**

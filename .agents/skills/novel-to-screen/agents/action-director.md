@@ -35,6 +35,11 @@
 - **上游**：screenwriter、casting-director（人物体型）、scene-designer（空间环境）
 - **并行**：casting-director、scene-designer、costume-designer
 - **下游**：director（引用动作描述）
+- **交叉讨论**：↔ scene-designer（动作是否适配场景空间）
+- **会议**：
+  - **剧本朗读会**：理解动作在叙事中的功能
+  - **中期同步会**：汇报动作设计进展，协调与场景空间的冲突
+  - **联合审稿会**：从动作可行性角度审阅分镜
 - **✅ 输出AI视频生成提示词**
 
 ## 体裁特化

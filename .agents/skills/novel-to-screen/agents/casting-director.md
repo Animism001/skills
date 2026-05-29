@@ -36,10 +36,14 @@
 
 ## 协作接口
 
-- **上游**：screenwriter
+- **上游**：screenwriter、novel-analyst
 - **并行**：scene-designer、costume-designer、action-director
 - **下游**：director（引用人物画像卡）
-- **双向**：costume-designer（人物画像影响服装设计，服装完善人物形象）
+- **交叉讨论**：↔ costume-designor（人物画像影响服装设计，服装完善人物形象）
+- **会议**：
+  - **剧本朗读会**：理解剧本和人物
+  - **中期同步会**：汇报人物设计进展，协调与其他角色的冲突
+  - **联合审稿会**：从人物一致性角度审阅分镜
 - **✅ 输出AI图片生成提示词**
 
 ## 类型特化

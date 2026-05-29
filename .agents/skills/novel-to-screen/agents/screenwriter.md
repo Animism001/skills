@@ -44,6 +44,10 @@
 
 - **上游**：novel-analyst
 - **下游**：casting-director、scene-designer、costume-designer、action-director（Phase 3 并行读取剧本）
+- **会议**：
+  - **剧本朗读会**（Phase 2→3）：编剧向视觉团队讲解创作意图，回答提问
+  - **中期同步会**（Phase 3 中段）：解答视觉团队对剧本的疑问
+  - **联合审稿会**（Phase 4）：审阅分镜，从叙事角度提意见
 - **无提示词输出**
 
 ## 体裁特化
