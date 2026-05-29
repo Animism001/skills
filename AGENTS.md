@@ -34,12 +34,6 @@ You have access to your human's stuff — don't share it. You're a participant, 
 - **Stay silent when:** Casual banter, already answered, nothing to add
 - Quality > quantity. Participate, don't dominate.
 
-## Tools
-
-Skills provide your tools. Check `SKILL.md` when needed. Keep local notes in `TOOLS.md`.
-
-**Platform formatting:** Discord/WhatsApp → no markdown tables, use bullet lists. Discord links → wrap in `<>`.
-
 ## Heartbeats
 
 Use heartbeats productively, not just `HEARTBEAT_OK`. Edit `HEARTBEAT.md` with checklists. Keep it small.
@@ -58,13 +52,70 @@ Use heartbeats productively, not just `HEARTBEAT_OK`. Edit `HEARTBEAT.md` with c
 
 **Memory maintenance:** Every few days, review daily files → distill into MEMORY.md → remove outdated info.
 
+## 技能工作流
+
+### 搜索与发现
+- 通过 **clawhub** 和 **find-skills** 搜索已有技能
+
+### 安装与存放
+- 技能安装、存放位置默认 `./.agents/skills`
+- 从 GitHub clone 的技能必须删除 `.git` 目录，避免被 Git 当作子模块
+
+### 创建
+- **skill-creator** — 通用技能创建
+- **huashu-nuwa** — 从人名/主题蒸馏出人物视角技能
+- **dot-skill** — 从同事/亲密关系/公众人物蒸馏出 Skill（支持飞书/钉钉自动采集）
+- **book2skill** — 从书籍中提炼可执行技能
+
+**资料获取规则**：
+1. **huashu-nuwa 蒸馏调研** — 必须调用 **anysearch** 搜索
+2. **工作区无相关书籍时** — 先调用 **zlibrary** / **ima** / **literature-search** 获取资料
+3. **book2skill 创建** — 先获取资料，存放到 `./library/`（没有则新建）
+
+### 评测与优化
+- 通过 **skill-creator** 进行技能评测和迭代优化
+
+### 路标化改造
+
+**路标原则**：SKILL.md ≤ 80行，Description ≤ 40词，详细内容外置到 references/，渐进式加载。
+
+**三笔账**：延迟账（注入耗时）、注意力账（长描述噪声）、维护账（改一处动全身）。
+
+**改造流程**（评估-改造-再评估）：
+1. 设计测试用例（5 should-trigger + 3 should-not-trigger）
+2. 基线评估：触发准确率 + 执行完整度 + Token效率
+3. 路标化改造：SKILL.md 精简 + 详细内容外置到 references/
+4. 改造后评估：同用例重跑，四维对比
+
+### 技能结构选型
+
+| 结构 | 适用场景 | 核心目录 |
+|------|---------|---------|
+| **标准** | 单一功能域 | SKILL.md + scripts/ + references/ + evals/ |
+| **子代理** | 多阶段流水线 + 上下文隔离 | + agents/ |
+| **多模块** | 多功能域 + 不同API集 | + {module}/SKILL.md + meta.json |
+| **自主进化** | 需要持续改进 | + .evolution/ |
+
+选型判断：单域用标准，多阶段用子代理，多域用多模块，需进化加 .evolution/
+
+### 自主进化
+
+融合 self-improving + self-improving-agent：
+
+1. **信号捕获** — 用户纠正→corrections.md，操作失败→errors.md，知识过时→learnings.md，更好方法→learnings.md，缺失功能→feature-requests.md
+2. **模式晋升** — Tentative(1次)→Emerging(2次)→Pending(3次)→Confirmed(永久)
+3. **分层存储** — HOT(memory.md≤100行) / WARM(learnings/errors) / COLD(archive/)
+4. **自动衰减** — 7天3次晋升HOT，30天降WARM，90天归COLD
+5. **晋升目标** — 已确认规则→memory.md，最佳实践→references/，新功能→scripts/，成熟能力→提取新技能
+6. **安全边界** — 绝不存储凭证、金融/医疗数据、第三方个人信息、沉默推断的偏好
+
 ## References
 
-`references/` 目录存放技能相关的研究文章，作为技能设计与优化的理论参考。当前涵盖以下方向：
+`references/` 目录存放技能相关的研究文章，作为技能设计与优化的理论参考。当前涵盖：
 
 - **技能训练与优化** — 将技能文档视为可训练对象，通过有界编辑、验证门控、拒绝缓冲等机制实现文本空间优化
-- **技能审计与瘦身** — 技能提示词预算核算、重复检测、闲置筛查、描述精简，降低上下文占用与推理成本
-- **技能工程基础设施** — 技能的标准化表示、ETL 流程、生命周期管理，以及技能的发现、检索与进化机制
-- **技能体系综述** — 技能的表示形式（文本驱动/代码驱动/混合型）、获取方式、检索策略与进化路径的系统性梳理
+- **技能审计与瘦身** — 提示词预算核算、重复检测、闲置筛查、描述精简
+- **技能工程基础设施** — 标准化表示、ETL 流程、生命周期管理
+- **技能体系综述** — 表示形式、获取方式、检索策略与进化路径
 
 创建新技能或优化现有技能时，可按需查阅相关文章获取理论支撑和工程范式参考。
