@@ -129,6 +129,44 @@ Shows `downloads_today`, `downloads_limit`, and account details.
 
 ## Notes
 
-- The base domain `zh.101sun.ru` may change. If requests start failing, check for an updated domain.
+- The base domain `zh.101sun.ru` may change. If requests start failing, use the following method to discover the current working domain.
 - Always include the `User-Agent: Mozilla/5.0 (Android 12; Mobile)` header on every request.
 - When downloading, prefer EPUB over PDF when both are available, unless the user asks for a specific format.
+
+## Domain Discovery
+
+When the current base domain stops working (SSL errors, connection refused, etc.), find the new domain:
+
+### Step 1 — Visit known redirect domains
+
+Z-Library maintains short redirect domains that always point to the current mirror. Try these:
+
+```bash
+curl -s -I -L "https://zlib.re" 2>&1 | grep -i "location:"
+```
+
+Other known redirect domains to try:
+- `zlib.re`
+- `z-lib.sk`
+- `zlibrary-global.se`
+- `go-to-zlibrary.se`
+
+### Step 2 — Identify the target domain
+
+The redirect chain will lead to a domain like `zh.101sun.ru`, `zh.zlibrary-africa.se`, etc. Extract the base domain from the final URL.
+
+### Step 3 — Verify eAPI availability
+
+Test if the new domain supports the eAPI:
+
+```bash
+curl -s -X POST "https://<new-domain>/eapi/user/login" \
+  -H "User-Agent: Mozilla/5.0 (Android 12; Mobile)" \
+  -d "email=$ZLIBRARY_EMAIL&password=$ZLIBRARY_PASSWORD"
+```
+
+If the response contains `"success":1`, the domain works. Update all URLs in this skill from the old domain to the new one.
+
+### Step 4 — Update SKILL.md
+
+Replace all occurrences of the old domain with the new domain in this file.
