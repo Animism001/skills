@@ -56,6 +56,10 @@
     "humanize-chinese": {
       "version": "2.4.0",
       "installedAt": 1780077448573
+    },
+    "ai-humanizer": {
+      "version": "2.1.0",
+      "installedAt": 1780077636557
     }
   }
 }
