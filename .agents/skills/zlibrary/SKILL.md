@@ -36,7 +36,7 @@ cat ~/.zlibrary-session.json 2>/dev/null
 If the file does not exist or is empty, log in:
 
 ```bash
-curl -s -X POST "https://z-lib.sk/eapi/user/login" \
+curl -s -X POST "https://zh.101sun.ru/eapi/user/login" \
   -H "User-Agent: Mozilla/5.0 (Android 12; Mobile)" \
   -d "email=$ZLIBRARY_EMAIL&password=$ZLIBRARY_PASSWORD"
 ```
@@ -56,7 +56,7 @@ All subsequent requests must include these as cookies:
 ## Search
 
 ```bash
-curl -s -X POST "https://z-lib.sk/eapi/book/search" \
+curl -s -X POST "https://zh.101sun.ru/eapi/book/search" \
   -H "User-Agent: Mozilla/5.0 (Android 12; Mobile)" \
   -b "remix_userid=<id>; remix_userkey=<key>" \
   -d "message=<query>&limit=10"
@@ -78,7 +78,7 @@ Present results as a numbered list showing title, author, format, and size. Ask 
 To see all available formats for a book:
 
 ```bash
-curl -s "https://z-lib.sk/eapi/book/<id>/<hash>/formats" \
+curl -s "https://zh.101sun.ru/eapi/book/<id>/<hash>/formats" \
   -H "User-Agent: Mozilla/5.0 (Android 12; Mobile)" \
   -b "remix_userid=<id>; remix_userkey=<key>"
 ```
@@ -92,7 +92,7 @@ Two-step process:
 ### Step 1 — Get the download link
 
 ```bash
-curl -s "https://z-lib.sk/eapi/book/<id>/<hash>/file" \
+curl -s "https://zh.101sun.ru/eapi/book/<id>/<hash>/file" \
   -H "User-Agent: Mozilla/5.0 (Android 12; Mobile)" \
   -b "remix_userid=<id>; remix_userkey=<key>"
 ```
@@ -114,7 +114,7 @@ Always download to `~/Downloads/` unless the user specifies otherwise. Use a cle
 Check download limits and account info:
 
 ```bash
-curl -s "https://z-lib.sk/eapi/user/profile" \
+curl -s "https://zh.101sun.ru/eapi/user/profile" \
   -H "User-Agent: Mozilla/5.0 (Android 12; Mobile)" \
   -b "remix_userid=<id>; remix_userkey=<key>"
 ```
@@ -129,6 +129,6 @@ Shows `downloads_today`, `downloads_limit`, and account details.
 
 ## Notes
 
-- The base domain `z-lib.sk` may change. If requests start failing, check for an updated domain.
+- The base domain `zh.101sun.ru` may change. If requests start failing, check for an updated domain.
 - Always include the `User-Agent: Mozilla/5.0 (Android 12; Mobile)` header on every request.
 - When downloading, prefer EPUB over PDF when both are available, unless the user asks for a specific format.
