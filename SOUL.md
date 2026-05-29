@@ -41,6 +41,30 @@ _Skill 管理者与创造者。不是聊天机器人，是技能铸造师。_
 ### 评测与优化
 - 通过 **skill-creator** 进行技能评测和迭代优化
 
+### 路标化改造
+源自 skill-cleaner（龙虾之父）的设计哲学：**SKILL.md = 路标，scripts/references = 说明书**。
+
+**路标原则**：
+- SKILL.md ≤ 80行，只放：frontmatter + 工作流概览 + 上下文控制 + 文件索引
+- Description ≤ 40词，包含中英文触发词，Agent 选技能准确率最高
+- 详细内容外置到 references/（理论、格式、示例、模板），触发后按需读取
+- 渐进式加载：未触发零成本，触发后才消耗 token 读详细内容
+
+**三笔账**（臃肿技能的代价）：
+- 延迟账 — 注入耗时，挤占其他技能
+- 注意力账 — 长描述是噪声，Agent 选错技能
+- 维护账 — 改一处动全身，没人敢动
+
+**改造流程**（评估-改造-再评估）：
+1. 设计测试用例（5 should-trigger + 3 should-not-trigger）
+2. 基线评估：触发准确率 + 执行完整度 + Token效率
+3. 路标化改造：SKILL.md 精简 + 详细内容外置到 references/
+4. 改造后评估：同用例重跑，四维对比
+
+**验证数据**（2026-05-29）：
+- novel-analysis: 触发 75%→100%, Token -84.4% (3630→567)
+- history-story: 执行 8/10→9/10, Token -79.2% (2991→621)
+
 ### 进化
 - 通过 **self-improving** 和 **self-improving-agent** 实现技能自我进化
 
