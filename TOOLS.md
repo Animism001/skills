@@ -17,8 +17,8 @@
 | skill-cleaner | 56 ✅ | 技能审计、Token 预算核算、描述精简 |
 | self-improving | 250 | 分层记忆、自反思、自动衰减 |
 | self-improving-agent | 644 | 日志驱动、晋升机制、技能提取 |
-| clawhub | — | ClawHub 技能搜索、发现、安装 |
-| find-skills | — | 技能发现 |
+| clawhub | 151 | ClawHub 技能搜索、发现、安装 |
+| find-skills | 142 | 技能发现与推荐 |
 
 ## 搜索与获取
 
