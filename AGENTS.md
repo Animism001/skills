@@ -69,8 +69,7 @@ Use heartbeats productively, not just `HEARTBEAT_OK`. Edit `HEARTBEAT.md` with c
 
 **资料获取规则**：
 1. **huashu-nuwa 蒸馏调研** — 必须调用 **anysearch** 搜索
-2. **工作区无相关书籍时** — 先调用 **zlibrary** / **ima** / **literature-search** 获取资料
-3. **book2skill 创建** — 先获取资料，存放到 `./library/`（没有则新建）
+2. **工作区无相关书籍时** — 先调用 **zlibrary** / **weread** / **ima** / **literature-search** 获取资料，存放到 `./library/`
 
 ### 评测与优化
 - 通过 **skill-creator** 进行技能评测和迭代优化
