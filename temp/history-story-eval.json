@@ -1,0 +1,53 @@
+{
+  "skill_name": "history-story",
+  "evals": [
+    {
+      "id": 1,
+      "type": "should_trigger",
+      "prompt": "今天历史上发生了什么？给我讲一个历史故事",
+      "expected": "触发 history-story，典型的'历史上的今天'需求"
+    },
+    {
+      "id": 2,
+      "type": "should_trigger",
+      "prompt": "历史上的今天有什么重大事件？帮我选一个写成故事",
+      "expected": "触发 history-story，明确要求历史事件+故事创作"
+    },
+    {
+      "id": 3,
+      "type": "should_trigger",
+      "prompt": "我想把1945年广岛原子弹事件改编成一个故事",
+      "expected": "触发 history-story，将历史事件改编为故事"
+    },
+    {
+      "id": 4,
+      "type": "should_trigger",
+      "prompt": "帮我创作一个关于马丁·路德宗教改革的历史故事",
+      "expected": "触发 history-story，历史人物+故事创作"
+    },
+    {
+      "id": 5,
+      "type": "should_trigger",
+      "prompt": "5月26日历史上有哪些有趣的事件？挑一个写成引人入胜的故事",
+      "expected": "触发 history-story，指定日期+故事创作"
+    },
+    {
+      "id": 6,
+      "type": "should_not_trigger",
+      "prompt": "帮我写一个科幻小说的开头，设定在火星殖民地",
+      "expected": "不应触发，这是纯虚构创作，不是历史故事"
+    },
+    {
+      "id": 7,
+      "type": "should_not_trigger",
+      "prompt": "给我讲一下法国大革命的起因和经过",
+      "expected": "不应触发，这是历史知识查询，不是故事创作"
+    },
+    {
+      "id": 8,
+      "type": "should_not_trigger",
+      "prompt": "用D.E.S.I.R.E. Matrix分析一下《三体》里叶文洁的心理",
+      "expected": "不应触发，这是小说分析，应触发novel-analysis"
+    }
+  ]
+}

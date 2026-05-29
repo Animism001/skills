@@ -1,0 +1,44 @@
+{
+  "skill": "history-story",
+  "phase": "after_refactor",
+  "timestamp": "2026-05-29T05:10:00",
+  "skill_version": "road_sign_52lines",
+  "trigger_eval": {
+    "input1_should_trigger": {"triggered": "history-story", "correct": true},
+    "input2_should_trigger": {"triggered": "history-story", "correct": true},
+    "input3_should_trigger": {"triggered": "history-story", "correct": true},
+    "input4_should_trigger": {"triggered": "history-story", "correct": true},
+    "input5_should_trigger": {"triggered": "history-story", "correct": true},
+    "input6_should_not_trigger": {"triggered": "story", "correct": true},
+    "input7_should_not_trigger": {"triggered": "none", "correct": true},
+    "input8_should_not_trigger": {"triggered": "novel-analysis", "correct": true}
+  },
+  "trigger_accuracy": {
+    "should_trigger_hit": "5/5",
+    "should_not_trigger_hit": "3/3",
+    "overall": "8/8 = 100%"
+  },
+  "execution_eval": {
+    "understood_8_phases": true,
+    "knew_context_isolation": true,
+    "knew_directory_structure": true,
+    "knew_data_acquisition": true,
+    "knew_desire_matrix_usage": true,
+    "steps_identified": 10,
+    "steps_complete": true,
+    "would_read_agents": true,
+    "would_read_references": true,
+    "missing_info": "子代理prompt模板、脚本文件是否存在（需读agents/和scripts/获取）",
+    "execution_score": "9/10"
+  },
+  "structural_metrics": {
+    "line_count": 52,
+    "token_count": 621,
+    "desc_words": 38,
+    "health_score": 100,
+    "has_frontmatter": true,
+    "has_refs": true,
+    "has_scripts": true,
+    "has_agents": true
+  }
+}

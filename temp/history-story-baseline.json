@@ -1,0 +1,52 @@
+{
+  "skill": "history-story",
+  "phase": "baseline",
+  "timestamp": "2026-05-29T05:00:00",
+  "skill_version": "original_225lines",
+  "trigger_eval": {
+    "input1_should_trigger": {"triggered": "history-story", "correct": true},
+    "input2_should_trigger": {"triggered": "history-story", "correct": true},
+    "input3_should_trigger": {"triggered": "history-story", "correct": true},
+    "input4_should_trigger": {"triggered": "history-story", "correct": true},
+    "input5_should_trigger": {"triggered": "history-story", "correct": true},
+    "input6_should_not_trigger": {"triggered": "story", "correct": true, "note": "科幻创作触发story，合理"},
+    "input7_should_not_trigger": {"triggered": "none", "correct": true},
+    "input8_should_not_trigger": {"triggered": "novel-analysis", "correct": true}
+  },
+  "trigger_accuracy": {
+    "should_trigger_hit": "5/5",
+    "should_not_trigger_hit": "3/3",
+    "overall": "8/8 = 100%"
+  },
+  "execution_eval": {
+    "understood_8_phases": true,
+    "knew_context_isolation": true,
+    "knew_directory_structure": true,
+    "knew_data_acquisition": true,
+    "knew_desire_matrix_usage": true,
+    "steps_identified": 10,
+    "steps_complete": true,
+    "would_read_agents": true,
+    "missing_info": "eval-card格式、评分标准、文件命名规范（需读agents/获取）",
+    "execution_score": "8/10"
+  },
+  "structural_metrics": {
+    "line_count": 225,
+    "token_count": 2991,
+    "desc_words": 2,
+    "desc_chars": 150,
+    "health_score": 90,
+    "has_frontmatter": true,
+    "has_refs": true,
+    "has_scripts": true,
+    "has_agents": true
+  },
+  "key_findings": [
+    "触发准确率100%——description虽然只有2个英文词但中文部分很长，触发词覆盖充分",
+    "执行完整度高——225行详细工作流让Agent完全理解8阶段流程",
+    "description问题：frontmatter的description字段只有2个英文词，但中文部分(~150字)全塞在description里",
+    "Token成本：2991 token占2%预算的74.8%",
+    "已有agents/目录（8个子代理定义），已有references/和scripts/，外置条件好",
+    "SKILL.md中Phase 4c的WritingStyle推导逻辑（15行）和selection.md格式模板（15行）可以外置"
+  ]
+}
