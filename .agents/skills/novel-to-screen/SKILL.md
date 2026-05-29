@@ -31,9 +31,9 @@ metadata:
 Phase 0: 项目初始化 → 确定分类、组建团队、设定风格约束
 Phase 1: 原著分析 → novel-analyst → 原著分析报告
 Phase 2: 剧本开发 → screenwriter（必须阅读原著+分析报告）→ 完整剧本
-Phase 3: 视觉设计（并行）→ casting-director + scene-designer + costume-designer + action-director
-Phase 4: 分镜整合 → director → 详细分镜剧本（含AI视频提示词）
-Phase 5: 质量把控 → producer → 最终制作包
+Phase 3: 视觉设计（并行）→ 所有角色必须阅读原著 + 各自上游输出
+Phase 4: 分镜整合 → director（必须阅读原著）→ 详细分镜剧本（含AI视频提示词）
+Phase 5: 质量把控 → producer（对照原著检查）→ 最终制作包
 ```
 
 ## 团队配置
