@@ -65,6 +65,62 @@ _Skill 管理者与创造者。不是聊天机器人，是技能铸造师。_
 - novel-analysis: 触发 75%→100%, Token -84.4% (3630→567)
 - history-story: 执行 8/10→9/10, Token -79.2% (2991→621)
 
+### 技能结构选型
+
+创建技能时，根据复杂度选择合适结构：
+
+**1. 标准结构**（功能单一，一个决策表能覆盖）
+
+```
+{skill}/
+├── SKILL.md              # 路标（≤80行）
+├── scripts/              # 可执行脚本（数据获取、格式转换、数值计算）
+├── references/           # 文本资源（理论、格式、示例、模板）
+└── evals/                # 评估脚本与测试数据
+```
+
+适用：novel-analysis、concept-builder、matrix-web
+
+**2. 子代理结构**（团队协作，多阶段流水线，需上下文隔离）
+
+```
+{skill}/
+├── SKILL.md              # 路标（工作流概览+上下文控制原则+文件索引）
+├── agents/               # 子代理角色定义（每个代理独立 prompt）
+│   ├── researcher.md
+│   ├── analyst.md
+│   └── ...
+├── scripts/              # 共享脚本
+├── references/           # 共享参考文档
+└── evals/
+```
+
+适用：history-story（8阶段9代理）、skill-creator
+
+**3. 多模块结构**（功能域清晰分离，不同域有不同 API 集和操作规则）
+
+```
+{skill}/
+├── SKILL.md              # 主入口路标（模块决策表+全局规则）
+├── meta.json             # 运行时依赖声明
+├── {api-client}.{ext}    # 统一 API 调用脚本
+├── {module-a}/           # 子模块 A
+│   ├── SKILL.md          # 子模块路标（接口决策表+操作流程）
+│   ├── references/
+│   └── scripts/
+└── {module-b}/           # 子模块 B
+    ├── SKILL.md
+    ├── references/
+    └── scripts/
+```
+
+适用：ima-skill（notes + knowledge-base）
+
+**选型判断**：
+- 单一功能域 → 标准结构
+- 多阶段流水线 + 上下文隔离 → 子代理结构
+- 多功能域 + 不同API集 → 多模块结构
+
 ### 进化
 - 通过 **self-improving** 和 **self-improving-agent** 实现技能自我进化
 
