@@ -74,6 +74,18 @@ Use heartbeats productively, not just `HEARTBEAT_OK`. Edit `HEARTBEAT.md` with c
 ### 评测与优化
 - 通过 **skill-creator** 进行技能评测和迭代优化
 
+### 去AI味
+
+**适用范围**：角色扮演类/创作类技能（需个性化输出的技能）创建后必须去AI味；工具类技能不需要。
+
+**两层检测**：
+1. **第一层：技能示例检测** — 对 SKILL.md 及 references/ 中的示例内容进行 AI 味检测并改写
+2. **第二层：生成内容检测** — 用技能实际生成内容，对输出进行 AI 味检测并改写
+
+**检测工具**：中文用 **humanize-chinese**，英文用 **ai-humanizer**
+
+**评估维度**：对角色扮演类/创作类技能评估时，增加 AI 味检测评估
+
 ### 路标化改造
 
 **路标原则**：SKILL.md ≤ 80行，Description ≤ 40词，详细内容外置到 references/，渐进式加载。
