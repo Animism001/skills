@@ -1,0 +1,17 @@
+{
+  "project": "神雕侠侣-三联版",
+  "author": "金庸",
+  "type": "AI·动画(2D)",
+  "genre": "短剧",
+  "style": "中国传统武侠动画",
+  "version": "1.0.0",
+  "total_chapters": 3,
+  "agents": [
+    "literature-to-json-script",
+    "novel-analyst",
+    "screenwriter",
+    "casting-director",
+    "scene-designer",
+    "director"
+  ]
+}
