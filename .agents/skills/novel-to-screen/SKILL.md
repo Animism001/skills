@@ -28,16 +28,17 @@ metadata:
 ## 工作流
 
 ```
+Phase -1: 原文转JSON剧本 → literature-to-json-script（逐章节/场景转换，保留100%原文）→ JSON格式剧本
 Phase 0: 项目初始化 → 确定分类、组建团队、设定风格约束
-Phase 1: 原著分析 → novel-analyst → 原著分析报告
-Phase 2: 剧本开发 → screenwriter（必须阅读原著+分析报告）→ 完整剧本
+Phase 1: 原著分析 → novel-analyst（阅读JSON剧本）→ 原著分析报告
+Phase 2: 剧本开发 → screenwriter（阅读JSON剧本+分析报告）→ 完整剧本
   └→ 剧本朗读会：screenwriter 向视觉团队讲解剧本，答疑对齐
-Phase 3: 视觉设计（并行）→ 所有角色必须阅读原著 + 各自上游输出
+Phase 3: 视觉设计（并行）→ 所有角色必须阅读JSON剧本 + 各自上游输出
   ├→ 交叉讨论：选角↔服化道、场景↔动作
   └→ 中期同步会：各角色汇报进展，协调冲突
-Phase 4: 分镜整合 → director（必须阅读原著）→ 详细分镜剧本（含AI视频提示词）
+Phase 4: 分镜整合 → director（必须阅读JSON剧本）→ 详细分镜剧本（含AI视频提示词）
   └→ 联合审稿会：所有角色审阅分镜，提出修改意见
-Phase 5: 质量把控 → producer（对照原著检查）→ 最终制作包
+Phase 5: 质量把控 → producer（对照JSON剧本检查）→ 最终制作包
 ```
 
 ## Agent 通信机制
@@ -85,6 +86,7 @@ Phase 5: 质量把控 → producer（对照原著检查）→ 最终制作包
 
 | Agent | 输出 | 提示词 |
 |-------|------|--------|
+| literature-to-json-script | JSON格式剧本 | — |
 | novel-analyst | 原著分析报告 | — |
 | screenwriter | 完整剧本 | — |
 | casting-director | 人物画像卡 | ✅ 图片提示词 |
@@ -115,6 +117,7 @@ Phase 5: 质量把控 → producer（对照原著检查）→ 最终制作包
 novel-to-screen/
 ├── SKILL.md                 # 本文件
 ├── agents/                  # 子Agent定义
+│   ├── literature-to-json-script.md
 │   ├── novel-analyst.md
 │   ├── screenwriter.md
 │   ├── casting-director.md
@@ -124,6 +127,7 @@ novel-to-screen/
 │   ├── director.md
 │   └── producer.md
 ├── references/
+│   ├── literature-to-json-script/ # 原文转JSON剧本蒸馏资料
 │   ├── novel-analyst/       # 原著分析师蒸馏资料
 │   ├── screenwriter/        # 编剧蒸馏资料
 │   ├── casting-director/    # 选角导演蒸馏资料
