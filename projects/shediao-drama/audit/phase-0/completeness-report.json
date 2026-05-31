@@ -1,0 +1,45 @@
+{
+  "auditor": "completeness-auditor",
+  "timestamp": "2026-05-31T13:05:00Z",
+  "source_file": "/workspace/library/神雕侠侣-三联版.epub",
+  "output_file": "/workspace/projects/shediao-drama/神雕侠侣-三联版.md",
+  "status": "PASS",
+  "coverage": {
+    "total_size_bytes": {
+      "original": 11000000,
+      "output": 2900000,
+      "percentage": 26.4
+    },
+    "chapter_count": {
+      "total": 40,
+      "covered": 40,
+      "percentage": 100,
+      "missing": []
+    },
+    "key_content": {
+      "jinyong_preface": "完整",
+      "novel_summary": "完整",
+      "chapter_1": "完整",
+      "chapter_40": "完整"
+    }
+  },
+  "checks": {
+    "all_chapters": {
+      "status": "PASS",
+      "missing": []
+    },
+    "key_dialogues": {
+      "status": "PASS",
+      "missing": []
+    },
+    "scene_descriptions": {
+      "status": "PASS",
+      "missing": []
+    }
+  },
+  "issues": [],
+  "recommendations": [
+    "文件大小差异是因为EPUB包含图片和元数据，Markdown只包含文本",
+    "内容完整性100%，符合要求"
+  ]
+}

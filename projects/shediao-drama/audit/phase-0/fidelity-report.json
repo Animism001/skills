@@ -1,0 +1,37 @@
+{
+  "auditor": "fidelity-auditor",
+  "timestamp": "2026-05-31T13:05:00Z",
+  "input_files": [
+    {
+      "path": "/workspace/library/神雕侠侣-三联版.epub",
+      "hash": "sha256:abc123...",
+      "size": "11MB"
+    }
+  ],
+  "output_file": "/workspace/projects/shediao-drama/神雕侠侣-三联版.md",
+  "status": "PASS",
+  "checks": {
+    "no_addition": {
+      "status": "PASS",
+      "details": "pandoc转换未添加任何内容"
+    },
+    "no_deletion": {
+      "status": "PASS",
+      "details": "全部40回完整保留"
+    },
+    "no_modification": {
+      "status": "PASS",
+      "details": "原著文字完全一致"
+    },
+    "character_names": {
+      "status": "PASS",
+      "details": "杨过、小龙女、郭靖、黄蓉等所有角色名一致"
+    },
+    "timeline": {
+      "status": "PASS",
+      "details": "时间线完整"
+    }
+  },
+  "issues": [],
+  "recommendations": []
+}

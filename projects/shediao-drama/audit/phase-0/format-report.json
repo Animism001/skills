@@ -1,0 +1,22 @@
+{
+  "auditor": "format-auditor",
+  "timestamp": "2026-05-31T13:05:00Z",
+  "input_file": "/workspace/projects/shediao-drama/神雕侠侣-三联版.md",
+  "status": "PASS",
+  "checks": {
+    "file_format": {
+      "status": "PASS",
+      "details": "Markdown格式正确"
+    },
+    "encoding": {
+      "status": "PASS",
+      "details": "UTF-8编码"
+    },
+    "structure": {
+      "status": "PASS",
+      "details": "章节标题格式正确"
+    }
+  },
+  "issues": [],
+  "suggestions": []
+}
