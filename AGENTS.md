@@ -71,6 +71,7 @@ Use heartbeats productively, not just `HEARTBEAT_OK`. Edit `HEARTBEAT.md` with c
 
 ### 安装与存放
 - 技能安装、存放位置默认 `./.agents/skills`
+- 技能zip包存放在 `./skillzip`
 - 从 GitHub clone 的技能必须删除 `.git` 目录，避免被 Git 当作子模块
 
 ### 创建
